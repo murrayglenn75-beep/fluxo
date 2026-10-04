@@ -1,0 +1,2 @@
+export type Approval=Readonly<{approvedBy:string;approvedAt:string;intentHash:string}>;
+export function requireApproval(approval:Approval|undefined):Approval{if(!approval)throw new Error("approval_required");if(!approval.approvedBy.trim()||!approval.intentHash.trim())throw new Error("invalid_approval");const time=Date.parse(approval.approvedAt);if(Number.isNaN(time))throw new Error("invalid_approval_time");return approval}

@@ -1,0 +1,1 @@
+export default function AI(){return <main><h1>Fluxo AI</h1><p>Read, explain and prepare. Financial execution remains outside the model boundary.</p></main>}

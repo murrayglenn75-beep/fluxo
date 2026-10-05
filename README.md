@@ -1,6 +1,23 @@
 # Fluxo
 
-Mobile fintech sandbox styled from the supplied Fluxo reference. Phone layout with bottom navigation and a centered 430px preview on larger screens. Android and iOS Capacitor projects are included.
+> **Mobile-first fintech engineering sandbox for Pix-style transfers, cards, budgets, goals, Open Finance concepts, and deterministic financial state.**
+
+Fluxo is a product-engineering portfolio project that combines a polished mobile interface with explicit review/approval flows, exact integer money handling, duplicate protection, local persistence, exportable statements, and Android/iOS Capacitor builds.
+
+## At a glance
+
+- TypeScript / Next.js application
+- Mobile-first 430px product interface
+- Pix-style transfer and request flows
+- Virtual card lifecycle and configurable limits
+- Deterministic balance and ledger checks
+- Duplicate-command and duplicate-payment protection
+- Budgets, goals, statements and transaction detail
+- Android and iOS Capacitor projects
+- GitHub Actions native test builds
+- Optional Supabase authentication foundation
+
+**Boundary:** Fluxo is a sandbox, not a regulated bank. It does not perform real Pix settlement, issue real cards, connect to production Open Finance providers, or move customer funds.
 
 ## Run locally
 

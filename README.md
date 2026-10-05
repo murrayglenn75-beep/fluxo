@@ -97,6 +97,8 @@ The original ledger, sandbox provider boundary, and Supabase migration are prese
 
 Live payments/card issuance, bank consent, server persistence, receipt extraction and external AI need service accounts and backend implementation. The local demo account is independent of optional sign-in. Those integrations are deferred until accounts are available.
 
-## License
+## Source rights
 
-MIT — see [LICENSE](LICENSE).
+Copyright (c) 2026 Glenn Murray. All rights reserved.
+
+This repository is public for portfolio and evaluation purposes. No permission is granted to copy, modify, redistribute, sublicense, commercialize, or create derivative works from the original source or architecture. See [NOTICE.md](NOTICE.md).

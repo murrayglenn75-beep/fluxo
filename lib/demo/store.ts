@@ -23,5 +23,6 @@ export function updateAccount(updater:(current:Account)=>Account){
  return persist(accountSchema.parse(next));
 }
 export function resetAccount(){return persist(accountSchema.parse(initialAccount));}
+export function restoreAccount(account:Account){return persist(accountSchema.parse(account));}
 export function exportAccountBackup(){load();const raw=localStorage.getItem(KEY);return raw||JSON.stringify(cache,null,2);}
 export function useAccountField<K extends keyof Account>(key:K):[Account[K],Dispatch<SetStateAction<Account[K]>>]{const account=useAccount();return[account[key],value=>{try{updateAccount(current=>({...current,[key]:typeof value==='function'?(value as (prev:Account[K])=>Account[K])(current[key]):value}));}catch(error){window.dispatchEvent(new CustomEvent('fluxo-storage-error',{detail:error instanceof Error?error.message:'Unable to save account.'}));}}];}

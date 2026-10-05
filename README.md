@@ -96,3 +96,7 @@ The manual **Native test builds** GitHub Actions workflow builds an Android debu
 The original ledger, sandbox provider boundary, and Supabase migration are preserved. Optional Supabase email authentication appears in Account settings when NEXT_PUBLIC_SUPABASE_URL and a public key are configured. It is not configured or verified in this sandbox. Keep service-role keys and provider credentials on a trusted backend.
 
 Live payments/card issuance, bank consent, server persistence, receipt extraction and external AI need service accounts and backend implementation. The local demo account is independent of optional sign-in. Those integrations are deferred until accounts are available.
+
+## License
+
+MIT — see [LICENSE](LICENSE).

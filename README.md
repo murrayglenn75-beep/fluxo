@@ -4,6 +4,9 @@
 
 Fluxo is a product-engineering portfolio project that combines a polished mobile interface with explicit review/approval flows, exact integer money handling, duplicate protection, local persistence, exportable statements, and Android/iOS Capacitor builds.
 
+**Live deployment:** https://fluxo-fintech-xi.vercel.app/  
+**Release:** v1.0.0
+
 ## At a glance
 
 - TypeScript / Next.js application
@@ -16,6 +19,7 @@ Fluxo is a product-engineering portfolio project that combines a polished mobile
 - Android and iOS Capacitor projects
 - GitHub Actions native test builds
 - Optional Supabase authentication foundation
+- Production deployment on Vercel
 
 **Boundary:** Fluxo is a sandbox, not a regulated bank. It does not perform real Pix settlement, issue real cards, connect to production Open Finance providers, or move customer funds.
 
@@ -93,7 +97,7 @@ The manual **Native test builds** GitHub Actions workflow builds an Android debu
 
 ## Optional live foundation
 
-The original ledger, sandbox provider boundary, and Supabase migration are preserved. Optional Supabase email authentication appears in Account settings when NEXT_PUBLIC_SUPABASE_URL and a public key are configured. It is not configured or verified in this sandbox. Keep service-role keys and provider credentials on a trusted backend.
+The original ledger, sandbox provider boundary, and Supabase migration are preserved. The Vercel deployment is configured with the public Supabase project URL and publishable key for the optional authentication foundation. This does not turn the client-side sandbox into a production banking backend. Keep service-role keys and provider credentials on a trusted server-side boundary.
 
 Live payments/card issuance, bank consent, server persistence, receipt extraction and external AI need service accounts and backend implementation. The local demo account is independent of optional sign-in. Those integrations are deferred until accounts are available.
 

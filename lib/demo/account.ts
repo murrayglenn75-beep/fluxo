@@ -16,10 +16,12 @@ export function parseMinor(text:string):number{
 }
 export type PaymentInput={commandId:string;name:string;key?:string;amount:number;kind:string;description?:string;createdAt:string};
 export function postPayment(account:Account,input:PaymentInput):Account{
- if(account.activity.some(t=>t.commandId===input.commandId))return account;
- if(!input.name.trim()||!input.commandId||!Number.isSafeInteger(input.amount)||input.amount<=0)throw new Error('Invalid payment details.');
+ const name=input.name.trim();
+ const existing=account.activity.find(t=>t.commandId===input.commandId);
+ if(existing){if(existing.name!==name||existing.amount!==-input.amount||existing.kind!==input.kind||existing.recipientKey!==input.key||existing.description!==input.description)throw new Error('This payment reference already belongs to different details.');return account;}
+ if(!name||!input.commandId.trim()||!Number.isSafeInteger(input.amount)||input.amount<=0||!Number.isFinite(Date.parse(input.createdAt)))throw new Error('Invalid payment details.');
  if(input.amount>account.balance)throw new Error('This amount exceeds your available balance.');
- if(input.kind==='Pay bill'&&account.paid.includes(input.name))throw new Error('This bill is already paid.');
+ if(input.kind==='Pay bill'&&account.paid.includes(name))throw new Error('This bill is already paid.');
  const transaction:Transaction={id:input.commandId,commandId:input.commandId,name:input.name.trim(),recipientKey:input.key,amount:-input.amount,kind:input.kind,description:input.description,date:'Just now',createdAt:input.createdAt,icon:input.kind==='Pay bill'?'bills':'pix',tone:'mint'};
- return {...account,balance:account.balance-input.amount,activity:[transaction,...account.activity],paid:input.kind==='Pay bill'?[...account.paid,input.name]:account.paid};
+ return {...account,balance:account.balance-input.amount,activity:[transaction,...account.activity],paid:input.kind==='Pay bill'?[...account.paid,name]:account.paid};
 }

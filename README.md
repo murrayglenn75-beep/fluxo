@@ -34,6 +34,8 @@ npm run sync:native
 
 Tests cover ledger integrity, exact currency parsing, balance checks, duplicate commands and duplicate bill payments. sync:native builds a static export into out/ and copies it into both native projects with installed plugins.
 
+See [the sandbox audit](docs/SANDBOX_AUDIT.md) for verified flows, regression checks and remaining integration/device limits.
+
 ## Android and iOS
 
 ```sh

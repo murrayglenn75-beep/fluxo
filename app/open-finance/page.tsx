@@ -1,0 +1,1 @@
+export default function OpenFinance(){return <main><h1>Open Finance</h1><p>Consent lifecycle and provider connections will live here.</p></main>}

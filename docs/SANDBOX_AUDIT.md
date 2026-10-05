@@ -25,9 +25,9 @@ Scope: the local mobile sandbox and its Android/iOS project setup. Live integrat
 
 ## Boundaries
 
-Android/iOS binaries and device behavior have not been verified: the required Android toolchain and macOS/Xcode are unavailable in this workspace. Export/plugin synchronization is not a substitute for device testing.
+Android debug APK and unsigned iOS simulator compilation both succeeded in [native build run 37259188510](https://github.com/murrayglenn75-beep/fluxo/actions/runs/37259188510). The artifacts are available from that run. Physical-device behavior has not been verified; compilation and export synchronization are not substitutes for device testing.
 
-Real payments, card issuance, server account synchronization, live bank consent, receipt OCR and external AI are not implemented or verified. Exchange previews, category allocations, goals' initial progress and initial transactions are illustrative. Scan selects a local file without extracting it. Optional Supabase authentication is unconfigured and untested.
+Real payments, card issuance, server account synchronization, live bank consent, receipt OCR and external AI are not implemented or verified. Exchange previews, initial category allocations and initial transactions are illustrative. Receipt details are entered manually, and goal progress is tracked without transferring money. Optional Supabase authentication is unconfigured and untested.
 
 The local wallet is a single-device sandbox, not a secure shared ledger. Updates refresh persisted state before applying commands, but simultaneous writes in separate browser tabs do not have a server transaction lock.
 

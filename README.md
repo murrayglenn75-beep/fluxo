@@ -48,11 +48,13 @@ npm run open:android
 npm run open:ios
 ```
 
-Android requires Android Studio, JDK 21 and Android SDK 36. iOS requires macOS and Xcode. Projects use the provisional identifier app.fluxo.mobile; choose your own identifier and signing configuration before distribution. Icons and an iOS filesystem privacy manifest are included. No APK or IPA has been compiled in this Windows workspace.
+Local Android builds require Android Studio, JDK 21 and Android SDK 36. Local iOS builds require macOS and Xcode 26 or newer. Projects use the provisional identifier app.fluxo.mobile; choose your own identifier and signing configuration before distribution. Icons and an iOS filesystem privacy manifest are included. GitHub hosted runners have successfully compiled the Android debug APK and unsigned iOS simulator app.
 
 See the [Capacitor development workflow](https://capacitorjs.com/docs/basics/workflow) for device builds and signing. Sync native files after UI changes. The native build contains local assets and does not point at localhost.
 
 The manual **Native test builds** GitHub Actions workflow builds an Android debug APK and an unsigned iOS simulator app. Successful runs publish downloadable artifacts for 14 days. The simulator app is for Xcode's simulator; installing on a physical iPhone still requires Apple signing. These test packages are not store releases.
+
+[Download the first successful native test build artifacts](https://github.com/murrayglenn75-beep/fluxo/actions/runs/37259188510).
 
 ## Optional live foundation
 

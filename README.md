@@ -19,6 +19,24 @@ Fluxo is a product-engineering portfolio project that combines a polished mobile
 
 **Boundary:** Fluxo is a sandbox, not a regulated bank. It does not perform real Pix settlement, issue real cards, connect to production Open Finance providers, or move customer funds.
 
+## Architecture
+
+```mermaid
+flowchart LR
+    UI[Mobile-first Next.js UI] --> CMD[Validated commands]
+    CMD --> R[Review / approval]
+    R --> L[Deterministic ledger logic]
+    L --> S[(Local sandbox state)]
+    L --> RCPT[Receipts / statements]
+    S --> A[Local assistant summaries]
+    UI --> N[Capacitor]
+    N --> AND[Android]
+    N --> IOS[iOS]
+    AUTH[Optional Supabase auth] -. optional .-> UI
+```
+
+Critical financial state transitions are deterministic and validated outside the assistant layer. The AI-facing functionality summarizes sandbox state; it does not control real funds or provider credentials.
+
 ## Run locally
 
 ```sh

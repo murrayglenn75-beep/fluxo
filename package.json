@@ -1,1 +1,48 @@
-{"name":"fluxo","version":"1.0.0","private":true,"engines":{"node":">=22"},"scripts":{"dev":"next dev","build":"next build","start":"next start","typecheck":"tsc --noEmit","test":"vitest run","verify":"npm run typecheck && npm test && npm run build"},"dependencies":{"@supabase/ssr":"0.7.0","@supabase/supabase-js":"2.57.4","next":"16.0.1","react":"19.2.0","react-dom":"19.2.0","zod":"4.1.12"},"devDependencies":{"@types/node":"24.10.0","@types/react":"19.2.2","@types/react-dom":"19.2.2","typescript":"5.9.3","vitest":"4.0.6"}}
+{
+  "name": "fluxo",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "verify": "npm run typecheck && npm test && npm run build",
+    "build:native": "node scripts/build-native.cjs",
+    "sync:native": "npm run build:native && cap sync",
+    "open:android": "cap open android",
+    "open:ios": "cap open ios"
+  },
+  "dependencies": {
+    "@capacitor/android": "8.5.2",
+    "@capacitor/app": "8.1.2",
+    "@capacitor/core": "8.5.2",
+    "@capacitor/filesystem": "8.1.4",
+    "@capacitor/ios": "8.5.2",
+    "@capacitor/share": "8.0.3",
+    "@supabase/ssr": "0.12.7",
+    "@supabase/supabase-js": "2.117.2",
+    "ai": "7.0.127",
+    "next": "16.3.8",
+    "qrcode": "1.5.4",
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
+    "zod": "4.6.5"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "8.5.2",
+    "@types/node": "26.6.4",
+    "@types/qrcode": "1.5.6",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "typescript": "7.0.2",
+    "vitest": "5.0.3"
+  },
+  "overrides": {
+    "xcode": {
+      "uuid": "11.1.1"
+    }
+  },
+  "type": "module"
+}

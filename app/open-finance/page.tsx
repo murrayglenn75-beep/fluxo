@@ -1,1 +1,2 @@
-export default function OpenFinance(){return <main><h1>Open Finance</h1><p>Consent lifecycle and provider connections will live here.</p></main>}
+import Dashboard from '../../components/dashboard';
+export default function Page(){return <Dashboard section='open-finance'/>;}

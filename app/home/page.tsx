@@ -1,1 +1,2 @@
-export default function Home(){return <main><h1>Home</h1><p>Portfolio, balances, safe-to-spend and recent activity will live here.</p></main>}
+import Dashboard from '../../components/dashboard';
+export default function Page(){return <Dashboard section='home'/>;}

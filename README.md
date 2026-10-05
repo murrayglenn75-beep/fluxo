@@ -1,6 +1,54 @@
-# Fluxo v1.0
+# Fluxo
 
-Secure AI-native fintech platform and sandbox for Brazil.
+Mobile fintech sandbox styled from the supplied Fluxo reference. Phone layout with bottom navigation and a centered 430px preview on larger screens. Android and iOS Capacitor projects are included.
 
-## Core rule
-No UI, AI agent, MCP client, or external provider can directly mutate financial truth. Only validated, authorised, idempotent financial commands may post to the ledger.
+## Run locally
+
+```sh
+npm ci
+npm run dev -- --port 3010
+```
+
+Open http://localhost:3010. No credentials are required for the sandbox.
+
+## Sandbox features
+
+- Add demo cards, create virtual cards, select, freeze/unfreeze, rename, change limits, remove cards, and export statements.
+- Pix and transfers have explicit review/approval, integer money amounts, balance validation, duplicate protection, saved recipients, and downloadable/shareable receipts.
+- Generate scannable Fluxo demo request QR codes, copy/import request codes, and retain request history. These are sandbox requests, not bank Pix QR codes.
+- Account onboarding, profile settings, balance privacy, editable budgets, goals, bill payments, demo bank connections, and local assistant summaries.
+- Home shortcuts include Exchange and Open Finance. Activity rows open transaction details.
+- Data survives reloads and navigation in device/browser storage. Account settings provide export and a confirmed reset. Browser data and installed app data are separate.
+- Native receipt sharing uses the operating system share sheet. Android Back closes dialogs or returns to the previous page.
+
+Initial balances, purchases, budgets, and conversion rates are illustrative. Exchange is a quote preview; receipt import selects a file locally without extracting its contents. The assistant computes local sandbox summaries. No real payments, issued cards, bank connections, or external AI requests occur.
+
+## Verify
+
+```sh
+npm run typecheck
+npm test
+npm run build
+npm run sync:native
+```
+
+Tests cover ledger integrity, exact currency parsing, balance checks, duplicate commands and duplicate bill payments. sync:native builds a static export into out/ and copies it into both native projects with installed plugins.
+
+## Android and iOS
+
+```sh
+npm run sync:native
+npm run open:android
+# On macOS:
+npm run open:ios
+```
+
+Android requires Android Studio, JDK 21 and Android SDK 36. iOS requires macOS and Xcode. Projects use the provisional identifier app.fluxo.mobile; choose your own identifier and signing configuration before distribution. Icons and an iOS filesystem privacy manifest are included. No APK or IPA has been compiled in this Windows workspace.
+
+See the [Capacitor development workflow](https://capacitorjs.com/docs/basics/workflow) for device builds and signing. Sync native files after UI changes. The native build contains local assets and does not point at localhost.
+
+## Optional live foundation
+
+The original ledger, sandbox provider boundary, and Supabase migration are preserved. Optional Supabase email authentication appears in Account settings when NEXT_PUBLIC_SUPABASE_URL and a public key are configured. It is not configured or verified in this sandbox. Keep service-role keys and provider credentials on a trusted backend.
+
+Live payments/card issuance, bank consent, server persistence, receipt extraction and external AI need service accounts and backend implementation. The local demo account is independent of optional sign-in. Those integrations are deferred until accounts are available.

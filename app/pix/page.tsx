@@ -1,1 +1,2 @@
-export default function Pix(){return <main><h1>Pix</h1><p>Prepare payment intents here. Submission will require deterministic validation and explicit approval.</p></main>}
+import Dashboard from '../../components/dashboard';
+export default function Page(){return <Dashboard section='pix'/>;}

@@ -1,7 +1,9 @@
 'use client';
 import { useEffect, useId, useRef, useState } from 'react';
 import {useAccount,useAccountField,updateAccount,useStorageError} from '../lib/demo/store';
-import {initialActivity,parseMinor,postPayment,type Transaction} from '../lib/demo/account';
+import {initialActivity,parseMinor,postPayment,type PaymentInput,type Transaction} from '../lib/demo/account';
+import {createPaymentApproval,verifyPaymentApproval} from '../lib/security/approved-payment';
+import type {Approval} from '../lib/security/financial-command';
 import {Receipt,Dialog,downloadText} from './dialog';
 import CardManager from './card-manager';
 import PixRequest from './pix-request';
@@ -32,6 +34,8 @@ export default function Dashboard({section='home'}:{section?:string}) {
  const [pixTab,setPixTab]=useState('Send'), [period,setPeriod]=useState('Last 6 months'), [conversion,setConversion]=useState('1000'), [connected,setConnected]=useAccountField('connected'), [question,setQuestion]=useState(''), [messages,setMessages]=useAccountField('messages'), [more,setMore]=useState(false), [goals]=useAccountField('goals'), [paid]=useAccountField('paid');
  const [addCard,setAddCard]=useState(false),[cardName,setCardName]=useState(''),[lastFour,setLastFour]=useState(''),[cardError,setCardError]=useState(''),[cards,setCards]=useAccountField('cards'),[selectedCard,setSelectedCard]=useAccountField('selectedCard'),[showCardDetails,setShowCardDetails]=useState(false);
  const fileInput=useRef<HTMLInputElement>(null),commandId=useRef('');
+ const approvedIntent=useRef<PaymentInput|null>(null);
+ const paymentApproval=useRef<Approval|null>(null);
  const account=useAccount();const storageError=useStorageError();const [receipt,setReceipt]=useState<Transaction|null>(null),[manageCard,setManageCard]=useState(false),[statement,setStatement]=useState(false),[recipientKey,setRecipientKey]=useState('');
  useEffect(()=>{const show=(event:Event)=>setNotice((event as CustomEvent<string>).detail);window.addEventListener('fluxo-storage-error',show);return()=>window.removeEventListener('fluxo-storage-error',show);},[]);
  useEffect(()=>{if(selectedCard>=cards.length)setSelectedCard(0);},[cards.length,selectedCard]);
@@ -41,13 +45,65 @@ export default function Dashboard({section='home'}:{section?:string}) {
  const title=section==='onboarding'?'Welcome':navigation.find(n=>n[0]===section)?.[2]||'Home';
  const filtered=activity.filter(t=>(filter==='All'||(filter==='Income'?t.amount>0:filter==='Transfers'?(t.kind==='Transfer'||t.name.toLowerCase().includes('transfer')):t.amount<0))&&t.name.toLowerCase().includes(search.toLowerCase()));
  function openPayment(kind:string, target='',value=''){setModal(kind);setRecipient(target);setAmount(value);setDescription('');setRecipientKey('');setReview(false);setError('');commandId.current=crypto.randomUUID();}
- function approve(){
-  try {const value=parseMinor(amount);if(!recipient.trim())throw new Error('Enter a recipient or goal name.');if(modal!=='Create goal'&&value>balance)throw new Error('This amount exceeds your available balance.');
-   if(!review){if(!commandId.current)commandId.current=crypto.randomUUID();setReview(true);setError('');return;}
-   if(modal==='Create goal'){updateAccount(a=>({...a,goals:[...a.goals,{name:recipient.trim(),amount:value,saved:0}]}));setNotice('Your goal is saved.');}
-   else {const id=commandId.current;const next=updateAccount(a=>postPayment(a,{commandId:id,name:recipient,amount:value,key:recipientKey,description,kind:modal,createdAt:new Date().toISOString()}));if(next)setReceipt(next.activity.find(t=>t.id===id)||null);setNotice('Demo payment approved and saved. No real money was moved.');}
-   setModal('');setRecipient('');setAmount('');commandId.current='';
-  }catch(e){setError(e instanceof Error?e.message:'Unable to process payment.');}
+ async function approve(){
+  try{
+   const value=parseMinor(amount);
+   if(!recipient.trim())throw new Error('Enter a recipient or goal name.');
+   if(modal!=='Create goal'&&value>balance)throw new Error('This amount exceeds your available balance.');
+
+   if(modal==='Create goal'){
+    if(!review){setReview(true);setError('');return;}
+    updateAccount(a=>({...a,goals:[...a.goals,{name:recipient.trim(),amount:value,saved:0}]}));
+    setNotice('Your goal is saved.');
+   }else{
+    if(!commandId.current)commandId.current=crypto.randomUUID();
+
+    const input:PaymentInput={
+     commandId:commandId.current,
+     name:recipient,
+     amount:value,
+     key:recipientKey,
+     description,
+     kind:modal,
+     createdAt:new Date().toISOString()
+    };
+
+    if(!review){
+     approvedIntent.current=input;
+     paymentApproval.current=await createPaymentApproval(input);
+     setReview(true);
+     setError('');
+     return;
+    }
+
+    const frozen=approvedIntent.current;
+    const approval=paymentApproval.current;
+
+    if(!frozen||!approval)throw new Error('Payment approval is missing. Review the payment again.');
+
+    const executionInput:PaymentInput={
+     ...input,
+     createdAt:frozen.createdAt
+    };
+
+    await verifyPaymentApproval(executionInput,approval);
+
+    const id=executionInput.commandId;
+    const next=updateAccount(a=>postPayment(a,executionInput));
+
+    if(next)setReceipt(next.activity.find(t=>t.id===id)||null);
+    setNotice('Demo payment approved and saved. No real money was moved.');
+   }
+
+   setModal('');
+   setRecipient('');
+   setAmount('');
+   commandId.current='';
+   approvedIntent.current=null;
+   paymentApproval.current=null;
+  }catch(e){
+   setError(e instanceof Error?e.message:'Unable to process payment.');
+  }
  }
 
  function ask(text:string){if(!text.trim())return; if(/prepare|pix payment/i.test(text)){openPayment('Send a Pix');return;} const unpaid=bills.filter(b=>!paid.includes(b.name));const outgoing=activity.filter(t=>t.amount<0).reduce((sum,t)=>sum-t.amount,0);const answer=/recurring|bills/i.test(text)?`Your unpaid demo bills total ${formatMoney(unpaid.reduce((sum,b)=>sum+b.amount,0))}: ${unpaid.map(b=>b.name).join(', ')||'none'}. Review each payment before approving.`:/spending|expenses|analy/i.test(text)?`Your saved demo activity contains ${activity.length} transactions, including ${formatMoney(outgoing)} in outgoing entries. Your available balance is ${formatMoney(balance)}.`:`Your saved demo balance is ${formatMoney(balance)}. Upcoming unpaid bills total ${formatMoney(unpaid.reduce((sum,b)=>sum+b.amount,0))}. I can prepare a payment for your explicit review; I cannot send money on my own.`;setMessages(m=>[...m,{question:text.trim(),answer}]);setQuestion('');}
@@ -76,5 +132,5 @@ export default function Dashboard({section='home'}:{section?:string}) {
  {statement&&<CardStatement index={selectedCard} close={()=>setStatement(false)}/>}
  {manageCard&&<CardManager index={selectedCard} close={()=>setManageCard(false)} removed={()=>setSelectedCard(0)}/>}
  {addCard&&<Dialog title="Add Card" close={()=>setAddCard(false)}><form onSubmit={e=>{e.preventDefault();if(!cardName.trim()||!/^\d{4}$/.test(lastFour)){setCardError('Enter a card name and exactly four digits.');return;}try{updateAccount(a=>({...a,selectedCard:a.cards.length,cards:[...a.cards,{name:cardName.trim(),lastFour,virtual:false,frozen:false,limit:500000,used:0}]}));setAddCard(false);setNotice('Demo card added. No real card was linked.');}catch(e){setCardError(e instanceof Error?e.message:'Unable to add card.');}}}><span className="modal-icon"><Icon name="cards"/></span><p>Add a demo card to your wallet. Use a nickname and the last four digits only.</p><label className="field">Card name<input autoFocus value={cardName} onChange={e=>setCardName(e.target.value)} placeholder="e.g. My travel card" maxLength={40}/></label><label className="field">Last four digits<input inputMode="numeric" value={lastFour} onChange={e=>setLastFour(e.target.value.replace(/\D/g,'').slice(0,4))} placeholder="1234" maxLength={4}/></label>{cardError&&<p className="error" role="alert">{cardError}</p>}<button className="primary" type="submit">Add demo card</button><small className="modal-note"><Icon name="lock"/>Do not enter a full card number or security code.</small></form></Dialog>}
- {modal&&<Dialog title={review?'Review your payment':modal} close={()=>setModal('')}><span className="modal-icon"><Icon name={modal==='Create goal'?'goals':'pix'}/></span><p>{review?'Check the details before approving your demo transaction.':'A simple, secure way to move forward.'}</p><label className="field">{modal==='Create goal'?'Goal name':'Recipient'}<input autoFocus disabled={review} value={recipient} onChange={e=>setRecipient(e.target.value)} placeholder="Name or Pix key"/></label><label className="field">Amount (BRL)<input disabled={review} value={amount} onChange={e=>setAmount(e.target.value)} inputMode="decimal" placeholder="0,00"/></label>{review&&<div className="approval"><span>Recipient <b>{recipient}</b></span><span>Amount <b>{formatMoney(parseMinor(amount))}</b></span><span>Fee <b>R$ 0,00</b></span></div>}{error&&<p className="error" role="alert">{error}</p>}<button className="primary" onClick={approve}>{review?'Approve demo transaction':'Review details'}</button>{review&&<button className="edit-payment" onClick={()=>setReview(false)}>Edit details</button>}<small className="modal-note"><Icon name="lock"/>Sandbox only. No real money will be moved.</small></Dialog>}</div>;
+ {modal&&<Dialog title={review?'Review your payment':modal} close={()=>setModal('')}><span className="modal-icon"><Icon name={modal==='Create goal'?'goals':'pix'}/></span><p>{review?'Check the details before approving your demo transaction.':'A simple, secure way to move forward.'}</p><label className="field">{modal==='Create goal'?'Goal name':'Recipient'}<input autoFocus disabled={review} value={recipient} onChange={e=>setRecipient(e.target.value)} placeholder="Name or Pix key"/></label><label className="field">Amount (BRL)<input disabled={review} value={amount} onChange={e=>setAmount(e.target.value)} inputMode="decimal" placeholder="0,00"/></label>{review&&<div className="approval"><span>Recipient <b>{recipient}</b></span><span>Amount <b>{formatMoney(parseMinor(amount))}</b></span><span>Fee <b>R$ 0,00</b></span></div>}{error&&<p className="error" role="alert">{error}</p>}<button className="primary" onClick={approve}>{review?'Approve demo transaction':'Review details'}</button>{review&&<button className="edit-payment" onClick={()=>{setReview(false);approvedIntent.current=null;paymentApproval.current=null;}}>Edit details</button>}<small className="modal-note"><Icon name="lock"/>Sandbox only. No real money will be moved.</small></Dialog>}</div>;
 }

@@ -40,7 +40,7 @@ export default function Dashboard({section='home'}:{section?:string}) {
  useEffect(()=>{const show=(event:Event)=>setNotice((event as CustomEvent<string>).detail);window.addEventListener('fluxo-storage-error',show);return()=>window.removeEventListener('fluxo-storage-error',show);},[]);
  useEffect(()=>{if(selectedCard>=cards.length)setSelectedCard(0);},[cards.length,selectedCard]);
  useEffect(()=>{if(!Capacitor.isNativePlatform())return;let cancelled=false;let remove:(()=>void)|undefined;import('@capacitor/app').then(async({App})=>{const listener=await App.addListener('backButton',()=>{if(document.querySelector('[role=dialog]')){document.dispatchEvent(new KeyboardEvent('keydown',{key:'Escape'}));return;}if(statement){setStatement(false);return;}if(addCard){setAddCard(false);return;}if(modal){setModal('');return;}if(receipt){setReceipt(null);return;}if(manageCard){setManageCard(false);return;}if(more){setMore(false);return;}if(window.location.pathname!=='/')window.history.back();else void App.minimizeApp();});if(cancelled)void listener.remove();else remove=()=>{void listener.remove();};});return()=>{cancelled=true;remove?.();};},[modal,receipt,manageCard,more,addCard,statement]);
- let conversionQuote:ReturnType<typeof quoteUsd>|null=null;try{conversionQuote=quoteUsd(conversion);}catch{}
+
  const currentCard=cards[selectedCard]||cards[0]||{name:'',lastFour:'0000',virtual:false,frozen:false,limit:0,used:0};
  const title=section==='onboarding'?'Welcome':navigation.find(n=>n[0]===section)?.[2]||'Home';
  const filtered=activity.filter(t=>(filter==='All'||(filter==='Income'?t.amount>0:filter==='Transfers'?(t.kind==='Transfer'||t.name.toLowerCase().includes('transfer')):t.amount<0))&&t.name.toLowerCase().includes(search.toLowerCase()));

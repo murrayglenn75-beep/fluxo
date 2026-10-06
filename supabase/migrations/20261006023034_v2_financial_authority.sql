@@ -28,13 +28,25 @@ alter table public.ledger_entries
   check (currency in ('BRL','USD','EUR','GBP','CAD','AUD','JPY','CHF','CNY'));
 
 -- ---------------------------------------------------------------------------
+-- Owner-bound relational keys
+-- ---------------------------------------------------------------------------
+
+alter table public.accounts
+  add constraint accounts_id_user_id_key
+  unique (id,user_id);
+
+alter table public.payment_intents
+  add constraint payment_intents_id_user_id_key
+  unique (id,user_id);
+
+-- ---------------------------------------------------------------------------
 -- Durable financial commands
 -- ---------------------------------------------------------------------------
 
 create table public.financial_commands (
   id uuid primary key default gen_random_uuid(),
   user_id uuid not null references auth.users(id) on delete cascade,
-  payment_intent_id uuid references public.payment_intents(id),
+  payment_intent_id uuid,
   idempotency_key text not null,
   intent_hash text not null,
   command_type text not null
@@ -51,7 +63,11 @@ create table public.financial_commands (
   created_at timestamptz not null default now(),
   executed_at timestamptz,
   unique (user_id,idempotency_key),
-  unique (id,user_id)
+  unique (id,user_id),
+
+  constraint financial_commands_payment_intent_owner_fkey
+    foreign key (payment_intent_id,user_id)
+    references public.payment_intents(id,user_id)
 );
 
 create index financial_commands_user_created_idx
@@ -72,10 +88,20 @@ create table public.financial_approvals (
   approved_by uuid not null references auth.users(id),
   approved_at timestamptz not null,
   expires_at timestamptz not null,
+  consumed_at timestamptz,
   created_at timestamptz not null default now(),
 
   constraint financial_approvals_expiry_check
     check (expires_at > approved_at),
+
+  constraint financial_approvals_consumed_at_check
+    check (
+      consumed_at is null
+      or (
+        consumed_at >= approved_at
+        and consumed_at <= expires_at
+      )
+    ),
 
   unique (command_id),
 
@@ -95,9 +121,17 @@ create index financial_approvals_user_idx
 -- ---------------------------------------------------------------------------
 
 alter table public.ledger_entries
-  add constraint ledger_entries_command_id_fkey
-  foreign key (command_id)
-  references public.financial_commands(id);
+  drop constraint ledger_entries_account_id_fkey;
+
+alter table public.ledger_entries
+  add constraint ledger_entries_account_owner_fkey
+  foreign key (account_id,user_id)
+  references public.accounts(id,user_id);
+
+alter table public.ledger_entries
+  add constraint ledger_entries_command_owner_fkey
+  foreign key (command_id,user_id)
+  references public.financial_commands(id,user_id);
 
 -- ---------------------------------------------------------------------------
 -- RLS

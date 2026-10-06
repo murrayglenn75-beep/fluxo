@@ -1,14 +1,14 @@
 import {parseMinor} from './account';
 
 export const sandboxRates = {
-  USD: {name:'US Dollar',symbol:'$',flag:'🇺🇸',numerator:1852n,denominator:10000n,minorUnits:2},
-  EUR: {name:'Euro',symbol:'€',flag:'🇪🇺',numerator:1589n,denominator:10000n,minorUnits:2},
-  GBP: {name:'British Pound',symbol:'£',flag:'🇬🇧',numerator:1384n,denominator:10000n,minorUnits:2},
-  CAD: {name:'Canadian Dollar',symbol:'C$',flag:'🇨🇦',numerator:2541n,denominator:10000n,minorUnits:2},
-  AUD: {name:'Australian Dollar',symbol:'A$',flag:'🇦🇺',numerator:2817n,denominator:10000n,minorUnits:2},
-  JPY: {name:'Japanese Yen',symbol:'¥',flag:'🇯🇵',numerator:2742n,denominator:100n,minorUnits:0},
-  CHF: {name:'Swiss Franc',symbol:'CHF',flag:'🇨🇭',numerator:1478n,denominator:10000n,minorUnits:2},
-  CNY: {name:'Chinese Yuan',symbol:'¥',flag:'🇨🇳',numerator:1318n,denominator:1000n,minorUnits:2},
+  USD: {name:'US Dollar',symbol:'$',flag:'🇺🇸',numerator:1852n,denominator:10000n,minorUnits:2,displayRate:'0.1852'},
+  EUR: {name:'Euro',symbol:'€',flag:'🇪🇺',numerator:1589n,denominator:10000n,minorUnits:2,displayRate:'0.1589'},
+  GBP: {name:'British Pound',symbol:'£',flag:'🇬🇧',numerator:1384n,denominator:10000n,minorUnits:2,displayRate:'0.1384'},
+  CAD: {name:'Canadian Dollar',symbol:'C$',flag:'🇨🇦',numerator:2541n,denominator:10000n,minorUnits:2,displayRate:'0.2541'},
+  AUD: {name:'Australian Dollar',symbol:'A$',flag:'🇦🇺',numerator:2817n,denominator:10000n,minorUnits:2,displayRate:'0.2817'},
+  JPY: {name:'Japanese Yen',symbol:'¥',flag:'🇯🇵',numerator:2742n,denominator:100n,minorUnits:0,displayRate:'27.42'},
+  CHF: {name:'Swiss Franc',symbol:'CHF',flag:'🇨🇭',numerator:1478n,denominator:10000n,minorUnits:2,displayRate:'0.1478'},
+  CNY: {name:'Chinese Yuan',symbol:'¥',flag:'🇨🇳',numerator:1318n,denominator:1000n,minorUnits:2,displayRate:'1.318'},
 } as const;
 
 export type SandboxCurrency=keyof typeof sandboxRates;

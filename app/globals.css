@@ -29,3 +29,11 @@ body{background:#eaf0ef}.app{width:100%;max-width:430px;min-height:100dvh;margin
 .empty-wallet{text-align:center;padding:44px 20px;background:#eef8f4;border-radius:18px;margin:22px 0}.empty-wallet>svg{width:42px;height:42px;color:#008566}.empty-wallet h3{margin:16px 0 8px}.empty-wallet p{font-size:13px;color:#63747d;line-height:1.6}.field input{min-height:44px}.saved-recipient button{min-height:44px}
 .saved-expense{display:flex;align-items:center;justify-content:space-between;width:100%;padding:14px 0;border-bottom:1px solid #e5ebef;text-align:left;gap:12px}.saved-expense strong{display:block}.saved-expense b{white-space:nowrap}.field select{width:100%;min-height:44px;border:1px solid #dbe4e8;border-radius:9px;background:#f8fafb;padding:10px;color:inherit}
 .page-panel .modal h2{display:block;font-size:22px;margin:0 0 16px}.saved-expense>button{text-align:left;flex:1}
+
+
+/* Secure access */
+.login-shell{min-height:100vh;display:grid;place-items:center;padding:24px;background:radial-gradient(circle at top,#12372f 0,#08110f 48%,#050807 100%)}
+.login-card{width:min(430px,100%);padding:28px;border:1px solid rgba(255,255,255,.1);border-radius:28px;background:rgba(14,22,20,.94);box-shadow:0 28px 80px rgba(0,0,0,.4)}
+.login-brand{font-size:28px;font-weight:800;letter-spacing:-1px;margin-bottom:20px}.login-card h1{font-size:34px;margin:6px 0}.login-divider{display:flex;align-items:center;gap:12px;margin:18px 0;color:#8e9b97}.login-divider:before,.login-divider:after{content:"";height:1px;background:rgba(255,255,255,.1);flex:1}
+.pattern-panel{margin-top:18px;padding:18px;border-radius:20px;background:rgba(255,255,255,.035)}.pattern-grid{display:grid;grid-template-columns:repeat(3,58px);justify-content:center;gap:18px;margin:20px 0}.pattern-grid button{width:58px;height:58px;border-radius:50%;border:1px solid rgba(255,255,255,.18);background:#101b18;color:#8da099;touch-action:none}.pattern-grid button.selected{border-color:#41e2b1;box-shadow:0 0 0 6px rgba(65,226,177,.1);color:#41e2b1}.pattern-actions{display:flex;gap:10px;margin-top:14px}.pattern-actions>*{flex:1;text-align:center}.biometric-button{width:100%}
+.currency-box select{width:100%;margin:10px 0;padding:13px 14px;border-radius:12px;border:1px solid rgba(255,255,255,.12);background:#0d1715;color:inherit}

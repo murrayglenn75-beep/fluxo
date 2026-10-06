@@ -1,24 +1,30 @@
 import {parseMinor} from './account';
 
 export const sandboxRates = {
-  USD: {name:'US Dollar', symbol:'$', flag:'🇺🇸', perBrl:0.1852},
-  EUR: {name:'Euro', symbol:'€', flag:'🇪🇺', perBrl:0.1589},
-  GBP: {name:'British Pound', symbol:'£', flag:'🇬🇧', perBrl:0.1384},
-  CAD: {name:'Canadian Dollar', symbol:'C$', flag:'🇨🇦', perBrl:0.2541},
-  AUD: {name:'Australian Dollar', symbol:'A$', flag:'🇦🇺', perBrl:0.2817},
-  JPY: {name:'Japanese Yen', symbol:'¥', flag:'🇯🇵', perBrl:27.42},
-  CHF: {name:'Swiss Franc', symbol:'CHF', flag:'🇨🇭', perBrl:0.1478},
-  CNY: {name:'Chinese Yuan', symbol:'¥', flag:'🇨🇳', perBrl:1.318},
+  USD: {name:'US Dollar',symbol:'$',flag:'🇺🇸',numerator:1852n,denominator:10000n,minorUnits:2},
+  EUR: {name:'Euro',symbol:'€',flag:'🇪🇺',numerator:1589n,denominator:10000n,minorUnits:2},
+  GBP: {name:'British Pound',symbol:'£',flag:'🇬🇧',numerator:1384n,denominator:10000n,minorUnits:2},
+  CAD: {name:'Canadian Dollar',symbol:'C$',flag:'🇨🇦',numerator:2541n,denominator:10000n,minorUnits:2},
+  AUD: {name:'Australian Dollar',symbol:'A$',flag:'🇦🇺',numerator:2817n,denominator:10000n,minorUnits:2},
+  JPY: {name:'Japanese Yen',symbol:'¥',flag:'🇯🇵',numerator:2742n,denominator:100n,minorUnits:0},
+  CHF: {name:'Swiss Franc',symbol:'CHF',flag:'🇨🇭',numerator:1478n,denominator:10000n,minorUnits:2},
+  CNY: {name:'Chinese Yuan',symbol:'¥',flag:'🇨🇳',numerator:1318n,denominator:1000n,minorUnits:2},
 } as const;
 
 export type SandboxCurrency=keyof typeof sandboxRates;
 
+function pow10(n:number){return 10n**BigInt(n);}
+function roundRatio(numerator:bigint,denominator:bigint){
+  if(numerator<0n||denominator<=0n) throw new Error('invalid_quote');
+  return (numerator+denominator/2n)/denominator;
+}
+
 export function quoteCurrency(text:string,currency:SandboxCurrency){
   const brl=parseMinor(text);
-  const rate=sandboxRates[currency].perBrl;
-  const targetMinor=Math.round((brl/100)*rate*100);
-  if(!Number.isSafeInteger(targetMinor)||targetMinor<0) throw new Error('invalid_quote');
-  return {brl,targetMinor,currency,rate};
+  const rate=sandboxRates[currency];
+  const target=roundRatio(BigInt(brl)*rate.numerator*pow10(rate.minorUnits),100n*rate.denominator);
+  if(target>BigInt(Number.MAX_SAFE_INTEGER)) throw new Error('invalid_quote');
+  return {brl,targetMinor:Number(target),currency,minorUnits:rate.minorUnits};
 }
 
 export function quoteUsd(text:string){

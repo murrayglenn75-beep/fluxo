@@ -1,5 +1,14 @@
 # Fluxo
 
+## 30-second overview
+
+**Fluxo is a mobile-first fintech product sandbox that demonstrates how banking-style workflows can be built with deterministic financial controls.** It includes Pix-style transfers, cards, budgets, goals, statements, request flows, and native Android/iOS builds.
+
+**What I built:** the product UI, exact integer money handling, validation and review flows, duplicate-payment protection, ledger/state logic, receipts and statements, local persistence, optional Supabase authentication foundations, Capacitor mobile packaging, tests, CI, and Vercel deployment.
+
+**Why it matters:** many fintech demos stop at screens. Fluxo focuses on the state, validation, idempotency, and approval behavior needed behind those screens while remaining clearly separated from real banking infrastructure.
+
+
 > **Mobile-first fintech engineering sandbox for Pix-style transfers, cards, budgets, goals, Open Finance concepts, and deterministic financial state.**
 
 Fluxo is a product-engineering portfolio project that combines a polished mobile interface with explicit review/approval flows, exact integer money handling, duplicate protection, local persistence, exportable statements, and Android/iOS Capacitor builds.

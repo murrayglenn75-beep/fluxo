@@ -9,8 +9,15 @@ describe('authenticated route policy',()=>{
     expect(isPublicRoute('/auth/callback')).toBe(true);
   });
 
+  it('keeps trailing-slash login public without exposing protected routes',()=>{
+    expect(isPublicRoute('/login/')).toBe(true);
+    expect(isPublicRoute('/api/health/')).toBe(true);
+    expect(requiresAuthenticatedUser('/settings/')).toBe(true);
+    expect(requiresAuthenticatedUser('/login-admin/')).toBe(true);
+  });
+
   it('protects financial and user application routes',()=>{
-    for(const path of ['/home','/cards','/pix','/transfer','/activity','/settings','/exchange']){
+    for(const path of ['/home','/cards','/pix','/transfer','/activity','/settings','/exchange','/import','/import/']){
       expect(requiresAuthenticatedUser(path)).toBe(true);
     }
   });

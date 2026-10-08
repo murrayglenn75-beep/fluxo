@@ -16,6 +16,8 @@ Fluxo is a product-engineering portfolio project that combines a polished mobile
 **Live deployment:** https://fluxo-fintech-xi.vercel.app/  
 **Release:** v1.0.0
 
+For the consolidated v2 working tree, statement-import behavior, verification evidence, and remaining integration work, see [the consolidation status](docs/CONSOLIDATION_STATUS.md).
+
 ## At a glance
 
 - TypeScript / Next.js application

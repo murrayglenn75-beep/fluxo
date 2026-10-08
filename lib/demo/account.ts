@@ -1,5 +1,6 @@
 import { z } from 'zod';
-export const transactionSchema=z.object({id:z.string(),name:z.string(),date:z.string(),amount:z.number().int().safe(),icon:z.string(),tone:z.string(),createdAt:z.string().optional(),description:z.string().optional(),kind:z.string().optional(),recipientKey:z.string().optional(),commandId:z.string().optional(),category:z.string().optional()});
+import {toMinorUnits} from '../money/minorUnits';
+export const transactionSchema=z.object({id:z.string(),name:z.string(),date:z.string(),amount:z.number().int().safe(),icon:z.string(),tone:z.string(),createdAt:z.string().optional(),description:z.string().optional(),kind:z.string().optional(),recipientKey:z.string().optional(),commandId:z.string().optional(),category:z.string().optional(),importFingerprint:z.string().regex(/^[a-f0-9]{64}$/).optional(),importIdentity:z.string().regex(/^[a-f0-9]{64}$/).optional()});
 const cardSchema=z.object({name:z.string().min(1).max(40),lastFour:z.string().regex(/^\d{4}$/),virtual:z.boolean(),frozen:z.boolean(),limit:z.number().int().nonnegative().safe().default(500000),used:z.number().int().nonnegative().safe().default(0)});
 export const accountSchema=z.object({version:z.literal(2),balance:z.number().int().nonnegative().safe(),hidden:z.boolean(),activity:z.array(transactionSchema),cards:z.array(cardSchema),selectedCard:z.number().int().nonnegative().default(0),connected:z.array(z.string()),goals:z.array(z.object({name:z.string().min(1).max(60),amount:z.number().int().positive().safe(),saved:z.number().int().nonnegative().safe().default(0)}).refine(g=>g.saved<=g.amount)),paid:z.array(z.string()),messages:z.array(z.object({question:z.string(),answer:z.string()})),profile:z.object({name:z.string(),email:z.string(),pixKey:z.string(),onboarded:z.boolean()}),recipients:z.array(z.object({name:z.string(),key:z.string()})),requests:z.array(z.object({id:z.string(),name:z.string(),key:z.string(),amount:z.number().int().positive().safe(),createdAt:z.string()})),budgetLimits:z.record(z.string(),z.number().int().positive().safe())});
 export type Transaction=z.infer<typeof transactionSchema>;
@@ -11,7 +12,7 @@ export function parseMinor(text:string):number{
  let normalized=clean;
  if(clean.includes(',')){if(!/^(?:\d+|\d{1,3}(?:\.\d{3})+)(?:,\d{1,2})?$/.test(clean))throw new Error('Enter an amount with at most two decimal places.');normalized=clean.replace(/\./g,'').replace(',','.');}
  else if(!/^\d+(?:\.\d{1,2})?$/.test(clean))throw new Error('Enter an amount with at most two decimal places.');
- const [whole,fraction='']=normalized.split('.');const value=Number(whole)*100+Number(fraction.padEnd(2,'0'));
+ const value=Number(toMinorUnits(normalized,'BRL'));
  if(!Number.isSafeInteger(value)||value<=0)throw new Error('Enter a positive, valid amount.');return value;
 }
 export type PaymentInput={commandId:string;name:string;key?:string;amount:number;kind:string;description?:string;createdAt:string};

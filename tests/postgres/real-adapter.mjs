@@ -72,7 +72,7 @@ try{
  assert.equal(await recordProviderReconciliation(pool,expectedA,{kind:'settled',providerOperationId:'wrong',amountMinor:2500,currency:'BRL',intentHash:'hash-a'},audit),'reconcile');
  assert.equal(await recordProviderReconciliation(pool,expectedA,{kind:'settled',providerOperationId:'provider-1',amountMinor:2500,currency:'BRL',intentHash:'hash-a'},audit),'settled');
  assert.equal(await recordProviderReconciliation(pool,expectedA,{kind:'rejected',providerOperationId:'provider-1',reason:'declined'},audit),'conflict');
- assert.equal((await pool.query('select status from public.financial_command_outbox where command_id=$1',[C1])).rows[0].status,'acknowledged');
+ assert.equal((await pool.query('select status from public.financial_command_outbox where command_id=$1',[C1])).rows[0].status,'settled');
  assert.equal((await pool.query('select count(*)::int as n from public.financial_provider_evidence where command_id=$1',[C1])).rows[0].n,3,'three audit records including uncertain outcomes');
  console.log('PASS durable reconciliation: unknown remains uncertain, exact evidence accepted, terminal outcome immutable');
  console.log('PASS outbox: concurrent SKIP LOCKED leasing, timeout, crash recovery, no blind retry');

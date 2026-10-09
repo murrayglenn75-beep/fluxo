@@ -10,10 +10,14 @@ import type {FinancialCommandStore} from './financial-command-service';
 export class SandboxAtomicCommandStore implements FinancialCommandStore {
   private readonly records = new Map<string,{command:FinancialCommand;approval:ServerApproval}>();
   private readonly claimed = new Set<string>();
+  private readonly idempotencyOwners = new Map<string,string>();
 
   constructor(records:ReadonlyArray<{command:FinancialCommand;approval:ServerApproval}>) {
     for (const record of records) {
       if (this.records.has(record.command.id)) throw new Error('duplicate_command_id');
+      const key=JSON.stringify([record.command.userId,record.command.idempotencyKey]);
+      if (this.idempotencyOwners.has(key)) throw new Error('duplicate_idempotency_key');
+      this.idempotencyOwners.set(key,record.command.id);
       this.records.set(record.command.id,record);
     }
   }

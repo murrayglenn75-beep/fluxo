@@ -106,3 +106,37 @@ body{background:#eaf0ef}.app{width:100%;max-width:430px;min-height:100dvh;margin
   body:has(.app) .topbar h1,
   body:has(.app) .topbar p{color:#f3fffb}
 }
+
+/* Cover/interior refinement: keep original information architecture and controls. */
+@media(max-width:767px){
+  body:has(.app) .app{
+    background:linear-gradient(160deg,#102e2c 0%,#081f22 75%);
+    min-height:100dvh;
+  }
+  body:has(.app) .mobile-header{
+    background:linear-gradient(130deg,#133e37,#0b2828);
+    color:#f4fffc;
+    border-bottom:1px solid rgba(120,232,188,.16);
+  }
+  body:has(.app) .mobile-header :is(h1,p,a,button){color:#f4fffc}
+  body:has(.app) .mobile-header .beta-label{color:#064d3a}
+  body:has(.app) :is(.panel,.metric,.page-panel){
+    background:var(--fluxo-content-surface);
+    color:var(--ink);
+  }
+  body:has(.app) .bottom-nav{
+    background:#102e2c;
+    color:#f2fff9;
+    border-top:1px solid rgba(120,232,188,.18);
+  }
+  body:has(.app) :is(.panel,.metric,.page-panel,.balance){
+    box-shadow:0 10px 24px rgba(0,0,0,.12);
+  }
+}
+@media(prefers-reduced-motion:reduce){
+  .app *, .app *::before, .app *::after{
+    scroll-behavior:auto!important;
+    animation-duration:.01ms!important;
+    transition-duration:.01ms!important;
+  }
+}

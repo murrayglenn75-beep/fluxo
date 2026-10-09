@@ -8,8 +8,9 @@ function fixture(overrides:{status?:string;approvalValid?:boolean;consumed?:stri
     sql.push(statement);
     if(statement.includes('from public.financial_commands')) return {rows:[{
       id:'cmd',user_id:overrides.owner??'owner',idempotency_key:'idem',
-      intent_hash:'hash',status:overrides.status??'pending',payment_intent_id:null
+      intent_hash:'hash',status:overrides.status??'pending',payment_intent_id:'intent-1'
     }],rowCount:1};
+    if(statement.includes('from public.payment_intents')) return {rows:[{id:'intent-1',user_id:'owner',request_fingerprint:'hash'}],rowCount:1};
     if(statement.includes('from public.financial_approvals')) return {rows:[{
       command_id:'cmd',user_id:'owner',approved_by:'owner',intent_hash:'hash',
       consumed_at:overrides.consumed??null,valid:overrides.approvalValid??true

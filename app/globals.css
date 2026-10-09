@@ -354,3 +354,20 @@ body{background:#eaf0ef}.app{width:100%;max-width:430px;min-height:100dvh;margin
 .fluxo-ai-hero-tabs{display:flex;gap:8px;flex-wrap:wrap}
 .fluxo-ai-hero-tabs span{padding:8px 12px;background:#225d4c;border:1px solid #44896b;border-radius:22px;font-size:11px;font-weight:700}
 @media(max-width:767px){body:has(.app) .assistant-page{background:transparent;border:0;box-shadow:none}body:has(.app) .assistant-page .suggestions button{background:#143d37;border:1px solid #326854;color:#f2fff9;border-radius:13px}body:has(.app) .assistant-page .ask-form input{background:#123b37;color:#f2fff9;border:1px solid #36765f}}
+
+/* Reference-led profile/settings screen; preserve all existing account actions. */
+.fluxo-settings-header{display:flex;align-items:center;gap:15px;padding:18px;border:1px solid #36715d;background:linear-gradient(125deg,#135545,#0b332f);border-radius:20px;margin-bottom:25px;color:#f2fff9}
+.fluxo-settings-avatar{width:62px;height:62px;flex-shrink:0;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,#70f6b6,#009f74);border:3px solid #b0ffda;color:#063b2c;font-size:28px;font-weight:800}
+.fluxo-settings-eyebrow{color:#8af5bc;font-size:10px;font-weight:800;letter-spacing:1.4px}
+.fluxo-settings-header h2{font-size:21px;letter-spacing:-.6px;margin:5px 0;color:#fff}
+.fluxo-settings-header p{font-size:12px;color:#b5d7c9;margin:0}
+@media(max-width:767px){
+ body:has(.app) .account-page{background:transparent;border:0;box-shadow:none;padding:12px 0 28px}
+ body:has(.app) .account-page>h3{font-size:20px;color:#f2fff9}
+ body:has(.app) .account-page .field{color:#c6e2d6}
+ body:has(.app) .account-page .field input{background:#143e38;border:1px solid #356b59;border-radius:13px;color:#f2fff9;min-height:48px}
+ body:has(.app) .account-page :is(.setting-row,.account-auth,.integration-status){background:#103b37;border:1px solid #285b4c;border-radius:17px;padding:16px;margin-top:15px;color:#f2fff9}
+ body:has(.app) .account-page :is(.setting-row,.account-auth,.integration-status) :is(h3,span){color:#f2fff9}
+ body:has(.app) .account-page :is(.page-subtitle,.privacy-note){color:#b3d2c5}
+ body:has(.app) .account-page .primary{background:#28db90;color:#062d22;border-radius:15px;min-height:50px;font-weight:800}
+}

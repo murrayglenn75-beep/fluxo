@@ -1,0 +1,55 @@
+name: PostgreSQL integration database
+on:
+  push:
+    branches: [security/v2-authority-hardening]
+  pull_request:
+  workflow_dispatch:
+jobs:
+  postgres:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: test_only_password
+          POSTGRES_DB: fluxo_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres -d fluxo_test"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+    env:
+      PGHOST: localhost
+      PGPORT: 5432
+      PGUSER: postgres
+      PGPASSWORD: test_only_password
+      PGDATABASE: fluxo_test
+    steps:
+      - uses: actions/checkout@v5
+      - name: Check PostgreSQL readiness
+        run: psql -v ON_ERROR_STOP=1 -c 'select current_database(),version()'
+      - name: Create isolated test schema and seed data
+        run: psql -X -v ON_ERROR_STOP=1 -f tests/postgres/fixture.sql
+      - name: Run PostgreSQL atomicity and privilege assertions
+        run: psql -X -v ON_ERROR_STOP=1 -f tests/postgres/integrity.sql
+      - name: Verify independent connections and row-lock serialization
+        shell: bash
+        run: |
+          set -euo pipefail
+          psql -X -v ON_ERROR_STOP=1 -c "begin; select id from public.financial_commands where id='20000000-0000-4000-8000-000000000001' for update; select pg_sleep(3); commit;" >/tmp/fluxo-lock-holder.log &
+          holder=$!
+          sleep 1
+          set +e
+          psql -X -v ON_ERROR_STOP=1 -c "begin; set local lock_timeout='500ms'; select id from public.financial_commands where id='20000000-0000-4000-8000-000000000001' for update; rollback;" >/tmp/fluxo-contender.log 2>&1
+          contender_status=$?
+          set -e
+          wait "$holder"
+          if [ "$contender_status" -eq 0 ]; then
+            echo "Expected competing transaction to block on locked row" >&2
+            exit 1
+          fi
+          grep -q 'canceling statement due to lock timeout' /tmp/fluxo-contender.log
+          psql -X -v ON_ERROR_STOP=1 -c "select id from public.financial_commands where id='20000000-0000-4000-8000-000000000001' for update"

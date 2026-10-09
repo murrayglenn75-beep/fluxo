@@ -228,3 +228,16 @@ body{background:#eaf0ef}.app{width:100%;max-width:430px;min-height:100dvh;margin
   .login-shell{background:radial-gradient(ellipse at 50% -25%,#17694d,#061b1b 75%)}
   .login-card{background:#0b302d;border:1px solid #285b4e;box-shadow:0 24px 60px #001a1780}
 }
+
+/* Reference implementation: five-item banking navigation, compact dark surfaces. */
+@media(max-width:767px){
+  body:has(.app) .bottom-nav{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));align-items:center;padding-bottom:max(8px,env(safe-area-inset-bottom))}
+  body:has(.app) .bottom-nav :is(a,button){min-width:0;min-height:52px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;color:#b6d6cc}
+  body:has(.app) .bottom-nav :is(a,button).active{color:#49f0a6}
+  body:has(.app) .bottom-nav :is(a,button).active .icon{filter:drop-shadow(0 0 6px #28db9066)}
+  body:has(.app) .more-menu{background:#0c2c2b;color:#f2fff9;border:1px solid #285a4f;border-radius:20px;box-shadow:0 16px 48px #0008}
+  body:has(.app) .more-menu a{color:#e4fff4;border-bottom-color:#29574e}
+  body:has(.app) .activity-row{border-bottom-color:#29534b}
+  body:has(.app) .quick-actions a,body:has(.app) .quick-actions button{color:#eafff4}
+  body:has(.app) .workspace-footer{color:#a9c9c2}
+}

@@ -19,7 +19,7 @@ function fixture(overrides:{status?:string;approvalValid?:boolean;consumed?:stri
     return {rows:[],rowCount:1};
   });
   const release=vi.fn();
-  const pool:PgPool={connect:async()=>({query,release})};
+  const pool:PgPool={connect:async()=>({query:query as unknown as Awaited<ReturnType<PgPool['connect']>>['query'],release})};
   return {pool,sql,release};
 }
 describe('PostgreSQL command claim transaction orchestration',()=>{

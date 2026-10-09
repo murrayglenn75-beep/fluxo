@@ -7,7 +7,7 @@ create table public.financial_command_outbox (
   intent_hash text not null,
   idempotency_key text not null,
   status text not null default 'pending'
-    check (status in ('pending','leased','acknowledged','reconcile','failed')),
+    check (status in ('pending','leased','acknowledged','settled','reconcile','failed')),
   attempts integer not null default 0 check (attempts >= 0),
   lease_expires_at timestamptz,
   constraint outbox_lease_consistency check ((status='leased') = (lease_expires_at is not null)),

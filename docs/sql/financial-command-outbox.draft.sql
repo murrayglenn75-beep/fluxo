@@ -41,3 +41,19 @@ alter table public.financial_provider_evidence enable row level security;
 revoke all on public.financial_provider_evidence from public,anon,authenticated;
 -- Insert-only access for a dedicated trusted worker is still to be configured.
 -- No evidence should be accepted from a browser or unverified webhook.
+
+-- Durable replay fence: a provider event can only be accepted once.
+-- Store event IDs only after signature verification by the trusted adapter.
+create table public.financial_provider_event_receipts (
+  id uuid primary key default gen_random_uuid(),
+  provider_name text not null,
+  provider_event_id text not null,
+  command_id uuid not null,
+  user_id uuid not null,
+  received_at timestamptz not null default clock_timestamp(),
+  unique(provider_name,provider_event_id),
+  foreign key(command_id,user_id) references public.financial_commands(id,user_id)
+);
+alter table public.financial_provider_event_receipts enable row level security;
+revoke all on public.financial_provider_event_receipts from public,anon,authenticated;
+-- A single transaction must insert the replay receipt and evidence record.

@@ -11,10 +11,11 @@ export type ExpectedSettlement={
  */
 export async function recordProviderReconciliation(
  pool:PgPool,expected:ExpectedSettlement,evidence:ProviderEvidence,
- audit:{authenticatedSource:string;evidenceDigest:string}
+ audit:{authenticatedSource:string;evidenceDigest:string;providerName:string;providerEventId:string}
 ):Promise<'settled'|'failed'|'reconcile'|'conflict'>{
  if(!expected.commandId.trim()||!expected.userId.trim())throw new Error('invalid_command_id');
- if(!audit.authenticatedSource.trim()||!/^[a-f0-9]{64}$/.test(audit.evidenceDigest))
+ if(!audit.authenticatedSource.trim()||!audit.providerName.trim()||!audit.providerEventId.trim()||
+    !/^[a-f0-9]{64}$/.test(audit.evidenceDigest))
   throw new Error('invalid_authenticated_evidence');
  const decision=decideProviderReconciliation(expected,evidence);
  const db=await pool.connect();
@@ -43,6 +44,16 @@ export async function recordProviderReconciliation(
   if(changed.rowCount!==1){
    await db.query('ROLLBACK');tx=false;return 'conflict';
   }
+  // The replay fence and evidence must commit together. Duplicate event IDs
+  // abort this transaction, including any status change above.
+  const receipt=await db.query(
+   `insert into public.financial_provider_event_receipts
+    (provider_name,provider_event_id,command_id,user_id)
+    values ($1,$2,$3,$4)
+    on conflict (provider_name,provider_event_id) do nothing
+    returning id`,
+   [audit.providerName,audit.providerEventId,expected.commandId,expected.userId]);
+  if(receipt.rowCount!==1){await db.query('ROLLBACK');tx=false;return 'conflict';}
   await db.query(
    `insert into public.financial_provider_evidence
     (command_id,user_id,provider_operation_id,evidence_kind,decision,evidence_digest,authenticated_source)

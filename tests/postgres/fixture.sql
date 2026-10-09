@@ -1,10 +1,8 @@
 -- Isolated PostgreSQL fixture. Never apply to production Supabase.
 begin;
 create schema if not exists auth;
-do '$fluxo
- if not exists(select 1 from pg_roles where rolname='anon') then create role anon nologin; end if;
- if not exists(select 1 from pg_roles where rolname='authenticated') then create role authenticated nologin; end if;
-end '$fluxo
+select 'create role anon nologin' where not exists (select 1 from pg_roles where rolname='anon') \gexec
+select 'create role authenticated nologin' where not exists (select 1 from pg_roles where rolname='authenticated') \gexec
 create table auth.users(id uuid primary key);
 create table public.payment_intents(
  id uuid primary key, user_id uuid not null references auth.users(id),

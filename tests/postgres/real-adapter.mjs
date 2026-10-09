@@ -26,7 +26,7 @@ const policyEntry=join(temp,'provider-reconciliation.mjs');
 await writeFile(policyEntry,ts.transpileModule(policySource,{compilerOptions:{target:ts.ScriptTarget.ES2022,module:ts.ModuleKind.ESNext}}).outputText);
 const reconciliationSource=await readFile('lib/security/postgres-provider-reconciliation.ts','utf8');
 const reconciliationEntry=join(temp,'postgres-provider-reconciliation.mjs');
-const reconciliationCompiled=ts.transpileModule(reconciliationSource,{compilerOptions:{target:ts.ScriptTarget.ES2022,module:ts.ModuleKind.ESNext}}).outputText.replace("from './provider-reconciliation'","from './provider-reconciliation.mjs'"));
+const reconciliationCompiled=ts.transpileModule(reconciliationSource,{compilerOptions:{target:ts.ScriptTarget.ES2022,module:ts.ModuleKind.ESNext}}).outputText.replace("from './provider-reconciliation'","from './provider-reconciliation.mjs'");
 await writeFile(reconciliationEntry,reconciliationCompiled);
 const {recordProviderReconciliation}=await import(pathToFileURL(reconciliationEntry).href);
 const pool=new pg.Pool({

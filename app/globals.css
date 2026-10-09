@@ -140,3 +140,91 @@ body{background:#eaf0ef}.app{width:100%;max-width:430px;min-height:100dvh;margin
     transition-duration:.01ms!important;
   }
 }
+
+/* Fluxo Rhythm v2 — reference-led mobile visual language.
+   Verse: deep teal reading surfaces. Chorus: vivid emerald balances and actions.
+   These are presentation overrides only; payment and auth behavior stays unchanged. */
+@media(max-width:767px){
+  body:has(.app){background:#061b1b;color:#e9faf5}
+  body:has(.app) .app{
+    background:radial-gradient(ellipse at 45% -10%,#125a4b 0%,#092b2b 40%,#061b1b 85%);
+    color:#e9faf5;
+  }
+  body:has(.app) .mobile-header{
+    background:transparent;
+    border-bottom:0;
+    padding-top:max(20px,env(safe-area-inset-top));
+  }
+  body:has(.app) .mobile-header .screen-heading h1{color:#f5fffb}
+  body:has(.app) :is(.panel,.metric,.page-panel){
+    background:linear-gradient(155deg,#103b37,#0a292a);
+    color:#f2fff9;
+    border:1px solid rgba(119,221,184,.13);
+    box-shadow:0 12px 26px rgba(0,0,0,.18);
+    border-radius:17px;
+  }
+  body:has(.app) :is(.panel,.page-panel) :is(h2,h3,strong,b){color:#f2fff9}
+  body:has(.app) :is(.page-subtitle,.panel small,.page-panel small,.axis,.categories small){color:#a9c9c2}
+  body:has(.app) .summary .balance{
+    background:radial-gradient(circle at 92% 2%,rgba(121,255,179,.4),transparent 38%),linear-gradient(115deg,#006a54,#20c88b);
+    border:1px solid rgba(137,255,201,.42);
+    border-radius:19px;
+    box-shadow:0 12px 30px rgba(0,15,12,.35);
+  }
+  body:has(.app) .summary .balance :is(h2,label,p){color:#fff}
+  body:has(.app) :is(.primary,.login-submit){
+    background:linear-gradient(100deg,#28db90,#4af0a5);
+    color:#042b20;
+    border-radius:13px;
+    font-weight:700;
+  }
+  body:has(.app) :is(.quick-icon,.activity-symbol,.bill-symbol){
+    border:1px solid rgba(113,236,181,.2);
+  }
+  body:has(.app) .bottom-nav{
+    background:rgba(7,33,33,.98);
+    color:#e9fff6;
+    border-top:1px solid rgba(119,221,184,.2);
+    box-shadow:0 -8px 26px rgba(0,0,0,.25);
+  }
+  body:has(.app) .bottom-nav a{color:#c4e0d7}
+  body:has(.app) .bottom-nav .active{color:#41eda0}
+  body:has(.app) :is(.tabs button,.secondary){background:#194840;color:#e6fff5}
+  body:has(.app) .tabs .selected{background:#32d997;color:#062a21}
+  body:has(.app) :is(input,select,textarea){
+    color-scheme:dark;
+  }
+  body:has(.app) .page-panel :is(input,select,textarea){
+    background:#103a37;
+    border-color:#326158;
+    color:#f3fffa;
+  }
+  body:has(.app) .page-panel input::placeholder{color:#abc8be}
+  body:has(.app) :is(button,a,input,select,textarea):focus-visible{
+    outline:3px solid #73f5b6;
+    outline-offset:3px;
+  }
+}
+/* Authentication is an intentional quieter transition after the vibrant cover. */
+.login-shell{
+  background:radial-gradient(ellipse at 50% -30%,#17694d 0%,#092c2b 46%,#061b1b 95%);
+  color:#f1fff9;
+}
+.login-card{color:#f1fff9}
+.login-brand,.login-heading h1{color:#f6fffb}
+.login-heading p,.login-help,.login-signup,.login-security{color:#b1d0c5}
+.login-field{color:#e8fff4}
+.login-card input{background:#103a37;color:#f4fff9;border-color:#346157;color-scheme:dark}
+.login-card input::placeholder{color:#accdc2}
+.login-submit{background:linear-gradient(100deg,#26d88b,#46eaa0);color:#052d20}
+.login-alternatives button{background:#103a37;color:#e8fff5;border-color:#326157}
+.login-divider{color:#b5d1c7}
+.login-divider:before,.login-divider:after{background:#386156}
+.login-signup a,.login-expand,.login-clear{color:#62f2ae}
+.login-card .pattern-panel{background:#103a37;border-color:#326157;color:#f0fff9}
+.login-card .pattern-panel p{color:#bad9ce}
+.login-card .pattern-grid button{background:#164b41;color:#e8fff4}
+@media(min-width:768px){
+  .login-shell{background:radial-gradient(ellipse at 50% -25%,#17694d,#061b1b 75%)}
+  .login-card{background:#0b302d;border:1px solid #285b4e;box-shadow:0 24px 60px #001a1780}
+}

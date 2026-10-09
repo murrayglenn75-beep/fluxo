@@ -16,3 +16,17 @@ The disposable PostgreSQL CI database creates a `fluxo_worker` NOLOGIN role and 
 5. Keep server-only secrets and DB credentials out of browser bundles and CI logs.
 
 This file documents the gap rather than claiming least-privilege runtime verification.
+
+## Confirmed schema mismatch requiring redesign
+
+The actual `20261006023034_v2_financial_authority.sql` permits
+`command_type` values `payment`, `transfer`, and `exchange` and allows
+`payment_intent_id` to be NULL. The current
+`postgres-command-claim.ts` rejects all pending commands with NULL payment
+intent, while the simplified CI fixture makes that column NOT NULL.
+Consequently, the CI fixture is **not migration-faithful** and does not prove
+transfer/exchange commands work. Do not remove the fail-closed check until
+each command type has a separately defined canonical intent binding and tests.
+
+The isolated fixture also omits several actual command and approval columns.
+A full migration replay and RLS-aware worker test remain mandatory.

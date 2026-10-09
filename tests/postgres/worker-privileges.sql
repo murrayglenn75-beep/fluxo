@@ -10,7 +10,9 @@ grant update(consumed_at) on public.financial_approvals to fluxo_worker;
 grant select,insert on public.financial_command_outbox to fluxo_worker;
 grant update(status,attempts,lease_expires_at,updated_at) on public.financial_command_outbox to fluxo_worker;
 grant insert on public.financial_provider_evidence,public.financial_provider_event_receipts to fluxo_worker;
-grant select(id) on public.financial_provider_event_receipts to fluxo_worker;
+-- ON CONFLICT replay fencing reads the unique provider identity and RETURNING id.
+-- Grant only these columns; do not expose other receipt fields.
+grant select(id,provider_name,provider_event_id) on public.financial_provider_event_receipts to fluxo_worker;
 -- Dedicated worker-only policies; browser roles do not inherit this role.
 create policy fluxo_worker_commands_select on public.financial_commands for select to fluxo_worker using (true);
 create policy fluxo_worker_commands_update on public.financial_commands for update to fluxo_worker using (true) with check (true);

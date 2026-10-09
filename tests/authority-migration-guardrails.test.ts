@@ -29,6 +29,6 @@ describe('v2 authority migration static guardrails', () => {
   it('does not introduce a privileged RPC or bypass RLS', () => {
     expect(sql).not.toMatch(/create\s+(?:or replace\s+)?function/i);
     expect(sql).not.toMatch(/disable\s+row\s+level\s+security/i);
-    expect(sql).not.toMatch(/security\s+definer\b/i);
+    expect(sql.replace(/^\s*--.*$/gm, '')).not.toMatch(/security\s+definer\b/i);
   });
 });

@@ -5,7 +5,7 @@ import {readFile,writeFile,mkdtemp,rm} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import {join} from 'node:path';
 import {pathToFileURL} from 'node:url';
-import ts from 'typescript';
+import * as ts from 'typescript';
 import pg from 'pg';
 
 const temp=await mkdtemp(join(tmpdir(),'fluxo-pg-'));

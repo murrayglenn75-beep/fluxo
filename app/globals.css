@@ -86,3 +86,23 @@ body{background:#eaf0ef}.app{width:100%;max-width:430px;min-height:100dvh;margin
 @media(min-width:768px){.login-shell{background:#eaf0ef;padding:48px}.login-card{max-width:484px;padding:32px;background:#f7f9fb;border:1px solid #e8edeb;border-radius:24px;box-shadow:0 10px 40px #18382b06}}
 @media(max-width:360px){.login-shell{padding:32px 18px}.login-alternatives{gap:7px}.login-alternatives button{gap:5px;font-size:11px}.login-brand{margin-bottom:24px}}
 .account-submit{margin-top:24px}.login-card form>.login-error{margin-top:16px}.statement-review{max-height:440px;overflow:auto;margin:14px 0}.statement-review strong{overflow-wrap:anywhere}.field textarea{width:100%;padding:12px;border:1px solid #dbe4e8;border-radius:9px;background:#f8fafb;color:inherit;resize:vertical}.statement-review .saved-expense{gap:16px}.statement-review .saved-expense>b{flex-shrink:0}
+
+/* Fluxo design system: vibrant cover, restrained authenticated interior.
+   Keep the existing light content cards for contrast and legibility. */
+:root{
+  --fluxo-cover-start:#008b65;
+  --fluxo-cover-end:#41e2b1;
+  --fluxo-interior-ink:#081f22;
+  --fluxo-interior-forest:#123b37;
+  --fluxo-action:#008a65;
+  --fluxo-focus:#53c4a5;
+  --fluxo-content-surface:#ffffff;
+}
+@media(max-width:767px){
+  body:has(.app){
+    background:linear-gradient(155deg,var(--fluxo-interior-forest),var(--fluxo-interior-ink) 75%);
+    background-attachment:fixed;
+  }
+  body:has(.app) .topbar h1,
+  body:has(.app) .topbar p{color:#f3fffb}
+}

@@ -261,3 +261,26 @@ body{background:#eaf0ef}.app{width:100%;max-width:430px;min-height:100dvh;margin
 .fluxo-cover-note{text-align:center;font-size:11px;color:#d4fff0;margin:17px 0 0}
 .fluxo-cover-cta:focus-visible{outline:3px solid white;outline-offset:4px}
 @media(prefers-reduced-motion:reduce){.fluxo-cover *{animation:none!important;transition:none!important}}
+
+/* Intro follows the second approved reference: sober forest backdrop, vivid floating tiles. */
+.fluxo-intro{min-height:100dvh;background:radial-gradient(ellipse at 100% 45%,#075b40 0%,#062e29 46%,#031b1b 90%);color:#f4fff9;display:grid;place-items:center;overflow:hidden}
+.fluxo-intro-inner{width:min(100%,430px);min-height:100dvh;display:flex;flex-direction:column;padding:clamp(28px,6vh,54px) 25px max(25px,env(safe-area-inset-bottom))}
+.fluxo-intro-brand{font-size:27px;font-weight:800;letter-spacing:-1.1px;display:flex;align-items:center;gap:8px}
+.fluxo-intro-symbol{font-weight:900;color:#0a5e43;background:linear-gradient(130deg,#92ffbe,#18d890);width:33px;height:33px;display:grid;place-items:center;border-radius:10px;transform:skew(-8deg)}
+.fluxo-intro-hero{position:relative;flex:1;padding-top:clamp(42px,9vh,90px)}
+.fluxo-intro-hero h1{font-size:clamp(34px,9vw,44px);letter-spacing:-1.6px;line-height:1.08;margin:0 0 16px}
+.fluxo-intro-hero h1 em{font-style:normal;color:#54f3a5}
+.fluxo-intro-hero p{font-size:14px;color:#c4e3d7;line-height:1.5;margin:0}
+.fluxo-intro-tiles{position:absolute;inset:38% -12% 0;min-height:230px;pointer-events:none;perspective:700px}
+.fluxo-intro-tile{position:absolute;display:grid;place-items:center;width:35%;aspect-ratio:1;border-radius:25px;background:linear-gradient(135deg,#0c7757,#074038 65%,#052e2e);border:1px solid #4be5a34d;box-shadow:0 20px 35px #001914aa,inset 0 1px 18px #60fbb61a;color:#89ffc2;font-size:65px}
+.fluxo-intro-tile.first{left:6%;top:28%;transform:rotate(-18deg)}
+.fluxo-intro-tile.second{right:8%;top:2%;transform:rotate(20deg)}
+.fluxo-intro-tile.third{right:29%;top:51%;transform:rotate(8deg)}
+.fluxo-intro-footer{display:flex;flex-direction:column;align-items:center;gap:14px}
+.fluxo-intro-dots{display:flex;gap:7px;margin-bottom:18px}
+.fluxo-intro-dots span{width:7px;height:7px;border-radius:50%;background:#37665b}
+.fluxo-intro-dots .current{background:#58efa7;width:19px;border-radius:9px}
+.fluxo-intro-next{width:100%;min-height:52px;border-radius:30px;background:linear-gradient(100deg,#087c5c,#23d48e);color:#fff;display:flex;justify-content:center;align-items:center;font-weight:700;position:relative}
+.fluxo-intro-next span{position:absolute;right:20px}
+.fluxo-intro-skip{min-height:36px;display:grid;place-items:center;color:#b2d7c7;font-size:13px}
+.fluxo-intro :is(a,button):focus-visible{outline:3px solid #85ffbb;outline-offset:4px}

@@ -71,6 +71,7 @@ try{
  const audit3={...audit,providerEventId:'event-3'};
  const expectedA={commandId:C1,userId:A,providerOperationId:'provider-1',amountMinor:2500,currency:'BRL',intentHash:'hash-a'};
  assert.equal(await recordProviderReconciliation(pool,expectedA,{kind:'unavailable'},audit),'reconcile');
+ assert.equal(await recordProviderReconciliation(pool,expectedA,{kind:'unavailable'},audit),'conflict','duplicate event replay rejected');
  assert.equal(await recordProviderReconciliation(pool,expectedA,{kind:'settled',providerOperationId:'wrong',amountMinor:2500,currency:'BRL',intentHash:'hash-a'},audit2),'reconcile');
  assert.equal(await recordProviderReconciliation(pool,expectedA,{kind:'settled',providerOperationId:'provider-1',amountMinor:2500,currency:'BRL',intentHash:'hash-a'},audit3),'settled');
  assert.equal(await recordProviderReconciliation(pool,expectedA,{kind:'rejected',providerOperationId:'provider-1',reason:'declined'},audit),'conflict');

@@ -28,15 +28,14 @@ export async function recordProviderReconciliation(
    await db.query('ROLLBACK');tx=false;return 'conflict';
   }
   const status=existing.rows[0].status;
-  if(status==='acknowledged'||status==='failed'){
+  if(status==='settled'||status==='acknowledged'||status==='failed'){
    await db.query('ROLLBACK');tx=false;return 'conflict';
   }
   if(status!=='reconcile'){
    await db.query('ROLLBACK');tx=false;return 'conflict';
   }
-  // A settled outcome is recorded as acknowledged by the current draft schema.
-  // Separate settlement ledger and provider evidence audit are future requirements.
-  const next=decision==='settled'?'acknowledged':decision==='failed'?'failed':'reconcile';
+  // A provider acknowledgement is NOT a verified settlement.
+  const next=decision==='settled'?'settled':decision==='failed'?'failed':'reconcile';
   const changed=await db.query(
    `update public.financial_command_outbox
     set status=$2,lease_expires_at=null,updated_at=clock_timestamp()

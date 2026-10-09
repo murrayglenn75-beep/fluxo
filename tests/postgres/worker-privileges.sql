@@ -3,6 +3,8 @@
 select 'create role fluxo_worker nologin' where not exists (select 1 from pg_roles where rolname='fluxo_worker') \gexec
 grant usage on schema public to fluxo_worker;
 grant select on public.financial_commands,public.financial_approvals,public.payment_intents to fluxo_worker;
+-- A read-only SHARE lock protects intent verification without granting intent UPDATE.
+select 1/(case when not has_table_privilege('fluxo_worker','public.payment_intents','UPDATE') then 1 else 0 end);
 grant update(status) on public.financial_commands to fluxo_worker;
 grant update(consumed_at) on public.financial_approvals to fluxo_worker;
 grant select,insert on public.financial_command_outbox to fluxo_worker;

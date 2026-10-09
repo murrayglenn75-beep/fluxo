@@ -25,6 +25,13 @@ describe('sandbox outbox recovery state machine',()=>{
     expect(ack.status).toBe('acknowledged');
     expect(()=>transitionOutbox(ack,{type:'lease',now:'2026-10-09T10:00:31.000Z'})).toThrow('lease_not_allowed');
   });
+  it('records verified settlement distinctly from acknowledgement',()=>{
+    const leased=transitionOutbox(base,{type:'lease',now:'2026-10-09T10:00:00.000Z'});
+    const ack=transitionOutbox(leased,{type:'provider_ack'});
+    const settled=transitionOutbox(ack,{type:'settlement_verified'});
+    expect(settled.status).toBe('settled');
+    expect(()=>transitionOutbox(settled,{type:'lease',now:'2026-10-09T10:00:40.000Z'})).toThrow('lease_not_allowed');
+  });
   it('rejects forged or incomplete identities',()=>{
     expect(()=>transitionOutbox({...base,userId:''},{type:'lease',now:'2026-10-09T10:00:00.000Z'})).toThrow('invalid_outbox_identity');
   });

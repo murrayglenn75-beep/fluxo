@@ -284,3 +284,39 @@ body{background:#eaf0ef}.app{width:100%;max-width:430px;min-height:100dvh;margin
 .fluxo-intro-next span{position:absolute;right:20px}
 .fluxo-intro-skip{min-height:36px;display:grid;place-items:center;color:#b2d7c7;font-size:13px}
 .fluxo-intro :is(a,button):focus-visible{outline:3px solid #85ffbb;outline-offset:4px}
+
+/* Mobile dashboard: reference-led card-first composition. Existing desktop remains intact. */
+.fluxo-mobile-hero{display:none}
+@media(max-width:767px){
+ .fluxo-mobile-hero{display:flex;flex-direction:column;gap:18px;margin-bottom:22px;color:#f2fff9}
+ .fluxo-hero-greeting{display:flex;align-items:center;justify-content:space-between;padding:3px 2px}
+ .fluxo-hero-greeting>span{display:flex;flex-direction:column;gap:4px}
+ .fluxo-hero-greeting small{color:#a9c9c2;font-size:12px}
+ .fluxo-hero-greeting strong{font-size:23px;letter-spacing:-.7px}
+ .fluxo-hero-avatar{display:grid;place-items:center;width:43px;height:43px;border-radius:50%;border:2px solid #60e6a8;background:#174a40;color:#fff;font-weight:800}
+ .fluxo-hero-bank-card{position:relative;overflow:hidden;min-height:196px;border-radius:22px;padding:22px;background:radial-gradient(circle at 87% 13%,#93ffd65e,transparent 40%),linear-gradient(125deg,#007b5b,#1cce8d 68%,#65e5b1);box-shadow:0 18px 35px #001e1980,inset 0 1px #baffdfaa;color:white;display:flex;flex-direction:column;justify-content:space-between}
+ .fluxo-hero-bank-card:after{content:'';position:absolute;right:-35px;bottom:-110px;width:250px;height:250px;border:1px solid #d1ffde80;border-radius:50%;box-shadow:0 0 0 30px #dcffe31a,0 0 0 65px #dcffe318;pointer-events:none}
+ .fluxo-hero-card-top,.fluxo-hero-card-bottom{display:flex;justify-content:space-between;align-items:center;position:relative;z-index:1}
+ .fluxo-hero-card-top strong{font-size:25px;letter-spacing:-1px}
+ .fluxo-hero-card-mark{margin-left:6px;font-size:20px}
+ .fluxo-hero-card-top>span{font-size:9px;letter-spacing:1px;font-weight:700}
+ .fluxo-hero-card-chip{font-size:35px;opacity:.9}
+ .fluxo-hero-card-bottom{font-size:13px;letter-spacing:1px;font-weight:700}
+ .fluxo-hero-card-bottom span:last-child{font-size:19px;font-style:italic;letter-spacing:-1px}
+ .fluxo-hero-balance{text-align:center;padding:3px 0 0}
+ .fluxo-hero-balance>div{display:flex;align-items:center;justify-content:center;gap:12px;color:#c3ded4;font-size:13px}
+ .fluxo-hero-balance button{border:0;background:transparent;color:#c3ded4;padding:3px;cursor:pointer}
+ .fluxo-hero-balance h2{font-size:clamp(34px,9vw,43px);margin:7px 0 5px;letter-spacing:-1.5px;color:#f4fff9}
+ .fluxo-hero-balance small{color:#65eab0;display:flex;align-items:center;justify-content:center;gap:4px}
+ .fluxo-hero-shortcuts{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+ .fluxo-hero-shortcuts a{display:flex;align-items:center;justify-content:center;gap:9px;min-height:49px;border-radius:28px;background:#194b40;border:1px solid #2e7660;color:#f3fff9;font-weight:700}
+ .fluxo-hero-shortcuts a:last-child{background:#27d28c;color:#062e22;border-color:#27d28c}
+ .fluxo-hero-ai{display:flex;align-items:center;gap:13px;padding:17px 16px;border-radius:18px;background:linear-gradient(115deg,#165848,#0d403a);border:1px solid #3a9270;color:#effff7}
+ .fluxo-hero-ai-icon{display:grid;place-items:center;width:44px;height:44px;flex-shrink:0;border-radius:15px;background:#3add9c;color:#063b2d;font-size:25px}
+ .fluxo-hero-ai>span:nth-child(2){flex:1;display:flex;flex-direction:column;gap:5px}
+ .fluxo-hero-ai strong{font-size:15px}
+ .fluxo-hero-ai small{font-size:11px;color:#b5d8c9}
+ .fluxo-hero-ai>span:last-child{font-size:23px;color:#7ef2b4}
+ body:has(.fluxo-mobile-hero) .summary .balance{display:none}
+ body:has(.fluxo-mobile-hero) .mobile-header{background:transparent}
+}

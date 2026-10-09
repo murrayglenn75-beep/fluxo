@@ -54,6 +54,6 @@ jobs:
           grep -q 'canceling statement due to lock timeout' /tmp/fluxo-contender.log
           psql -X -v ON_ERROR_STOP=1 -c "select id from public.financial_commands where id='20000000-0000-4000-8000-000000000001' for update"
       - name: Install test-only PostgreSQL driver and TypeScript compiler
-        run: npm install --no-save --no-package-lock --ignore-scripts pg@8.16.3 typescript@7.0.2
+        run: npm install --no-save --no-package-lock --ignore-scripts pg@8.16.3 typescript@5.9.3
       - name: Execute actual TypeScript adapter against PostgreSQL
         run: node tests/postgres/real-adapter.mjs

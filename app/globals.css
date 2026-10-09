@@ -320,3 +320,28 @@ body{background:#eaf0ef}.app{width:100%;max-width:430px;min-height:100dvh;margin
  body:has(.fluxo-mobile-hero) .summary .balance{display:none}
  body:has(.fluxo-mobile-hero) .mobile-header{background:transparent}
 }
+
+/* Reference-matched interior components: cards, payments, Pix and transfers */
+.fluxo-screen-kicker{font-size:10px;letter-spacing:1.8px;color:#65eab0;font-weight:800;margin-bottom:9px}
+.fluxo-screen-description{color:#a9c9c2;font-size:13px;margin:4px 0 22px;line-height:1.5}
+.fluxo-bill-summary{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:20px 0 25px}
+.fluxo-bill-summary>div{background:linear-gradient(135deg,#164f42,#0c302d);border:1px solid #2a6857;border-radius:17px;padding:17px;display:flex;flex-direction:column;gap:8px}
+.fluxo-bill-summary span{color:#b8d8cc;font-size:11px}
+.fluxo-bill-summary strong{font-size:29px;line-height:1.1;color:#f2fff9}
+.fluxo-bill-summary small{color:#62dca3;font-size:11px}
+@media(max-width:767px){
+ body:has(.app) .page-panel.cards-page,body:has(.app) .page-panel.payment-page,body:has(.app) .page-panel.fluxo-bills-page{background:transparent;border:0;box-shadow:none;padding:12px 0 25px}
+ body:has(.app) .cards-page>h2,body:has(.app) .payment-page>h2,body:has(.app) .fluxo-bills-page>h2{font-size:27px;letter-spacing:-.9px;color:#f2fff9;margin:0 0 5px}
+ body:has(.app) .cards-page .credit-card{background:radial-gradient(circle at 85% 18%,#a2ffe766,transparent 42%),linear-gradient(125deg,#006a54,#20c88b 68%,#73f5b6);border:1px solid #8dfcc180;border-radius:22px;box-shadow:0 20px 38px #001a1780;color:#fff;min-height:195px;overflow:hidden}
+ body:has(.app) .cards-page .credit-card :is(strong,h3,p,small){color:#fff}
+ body:has(.app) .cards-page .credit-card.frozen{filter:saturate(.35);opacity:.75}
+ body:has(.app) .cards-page .cards-toolbar{gap:10px;flex-wrap:wrap}
+ body:has(.app) .cards-page .cards-toolbar button{border-radius:22px}
+ body:has(.app) .payment-page :is(input,select,textarea){background:#143d37;color:#f2fff9;border:1px solid #35695a;border-radius:13px;min-height:48px}
+ body:has(.app) .payment-page :is(input,textarea)::placeholder{color:#aacbc0}
+ body:has(.app) .payment-page :is(.tabs,.tab-row){background:#123b37;border-radius:14px}
+ body:has(.app) .payment-page .primary,body:has(.app) .fluxo-bills-page .primary{background:#28db90;color:#062d22;border-radius:16px;min-height:50px;font-weight:800}
+ body:has(.app) .fluxo-bills-page .bill-row{border-color:#285a4f;color:#f2fff9}
+ body:has(.app) .fluxo-bills-page .bill-row strong{color:#f2fff9}
+ body:has(.app) .fluxo-bills-page .bill-row small{color:#a9c9c2}
+}

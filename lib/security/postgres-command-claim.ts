@@ -13,7 +13,7 @@ export type DurableClaim='claimed'|'already_claimed'|'conflict';
 
 type CommandRow={id:string;user_id:string;idempotency_key:string;intent_hash:string;status:string;payment_intent_id:string|null};
 type ApprovalRow={user_id:string;command_id:string;approved_by:string;intent_hash:string;consumed_at:string|null;valid:boolean};
-type IntentRow={id:string;user_id:string;intent_hash:string};
+type IntentRow={id:string;user_id:string;request_fingerprint:string};
 
 /**
  * Claims an already-created command and approval. The caller MUST supply an
@@ -66,10 +66,10 @@ export async function claimDurableFinancialCommand(
 
     if (command.payment_intent_id!==null) {
       const intents=await db.query<IntentRow>(
-        `select id,user_id,intent_hash from public.payment_intents
+        `select id,user_id,request_fingerprint from public.payment_intents
          where id=$1 and user_id=$2 for update`,
         [command.payment_intent_id,authenticatedUserId]);
-      if (intents.rows.length!==1 || intents.rows[0].intent_hash!==intentHash)
+      if (intents.rows.length!==1 || intents.rows[0].request_fingerprint!==intentHash)
         return await rollbackConflict(db);
     }
 

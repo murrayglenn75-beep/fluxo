@@ -35,6 +35,8 @@ jobs:
         run: psql -X -v ON_ERROR_STOP=1 -f tests/postgres/fixture.sql
       - name: Run PostgreSQL atomicity and privilege assertions
         run: psql -X -v ON_ERROR_STOP=1 -f tests/postgres/integrity.sql
+      - name: Assert least-privilege worker and browser denials
+        run: psql -X -v ON_ERROR_STOP=1 -f tests/postgres/worker-privileges.sql
       - name: Verify independent connections and row-lock serialization
         shell: bash
         run: |

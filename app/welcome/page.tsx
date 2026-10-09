@@ -10,7 +10,7 @@ return <main className="fluxo-cover">
 </div>
 <div className="fluxo-cover-bottom">
 <h1>Your Smart<br/>Financial Future<br/><em>Starts Here</em></h1>
-<Link className="fluxo-cover-cta" href="/login">Get Started <span aria-hidden="true">→</span></Link>
+<Link className="fluxo-cover-cta" href="/intro">Get Started <span aria-hidden="true">→</span></Link>
 <p className="fluxo-cover-note">Sandbox experience. No real money moves.</p>
 </div></div></main>;
 }

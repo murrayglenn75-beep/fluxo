@@ -14,6 +14,11 @@ const compiled=ts.transpileModule(source,{compilerOptions:{target:ts.ScriptTarge
 const entry=join(temp,'claim.mjs');
 await writeFile(entry,compiled);
 const {claimDurableFinancialCommand}=await import(pathToFileURL(entry).href);
+const recoverySource=await readFile('lib/security/postgres-outbox-recovery.ts','utf8');
+const recoveryEntry=join(temp,'recovery.mjs');
+const recoveryCompiled=ts.transpileModule(recoverySource,{compilerOptions:{target:ts.ScriptTarget.ES2022,module:ts.ModuleKind.ESNext}}).outputText;
+await writeFile(recoveryEntry,recoveryCompiled);
+const {leaseNextOutbox,reconcileExpiredLeases,markOutboxTimeout}=await import(pathToFileURL(recoveryEntry).href);
 const pool=new pg.Pool({
  host:process.env.PGHOST,port:Number(process.env.PGPORT||5432),
  user:process.env.PGUSER,password:process.env.PGPASSWORD,
@@ -42,6 +47,16 @@ try{
  assert.equal(outbox.rows[0].user_id,A);
  assert.equal(await claimDurableFinancialCommand(pool,request(C2,B,'key-b','hash-b')),'claimed','independent owner');
  assert.equal((await pool.query('select count(*)::int as n from public.financial_command_outbox')).rows[0].n,2);
+ const now=new Date();
+ const leases=await Promise.all(Array.from({length:6},()=>leaseNextOutbox(pool,now.toISOString(),1)));
+ assert.equal(leases.filter(Boolean).length,2,'only two jobs leased across six workers');
+ assert.equal((await pool.query("select count(*)::int as n from public.financial_command_outbox where status='leased'")).rows[0].n,2);
+ assert.equal(await markOutboxTimeout(pool,C1),true,'provider timeout goes to reconcile');
+ assert.equal(await markOutboxTimeout(pool,C1),false,'cannot transition twice');
+ assert.deepEqual(await reconcileExpiredLeases(pool,new Date(now.getTime()+5000).toISOString()),[C2],'expired worker lease reconciled');
+ assert.equal(await leaseNextOutbox(pool,new Date(now.getTime()+6000).toISOString()),null,'uncertain jobs never automatically resent');
+ assert.equal((await pool.query("select count(*)::int as n from public.financial_command_outbox where status='reconcile'")).rows[0].n,2);
+ console.log('PASS outbox: concurrent SKIP LOCKED leasing, timeout, crash recovery, no blind retry');
  console.log('PASS real adapter: cross-owner, wrong key/hash, 12 concurrent claims, approval consumption, durable outbox and independent owner');
 }finally{
  await pool.end();

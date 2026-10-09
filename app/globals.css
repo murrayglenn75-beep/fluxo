@@ -345,3 +345,12 @@ body{background:#eaf0ef}.app{width:100%;max-width:430px;min-height:100dvh;margin
  body:has(.app) .fluxo-bills-page .bill-row strong{color:#f2fff9}
  body:has(.app) .fluxo-bills-page .bill-row small{color:#a9c9c2}
 }
+
+.fluxo-ai-hero{padding:23px 19px;border-radius:22px;background:radial-gradient(circle at 85% 15%,#68f6b452,transparent 40%),linear-gradient(135deg,#125b48,#06362f);border:1px solid #3c9773;color:#f2fff9;margin-bottom:20px}
+.fluxo-ai-hero-icon{display:grid;place-items:center;width:45px;height:45px;border-radius:15px;background:#37e29d;color:#064232;font-size:28px;margin-bottom:16px}
+.fluxo-ai-hero>span{font-size:10px;letter-spacing:1.7px;font-weight:800;color:#89f8bd}
+.fluxo-ai-hero h2{font-size:27px;line-height:1.13;letter-spacing:-1px;margin:11px 0;color:#fff}
+.fluxo-ai-hero p{color:#c5e8d9;font-size:12px;line-height:1.6;margin:0 0 19px}
+.fluxo-ai-hero-tabs{display:flex;gap:8px;flex-wrap:wrap}
+.fluxo-ai-hero-tabs span{padding:8px 12px;background:#225d4c;border:1px solid #44896b;border-radius:22px;font-size:11px;font-weight:700}
+@media(max-width:767px){body:has(.app) .assistant-page{background:transparent;border:0;box-shadow:none}body:has(.app) .assistant-page .suggestions button{background:#143d37;border:1px solid #326854;color:#f2fff9;border-radius:13px}body:has(.app) .assistant-page .ask-form input{background:#123b37;color:#f2fff9;border:1px solid #36765f}}

@@ -241,3 +241,23 @@ body{background:#eaf0ef}.app{width:100%;max-width:430px;min-height:100dvh;margin
   body:has(.app) .quick-actions a,body:has(.app) .quick-actions button{color:#eafff4}
   body:has(.app) .workspace-footer{color:#a9c9c2}
 }
+
+/* Reference splash: intentionally more expressive than the interior banking UI. */
+.fluxo-cover{min-height:100dvh;display:grid;place-items:center;background:radial-gradient(ellipse at 52% 27%,#29df92 0%,#047456 30%,#064339 55%,#041c1c 85%);color:#fff;overflow:hidden;isolation:isolate;position:relative}
+.fluxo-cover-glow{position:absolute;inset:-20%;background:conic-gradient(from 220deg at 45% 37%,transparent 0deg,#73ffb555 55deg,transparent 105deg,#c5ff7a55 180deg,transparent 260deg);filter:blur(34px);z-index:-1;pointer-events:none}
+.fluxo-cover-inner{width:min(100%,430px);min-height:100dvh;padding:clamp(24px,6vh,52px) 28px max(28px,env(safe-area-inset-bottom));display:flex;flex-direction:column}
+.fluxo-cover-brand{font-size:34px;font-weight:800;letter-spacing:-1.6px;text-shadow:0 2px 18px #003b2b80}
+.fluxo-cover-brand:before{content:'F';display:inline-grid;place-items:center;width:38px;height:38px;margin-right:9px;border-radius:12px;background:linear-gradient(145deg,#a1ffd0,#14c78c);color:#064334;font-weight:900;transform:skew(-8deg)}
+.fluxo-cover-art{height:clamp(250px,39vh,370px);position:relative;perspective:800px;margin:20px 0 8px}
+.fluxo-cover-card{position:absolute;top:17%;left:15%;width:68%;height:65%;min-height:170px;max-height:230px;border-radius:20px;padding:20px;display:flex;flex-direction:column;justify-content:space-between;font-size:19px;font-weight:800;letter-spacing:-.6px;box-shadow:0 22px 40px #001b1b9e;border:1px solid #d1ffde7a}
+.fluxo-cover-card-back{transform:rotate(17deg) translate(21%,3%);background:linear-gradient(135deg,#061b1b,#006c53 70%,#39d9a0)}
+.fluxo-cover-card-front{transform:rotate(-15deg) translate(-11%,6%);background:linear-gradient(125deg,#0745a8,#00aeb5 46%,#20d98b 85%)}
+.fluxo-cover-card span:last-child{font-size:14px;letter-spacing:2px}
+.fluxo-cover-bottom{margin-top:auto}
+.fluxo-cover-bottom h1{font-size:clamp(32px,8vw,42px);line-height:1.12;letter-spacing:-1.6px;margin:0 0 25px;font-weight:800}
+.fluxo-cover-bottom em{font-style:normal;color:#68ffc0}
+.fluxo-cover-cta{min-height:54px;background:linear-gradient(100deg,#28db90,#73f5b6);color:#053425;display:flex;align-items:center;justify-content:center;position:relative;border-radius:30px;font-size:15px;font-weight:800}
+.fluxo-cover-cta span{position:absolute;right:22px;font-size:22px}
+.fluxo-cover-note{text-align:center;font-size:11px;color:#d4fff0;margin:17px 0 0}
+.fluxo-cover-cta:focus-visible{outline:3px solid white;outline-offset:4px}
+@media(prefers-reduced-motion:reduce){.fluxo-cover *{animation:none!important;transition:none!important}}

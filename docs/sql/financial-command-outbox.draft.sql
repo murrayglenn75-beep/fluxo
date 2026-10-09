@@ -9,6 +9,8 @@ create table public.financial_command_outbox (
   status text not null default 'pending'
     check (status in ('pending','leased','acknowledged','reconcile','failed')),
   attempts integer not null default 0 check (attempts >= 0),
+  lease_expires_at timestamptz,
+  constraint outbox_lease_consistency check ((status='leased') = (lease_expires_at is not null)),
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now(),
   unique (command_id),

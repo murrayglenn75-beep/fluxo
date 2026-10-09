@@ -41,12 +41,14 @@ export async function claimDurableFinancialCommand(
       [commandId,authenticatedUserId]);
     if (commands.rows.length!==1) return await rollbackConflict(db);
     const command=commands.rows[0];
-    if (command.idempotency_key!==idempotencyKey || command.intent_hash!==intentHash)
+    if (command.id!==commandId || command.user_id!==authenticatedUserId ||
+      command.idempotency_key!==idempotencyKey || command.intent_hash!==intentHash)
       return await rollbackConflict(db);
     if (command.status==='executing' || command.status==='executed') {
       await db.query('COMMIT');inTransaction=false;
       return 'already_claimed';
     }
+    if (command.payment_intent_id===null) return await rollbackConflict(db);
     if (command.status!=='pending' && command.status!=='approved')
       return await rollbackConflict(db);
 
@@ -69,7 +71,8 @@ export async function claimDurableFinancialCommand(
         `select id,user_id,request_fingerprint from public.payment_intents
          where id=$1 and user_id=$2 for update`,
         [command.payment_intent_id,authenticatedUserId]);
-      if (intents.rows.length!==1 || intents.rows[0].request_fingerprint!==intentHash)
+      if (intents.rows.length!==1 || intents.rows[0].id!==command.payment_intent_id ||
+        intents.rows[0].user_id!==authenticatedUserId || intents.rows[0].request_fingerprint!==intentHash)
         return await rollbackConflict(db);
     }
 

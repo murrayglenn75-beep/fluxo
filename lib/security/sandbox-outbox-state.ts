@@ -2,7 +2,7 @@
  * Sandbox-only outbox lease and reconciliation state machine.
  * No provider transport is invoked. This module does not grant database access.
  */
-export type OutboxStatus='pending'|'leased'|'acknowledged'|'reconcile'|'failed';
+export type OutboxStatus='pending'|'leased'|'acknowledged'|'settled'|'reconcile'|'failed';
 export type OutboxRecord=Readonly<{
   commandId:string;userId:string;idempotencyKey:string;intentHash:string;
   status:OutboxStatus;attempts:number;leaseExpiresAt:string|null;
@@ -49,6 +49,6 @@ export function transitionOutbox(record:OutboxRecord,event:OutboxEvent):OutboxRe
       // Acknowledgement alone never constitutes settlement.
       if(record.status!=='acknowledged'&&record.status!=='reconcile')
         throw new Error('settlement_not_allowed');
-      return {...record,status:'acknowledged',leaseExpiresAt:null};
+      return {...record,status:'settled',leaseExpiresAt:null};
   }
 }

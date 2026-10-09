@@ -14,3 +14,12 @@ select 1/(case when not has_table_privilege('authenticated','public.financial_pr
 select 1/(case when not has_table_privilege('fluxo_worker','public.financial_provider_evidence','DELETE') then 1 else 0 end);
 select 1/(case when not has_column_privilege('fluxo_worker','public.financial_commands','user_id','UPDATE') then 1 else 0 end);
 select 1/(case when has_table_privilege('fluxo_worker','public.financial_provider_event_receipts','INSERT') then 1 else 0 end);
+
+-- Exercise the actual SQL role, not only has_*_privilege metadata.
+-- RLS currently has no worker policies: verify it fails closed.
+set role fluxo_worker;
+select 1/(case when (select count(*) from public.financial_commands)=2 then 1 else 0 end);
+select 1/(case when (select count(*) from public.financial_command_outbox)=0 then 1 else 0 end);
+reset role;
+-- Dedicated worker policies must be added and reviewed before the adapter
+-- can execute under fluxo_worker. Never grant BYPASSRLS to make tests pass.

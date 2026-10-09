@@ -20,6 +20,7 @@ type IntentRow={id:string;user_id:string;request_fingerprint:string};
  * authenticated principal established by trusted server middleware.
  *
  * This is a claim/outbox transaction, NOT a provider payment or settlement.
+ * The outbox schema is currently a non-deployed draft under docs/sql/.
  * The provider worker and recovery/reconciliation process remain unimplemented.
  */
 export async function claimDurableFinancialCommand(
@@ -90,8 +91,16 @@ export async function claimDurableFinancialCommand(
       [commandId,authenticatedUserId]);
     if (updated.rowCount!==1) return await rollbackConflict(db);
 
-    // Outbox table is intentionally not invented here. This claim MUST NOT be
-    // connected to provider submission until an outbox is inserted atomically.
+    // Durable outbox must commit with approval consumption and command transition.
+    // The unique command_id prevents two outbox entries for the same command.
+    const outbox=await db.query(
+      `insert into public.financial_command_outbox
+         (command_id,user_id,intent_hash,idempotency_key,status)
+       values ($1,$2,$3,$4,'pending')
+       on conflict (command_id) do nothing
+       returning command_id`,
+      [commandId,authenticatedUserId,intentHash,idempotencyKey]);
+    if (outbox.rowCount!==1) return await rollbackConflict(db);
     await db.query('COMMIT');inTransaction=false;
     return 'claimed';
   } catch (error) {

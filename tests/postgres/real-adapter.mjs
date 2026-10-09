@@ -21,6 +21,14 @@ const recoveryEntry=join(temp,'recovery.mjs');
 const recoveryCompiled=ts.transpileModule(recoverySource,{compilerOptions:{target:ts.ScriptTarget.ES2022,module:ts.ModuleKind.ESNext}}).outputText;
 await writeFile(recoveryEntry,recoveryCompiled);
 const {leaseNextOutbox,reconcileExpiredLeases,markOutboxTimeout}=await import(pathToFileURL(recoveryEntry).href);
+const policySource=await readFile('lib/security/provider-reconciliation.ts','utf8');
+const policyEntry=join(temp,'provider-reconciliation.mjs');
+await writeFile(policyEntry,ts.transpileModule(policySource,{compilerOptions:{target:ts.ScriptTarget.ES2022,module:ts.ModuleKind.ESNext}}).outputText);
+const reconciliationSource=await readFile('lib/security/postgres-provider-reconciliation.ts','utf8');
+const reconciliationEntry=join(temp,'postgres-provider-reconciliation.mjs');
+const reconciliationCompiled=ts.transpileModule(reconciliationSource,{compilerOptions:{target:ts.ScriptTarget.ES2022,module:ts.ModuleKind.ESNext}}).outputText.replace("from './provider-reconciliation'","from './provider-reconciliation.mjs'"));
+await writeFile(reconciliationEntry,reconciliationCompiled);
+const {recordProviderReconciliation}=await import(pathToFileURL(reconciliationEntry).href);
 const pool=new pg.Pool({
  host:process.env.PGHOST,port:Number(process.env.PGPORT||5432),
  user:process.env.PGUSER,password:process.env.PGPASSWORD,
@@ -58,6 +66,13 @@ try{
  assert.deepEqual(await reconcileExpiredLeases(pool,new Date(now.getTime()+5000).toISOString()),[C2],'expired worker lease reconciled');
  assert.equal(await leaseNextOutbox(pool,new Date(now.getTime()+6000).toISOString()),null,'uncertain jobs never automatically resent');
  assert.equal((await pool.query("select count(*)::int as n from public.financial_command_outbox where status='reconcile'")).rows[0].n,2);
+ const expectedA={commandId:C1,providerOperationId:'provider-1',amountMinor:2500,currency:'BRL',intentHash:'hash-a'};
+ assert.equal(await recordProviderReconciliation(pool,expectedA,{kind:'unavailable'}),'reconcile');
+ assert.equal(await recordProviderReconciliation(pool,expectedA,{kind:'settled',providerOperationId:'wrong',amountMinor:2500,currency:'BRL',intentHash:'hash-a'}),'reconcile');
+ assert.equal(await recordProviderReconciliation(pool,expectedA,{kind:'settled',providerOperationId:'provider-1',amountMinor:2500,currency:'BRL',intentHash:'hash-a'}),'settled');
+ assert.equal(await recordProviderReconciliation(pool,expectedA,{kind:'rejected',providerOperationId:'provider-1',reason:'declined'}),'conflict');
+ assert.equal((await pool.query('select status from public.financial_command_outbox where command_id=$1',[C1])).rows[0].status,'acknowledged');
+ console.log('PASS durable reconciliation: unknown remains uncertain, exact evidence accepted, terminal outcome immutable');
  console.log('PASS outbox: concurrent SKIP LOCKED leasing, timeout, crash recovery, no blind retry');
  console.log('PASS real adapter: cross-owner, wrong key/hash, 12 concurrent claims, approval consumption, durable outbox and independent owner');
 }finally{

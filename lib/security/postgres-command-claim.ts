@@ -70,7 +70,7 @@ export async function claimDurableFinancialCommand(
     if (command.payment_intent_id!==null) {
       const intents=await db.query<IntentRow>(
         `select id,user_id,request_fingerprint from public.payment_intents
-         where id=$1 and user_id=$2 for update`,
+         where id=$1 and user_id=$2 for share`,
         [command.payment_intent_id,authenticatedUserId]);
       if (intents.rows.length!==1 || intents.rows[0].id!==command.payment_intent_id ||
         intents.rows[0].user_id!==authenticatedUserId || intents.rows[0].request_fingerprint!==intentHash)

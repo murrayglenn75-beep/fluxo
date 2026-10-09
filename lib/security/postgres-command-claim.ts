@@ -67,10 +67,13 @@ export async function claimDurableFinancialCommand(
       approval.consumed_at!==null || approval.valid!==true)
       return await rollbackConflict(db);
 
+    // Read the intent under the command transaction without a row lock.
+    // The worker is SELECT-only on payment_intents; any writer must preserve
+    // request_fingerprint immutability as part of the database authority model.
     if (command.payment_intent_id!==null) {
       const intents=await db.query<IntentRow>(
         `select id,user_id,request_fingerprint from public.payment_intents
-         where id=$1 and user_id=$2 for share`,
+         where id=$1 and user_id=$2`,
         [command.payment_intent_id,authenticatedUserId]);
       if (intents.rows.length!==1 || intents.rows[0].id!==command.payment_intent_id ||
         intents.rows[0].user_id!==authenticatedUserId || intents.rows[0].request_fingerprint!==intentHash)

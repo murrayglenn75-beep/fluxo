@@ -28,8 +28,8 @@ Work completed on `security/v2-authority-hardening`, following `docs/codex-hando
 | Independent PostgreSQL connections | Expected competing-row lock timeout verified; row accessible after holder committed |
 | `node tests/postgres/real-adapter.mjs` | Passed actual TypeScript adapter checks with test-only `pg@8.16.3` and `typescript@5.9.3`: one winner among 12 claims, consumed approval, one outbox entry, owner/key/hash conflicts, concurrent leases, crash/timeout recovery, uncertain outcomes, evidence matching and replay rejection |
 | Actual migrations on clean and populated databases | Both passed: preserved seeded rows, owner-scoped reads, denied client writes and anonymous reads, cross-owner FK/approver rejection, owner-scoped idempotency |
-| GitHub `verify` on implementation commit `2bf0c95` | Passed: https://github.com/murrayglenn75-beep/fluxo/actions/runs/38015372925 |
-| GitHub PostgreSQL integration on implementation commit `2bf0c95` | Passed: https://github.com/murrayglenn75-beep/fluxo/actions/runs/38015372922 |
+| GitHub `verify` on implementation commit `2bf0c95` | Passed: https://github.com/murrayglenn75-beep/fluxo/actions/runs/38015369883 |
+| GitHub PostgreSQL integration on implementation commit `2bf0c95` | Passed: https://github.com/murrayglenn75-beep/fluxo/actions/runs/38015369927 |
 | `git diff --check` and changed formatted-file checks | Passed |
 | Lint | No repository lint script/configured lint workflow exists; not claimed as executed |
 

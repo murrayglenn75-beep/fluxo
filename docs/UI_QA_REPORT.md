@@ -28,6 +28,8 @@ Work completed on `security/v2-authority-hardening`, following `docs/codex-hando
 | Independent PostgreSQL connections | Expected competing-row lock timeout verified; row accessible after holder committed |
 | `node tests/postgres/real-adapter.mjs` | Passed actual TypeScript adapter checks with test-only `pg@8.16.3` and `typescript@5.9.3`: one winner among 12 claims, consumed approval, one outbox entry, owner/key/hash conflicts, concurrent leases, crash/timeout recovery, uncertain outcomes, evidence matching and replay rejection |
 | Actual migrations on clean and populated databases | Both passed: preserved seeded rows, owner-scoped reads, denied client writes and anonymous reads, cross-owner FK/approver rejection, owner-scoped idempotency |
+| GitHub `verify` on implementation commit `2bf0c95` | Passed: https://github.com/murrayglenn75-beep/fluxo/actions/runs/38015372925 |
+| GitHub PostgreSQL integration on implementation commit `2bf0c95` | Passed: https://github.com/murrayglenn75-beep/fluxo/actions/runs/38015372922 |
 | `git diff --check` and changed formatted-file checks | Passed |
 | Lint | No repository lint script/configured lint workflow exists; not claimed as executed |
 
@@ -78,8 +80,8 @@ For the real adapter, CI installs the test-only driver/compiler. In this environ
 - Current Vercel previews were located in PR #5, but HTTP requests were denied by the environment's network proxy. No preview rendering or live auth behavior is claimed:
   - https://fluxo-git-security-v2-autho-08eac5-murrayglenn75-9604s-projects.vercel.app
   - https://fluxo-fintech-git-security-4c1387-murrayglenn75-9604s-projects.vercel.app
-- GitHub API access was also denied. The draft environment allowlist now contains `api.github.com` and those two exact preview hosts, preserving package-manager presets. Review/save those settings and publish the **cloud environment** to activate the saved configuration; this does not deploy Fluxo to production. Retry external checks after access changes. Additional Vercel preview protection may still require project access.
+- GitHub API access was also denied; public GitHub pages confirmed the pushed commit, Draft status, and successful CI runs. The draft environment allowlist now contains `api.github.com` and those two exact preview hosts, preserving package-manager presets. Review/save those settings and publish the **cloud environment** to activate the saved configuration; this does not deploy Fluxo to production. Retry external checks after access changes. Additional Vercel preview protection may still require project access.
 - Auth end-to-end (signup/confirmation/login/recovery/expiry/logout) needs a configured test Supabase project. Public configuration variables are absent in this machine; UI/error states and existing auth unit tests passed. No credentials are requested in chat.
-- Final remote CI, visual comparison to the original references, native/device behavior, human SQL/authority review, and production-project ownership/rollback checks remain release gates. Local tests and preview status alone do not mark the release ready.
+- Recheck remote CI after any future commits. Visual comparison to the original references, native/device behavior, human SQL/authority review, and production-project ownership/rollback checks remain release gates. Local tests and preview status alone do not mark the release ready.
 
 Keep PR #5 Draft. Production promotion and migrations remain outside this task.

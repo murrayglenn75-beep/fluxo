@@ -412,3 +412,10 @@ body:has(.app) select option{background:#fff;color:#102e2c}
  body:has(.app) :is(.page-panel,.bank-page) :is(.primary,button[type=submit]){border-radius:14px}
  body:has(.app) .workspace-footer{border-color:#285b4c}
 }
+
+.fluxo-activity-summary{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:15px 0 22px}
+.fluxo-activity-summary>div{min-width:0;padding:18px 15px;border-radius:18px;background:linear-gradient(140deg,#164c40,#0b302d);border:1px solid #326c56;display:flex;flex-direction:column;gap:10px}
+.fluxo-activity-summary span{font-size:12px;color:#b1d5c4}
+.fluxo-activity-summary strong{font-size:clamp(17px,4.5vw,25px);letter-spacing:-.5px;color:#f2fff9;overflow-wrap:anywhere}
+.fluxo-activity-summary>div:first-child strong{color:#73f5b6}
+@media(max-width:767px){body:has(.app) .section-activity .page-panel{padding:14px 0 25px}body:has(.app) .section-activity .page-title h2{font-size:28px;color:#f2fff9}}

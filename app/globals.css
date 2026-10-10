@@ -419,3 +419,9 @@ body:has(.app) select option{background:#fff;color:#102e2c}
 .fluxo-activity-summary strong{font-size:clamp(17px,4.5vw,25px);letter-spacing:-.5px;color:#f2fff9;overflow-wrap:anywhere}
 .fluxo-activity-summary>div:first-child strong{color:#73f5b6}
 @media(max-width:767px){body:has(.app) .section-activity .page-panel{padding:14px 0 25px}body:has(.app) .section-activity .page-title h2{font-size:28px;color:#f2fff9}}
+
+.fluxo-exchange-banner{display:flex;flex-direction:column;gap:9px;padding:23px 19px;margin:16px 0 25px;border-radius:21px;background:radial-gradient(circle at 90% 0%,#73f5b655,transparent 42%),linear-gradient(130deg,#135747,#082c2a);border:1px solid #397d60;color:#f2fff9}
+.fluxo-exchange-banner span{font-size:10px;font-weight:800;letter-spacing:1.7px;color:#83f5b8}
+.fluxo-exchange-banner strong{font-size:25px;letter-spacing:-.8px;line-height:1.15}
+.fluxo-exchange-banner small{font-size:12px;color:#b8dfcf}
+@media(max-width:767px){body:has(.app) .exchange-page{padding:14px 0 30px;background:transparent;border:0}body:has(.app) .exchange-page>h2{font-size:28px;color:#f2fff9}body:has(.app) .exchange-page .currency-box{background:#103b37;border:1px solid #326756;border-radius:17px;padding:17px;color:#f2fff9}body:has(.app) .exchange-page .currency-box select{background:#174a40;color:#f2fff9;border:1px solid #468c71;color-scheme:dark}body:has(.app) .exchange-page .currency-box select option{background:#103b37;color:#f2fff9}body:has(.app) .exchange-page .primary{background:#28db90;color:#062d22;border-radius:15px;min-height:50px}}

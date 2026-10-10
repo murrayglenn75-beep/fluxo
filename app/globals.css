@@ -385,3 +385,12 @@ body{background:#eaf0ef}.app{width:100%;max-width:430px;min-height:100dvh;margin
  .login-input,.login-password{border-radius:12px}
  .login-security{line-height:1.55}
 }
+
+/* Mobile QA fixes: prevent footer clipping and keep native selects legible. */
+@media(max-width:767px){
+ body:has(.app) .workspace-footer{padding-bottom:24px!important}
+ body:has(.app) .workspace{padding-bottom:calc(100px + env(safe-area-inset-bottom,0px))!important}
+ body:has(.app) .page-panel{padding-bottom:calc(105px + env(safe-area-inset-bottom,0px))!important}
+}
+body:has(.app) select{color-scheme:light;color:#102e2c;background-color:#f6f8fa}
+body:has(.app) select option{background:#fff;color:#102e2c}

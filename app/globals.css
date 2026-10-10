@@ -394,3 +394,21 @@ body{background:#eaf0ef}.app{width:100%;max-width:430px;min-height:100dvh;margin
 }
 body:has(.app) select{color-scheme:light;color:#102e2c;background-color:#f6f8fa}
 body:has(.app) select option{background:#fff;color:#102e2c}
+
+/* Approved Fluxo midnight-teal mobile interior: shared visual foundation. */
+@media(max-width:767px){
+ body:has(.app){background:#061b1b!important;color:#f2fff9}
+ body:has(.app) .app,body:has(.app) main,body:has(.app) .workspace,body:has(.app) .workspace-content{background:linear-gradient(165deg,#103b37 0%,#092c2b 36%,#061b1b 100%)!important;color:#f2fff9}
+ body:has(.app) .page-panel,body:has(.app) .bank-page{background:transparent!important;color:#f2fff9;border-color:transparent}
+ body:has(.app) :is(.mobile-header,.topbar,.bottom-nav){background:#092c2b!important;color:#f2fff9;border-color:#255448!important}
+ body:has(.app) :is(.mobile-header,.topbar,.bottom-nav) a,body:has(.app) .bottom-nav button{color:#b6d7ca}
+ body:has(.app) .bottom-nav .active{color:#73f5b6!important}
+ body:has(.app) :is(.page-panel,.bank-page) :is(h1,h2,h3,h4,strong,label){color:#f2fff9}
+ body:has(.app) :is(.page-subtitle,.bank-page>p,.workspace-footer,small){color:#a9c9c2}
+ body:has(.app) :is(.page-panel,.bank-page) :is(input,textarea,select){background:#123b37;color:#f2fff9;border:1px solid #35695a;border-radius:13px}
+ body:has(.app) :is(.page-panel,.bank-page) :is(input,textarea)::placeholder{color:#b1cec4}
+ body:has(.app) :is(.page-panel,.bank-page) select{color-scheme:dark}
+ body:has(.app) :is(.page-panel,.bank-page) select option{background:#123b37;color:#f2fff9}
+ body:has(.app) :is(.page-panel,.bank-page) :is(.primary,button[type=submit]){border-radius:14px}
+ body:has(.app) .workspace-footer{border-color:#285b4c}
+}

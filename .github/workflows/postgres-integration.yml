@@ -37,6 +37,14 @@ jobs:
         run: psql -X -v ON_ERROR_STOP=1 -f tests/postgres/integrity.sql
       - name: Assert least-privilege worker and browser denials
         run: psql -X -v ON_ERROR_STOP=1 -f tests/postgres/worker-privileges.sql
+      - name: Validate actual authority migrations on clean and populated databases
+        shell: bash
+        run: |
+          set -euo pipefail
+          createdb fluxo_qa_authority_clean
+          createdb fluxo_qa_authority_populated
+          psql -X -v ON_ERROR_STOP=1 -v populated=false -d fluxo_qa_authority_clean -f tests/postgres/authority-migrations.sql
+          psql -X -v ON_ERROR_STOP=1 -v populated=true -d fluxo_qa_authority_populated -f tests/postgres/authority-migrations.sql
       - name: Verify independent connections and row-lock serialization
         shell: bash
         run: |

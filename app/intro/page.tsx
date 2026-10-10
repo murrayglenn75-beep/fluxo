@@ -22,7 +22,7 @@ export default function IntroPage(){
    </div>
   </section>
   <footer className="fluxo-intro-footer">
-   <div className="fluxo-intro-dots" aria-label={`Slide ${step+1} of ${slides.length}`}>{slides.map((_,i)=><span key={i} className={i===step?'current':''}/>)}</div>
+   <div className="fluxo-intro-dots" role="group" aria-label={`Slide ${step+1} of ${slides.length}`}>{slides.map((_,i)=><span key={i} className={i===step?'current':''}/>)}</div>
    {step<slides.length-1?<button className="fluxo-intro-next" onClick={()=>setStep(v=>v+1)}>Next <span aria-hidden="true">→</span></button>:<Link className="fluxo-intro-next" href="/login">Get started <span aria-hidden="true">→</span></Link>}
    <Link className="fluxo-intro-skip" href="/login">Skip</Link>
   </footer>

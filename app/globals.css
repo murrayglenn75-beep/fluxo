@@ -431,3 +431,9 @@ body:has(.app) select option{background:#fff;color:#102e2c}
 .fluxo-wallet-banner strong{font-size:25px;letter-spacing:-.8px;line-height:1.15}
 .fluxo-wallet-banner small{font-size:12px;color:#c2e9d8}
 @media(max-width:767px){body:has(.app) .cards-page .cards-toolbar{margin-bottom:18px}body:has(.app) .cards-page .cards-toolbar button{min-height:42px;border-radius:14px}body:has(.app) .cards-page .credit-card{box-shadow:0 18px 44px #001d1a80}}
+
+.fluxo-feature-banner{display:flex;flex-direction:column;gap:9px;padding:24px 19px;margin:16px 0 25px;border-radius:21px;background:radial-gradient(circle at 92% 0%,#73f5b64d,transparent 48%),linear-gradient(125deg,#155948,#082e2a);border:1px solid #397d60;color:#f2fff9}
+.fluxo-feature-banner span{font-size:10px;font-weight:800;letter-spacing:1.7px;color:#83f5b8}
+.fluxo-feature-banner strong{font-size:clamp(21px,5vw,28px);letter-spacing:-.7px;line-height:1.15}
+.fluxo-feature-banner small{font-size:12px;color:#b8dfcf}
+@media(max-width:767px){body:has(.app) .bank-page{padding:14px 0 30px;background:transparent;border:0}body:has(.app) .bank-page .bank-row{background:#103b37;color:#f2fff9;border:1px solid #326756;border-radius:17px;margin-bottom:10px}body:has(.app) .bank-page .bank-row strong{color:#f2fff9}body:has(.app) .bank-page .bank-row small{color:#b8dfcf}body:has(.app) .bank-page .privacy-note{background:#103b37;color:#b8dfcf;border-radius:14px}}

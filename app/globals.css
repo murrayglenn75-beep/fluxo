@@ -437,3 +437,9 @@ body:has(.app) select option{background:#fff;color:#102e2c}
 .fluxo-feature-banner strong{font-size:clamp(21px,5vw,28px);letter-spacing:-.7px;line-height:1.15}
 .fluxo-feature-banner small{font-size:12px;color:#b8dfcf}
 @media(max-width:767px){body:has(.app) .bank-page{padding:14px 0 30px;background:transparent;border:0}body:has(.app) .bank-page .bank-row{background:#103b37;color:#f2fff9;border:1px solid #326756;border-radius:17px;margin-bottom:10px}body:has(.app) .bank-page .bank-row strong{color:#f2fff9}body:has(.app) .bank-page .bank-row small{color:#b8dfcf}body:has(.app) .bank-page .privacy-note{background:#103b37;color:#b8dfcf;border-radius:14px}}
+
+.fluxo-payment-banner{display:flex;flex-direction:column;gap:9px;padding:22px 19px;margin:15px 0 22px;border-radius:20px;background:radial-gradient(circle at 95% 0%,#73f5b65c,transparent 45%),linear-gradient(130deg,#125c48,#092d2a);border:1px solid #3d8c68;color:#f2fff9}
+.fluxo-payment-banner span{font-size:10px;font-weight:800;letter-spacing:1.7px;color:#9affc9}
+.fluxo-payment-banner strong{font-size:clamp(21px,5vw,27px);line-height:1.15;letter-spacing:-.7px}
+.fluxo-payment-banner small{font-size:12px;color:#c2e9d8}
+@media(max-width:767px){body:has(.app) .payment-page{padding:14px 0 30px;background:transparent;border:0}body:has(.app) .payment-page .field{color:#c5e4d7}body:has(.app) .payment-page .field input{min-height:48px;background:#103b37;color:#f2fff9;border:1px solid #39725d;border-radius:13px}body:has(.app) .payment-page .primary{background:#28db90;color:#062d22;border-radius:14px;min-height:50px}}

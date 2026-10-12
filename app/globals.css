@@ -150,3 +150,53 @@ body{background:#eaf0ef}.app{width:100%;max-width:430px;min-height:100dvh;margin
 .categories{flex:1 1 145px}
 .screen-heading,.mobile-header,.chart,.plot{min-width:0}
 }
+
+/* Premium dark emerald mobile theme, aligned to approved Fluxo reference screens. */
+@media(max-width:767px){
+:root{--ink:#effff8;--muted:#9cbdb1;--surface:#102a27;--line:#23443b}
+html{background:#061612;color-scheme:dark}
+body{background:radial-gradient(ellipse at 50% -15%,#145e49 0%,#09251e 38%,#061612 75%);color:#effff8}
+.app{background:transparent;color:#effff8;min-height:100dvh}
+.mobile-header{background:transparent;color:#f2fff9;padding-top:max(20px,env(safe-area-inset-top))}
+.mobile-header .brand{color:#f5fff9}
+.mobile-header button{color:#d9f9ea}
+.topbar{background:transparent}
+.topbar h1,.screen-heading h1{color:#f4fff9}
+.topbar p{color:#a3c9b9}
+.panel,.metric,.quick-actions>a,.page-panel{background:#102a27;color:#ecfff7;border:1px solid #1e493c;border-radius:18px}
+.section-home .summary .balance,.balance{background:radial-gradient(ellipse at 90% 5%,#26b98066,transparent 55%),linear-gradient(135deg,#064638,#09241f);border:1px solid #318f6c;box-shadow:0 12px 30px #0005;border-radius:20px}
+.summary .balance{min-height:158px;padding:22px}
+.balance label{color:#b7e7d1}
+.balance h2{font-size:clamp(26px,7vw,34px);color:#fff}
+.balance p{color:#8de7ba}
+.quick-actions>a{background:#0e3027;padding:13px 4px;min-height:96px;border-radius:16px}
+.quick-icon,.quick-icon.transfer,.quick-icon.bills,.quick-icon.scan,.quick-icon.exchange,.quick-icon.open-finance{background:linear-gradient(145deg,#175e46,#10382e);color:#76f5ad;border:1px solid #287558}
+.quick-actions strong{color:#e4fff1}
+.mobile-activity,.activity-list,.recent{color:#f2fff9}
+.activity-row,.bill-row,.saved-expense,.bank-row{border-bottom:1px solid #20453a}
+.activity-row strong,.activity-row>b{color:#eafff3}
+.activity-row small,.page-subtitle,.bank-page>p,.workspace-footer{color:#9cbdaf}
+.income-text{color:#68ecab!important}.expense-text{color:#ff8390!important}
+.bottom-nav{left:12px;right:12px;bottom:max(10px,env(safe-area-inset-bottom));border:1px solid #245343;border-radius:22px;background:#0a2923ed;box-shadow:0 10px 35px #0008;backdrop-filter:blur(18px);padding:7px}
+.bottom-nav>a,.bottom-nav>button{color:#a7c5b7}
+.bottom-nav .active{background:#1c6046;color:#90ffc0}
+.bottom-nav>a[href='/pix']{color:#88efb4}
+.bottom-nav>a[href='/pix'].active{background:#217f54;color:#fff}
+.more-menu{background:#0c2821;color:#effff7;border:1px solid #245343}
+.more-menu a{color:#effff7}
+.tabs button{background:#173b30;color:#c2e4d4}
+.tabs .selected{background:#22c977;color:#05241b}
+.field,.page-panel h2,.page-panel h3,.panel-heading h3{color:#effff7}
+.field input,.field select,.field textarea,.search-field,.currency-box,.login-input,.login-password{background:#102b25;color:#f2fff9;border-color:#32604b}
+input::placeholder,textarea::placeholder{color:#92b5a5}
+.primary,.login-submit{background:linear-gradient(105deg,#1ed978,#4aef9b);color:#042719;border:0;font-weight:750;box-shadow:0 5px 22px #1bca7a25}
+.secondary{background:#123c2d;color:#a8ffd1;border-color:#367b5a}
+.credit-card{background:radial-gradient(ellipse at 85% 12%,#57f3a65e,transparent 48%),linear-gradient(135deg,#0b4b3a,#06241e);border:1px solid #368a66;box-shadow:0 16px 35px #0006;border-radius:20px;min-height:205px}
+.login-shell{background:radial-gradient(ellipse at 60% 0%,#17624b,#061612 65%);color:#f1fff7}
+.login-heading h1,.login-brand{color:#f2fff9}
+.login-heading p,.login-help,.login-options,.login-signup,.login-security{color:#a7cbbb}
+.login-card .pattern-panel{background:#102b25;color:#f1fff7;border-color:#285843}
+.login-divider{color:#b1d2c3}
+.login-alternatives button{background:#123b2c;color:#effff7;border-color:#285b43}
+.login-options a,.login-signup a{color:#75efad}
+}

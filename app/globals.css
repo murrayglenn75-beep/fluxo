@@ -254,3 +254,47 @@ input::placeholder,textarea::placeholder{color:#92b5a5}
 .section-ai .assistant-disclaimer{color:#9bc8af}
 }
 @media(min-width:768px){.mobile-welcome{display:none}}
+
+/* Full-screen Fluxo onboarding and account access experiences */
+.mobile-auth-page,.mobile-splash{min-height:100dvh;background:radial-gradient(ellipse at 55% -15%,#13664b,#071e19 50%,#04120f);color:#f2fff8;font-family:Inter,Arial,sans-serif}
+.mobile-auth-page{max-width:600px;margin:0 auto;padding:max(35px,env(safe-area-inset-top)) 24px max(32px,env(safe-area-inset-bottom));display:flex;flex-direction:column}
+.mobile-auth-back{font-size:13px;color:#b9dec9;min-height:44px;display:flex;align-items:center}
+.mobile-auth-logo{color:#63f3a5;font-size:24px;font-weight:800;margin:25px 0 40px}
+.mobile-auth-page h1{font-size:28px;letter-spacing:-.9px;margin:0 0 10px}
+.mobile-auth-page p{color:#a8caba;font-size:13px;line-height:1.6;margin:0 0 30px}
+.mobile-auth-page form{display:flex;flex-direction:column;gap:18px}
+.mobile-auth-page form label{font-size:12px;color:#d2eadd;display:flex;flex-direction:column;gap:9px}
+.mobile-auth-page form input{background:#0b2a23;border:1px solid #285340;border-radius:12px;padding:15px;color:#fff;min-height:52px;font-size:16px}
+.mobile-auth-page form button,.mobile-auth-cta{background:linear-gradient(90deg,#1bd77c,#51efa2);color:#04271b;border-radius:13px;min-height:52px;padding:15px;text-align:center;font-size:14px;font-weight:800;margin-top:9px}
+.mobile-auth-page form button:disabled{opacity:.6}
+.mobile-auth-page>small{color:#a5c8b7;margin-top:25px;line-height:1.6}
+.mobile-auth-page>small a{color:#65eea6}
+.mobile-auth-page [role=alert]{color:#ffb6b6;margin-top:20px}
+.mobile-auth-page [role=status]{color:#8df2b5;margin-top:20px}
+.mobile-auth-center{justify-content:center;align-items:center;text-align:center}
+.mobile-auth-center .mobile-auth-logo{margin:0 0 70px}
+.mobile-auth-symbol{font-size:62px;display:grid;place-items:center;color:#8cffba;background:#0e5038;width:124px;height:124px;border:1px solid #2e9b69;border-radius:28px;margin:0 0 40px}
+.mobile-auth-center p{max-width:330px}
+.mobile-auth-center .mobile-auth-cta{width:100%;max-width:350px;margin-bottom:20px}
+.mobile-auth-center>a:last-child{color:#a4d9bb}
+.mobile-payment-options{display:flex;flex-direction:column;gap:12px}
+.mobile-payment-options>a{background:#0e3027;border:1px solid #245841;border-radius:17px;padding:18px;display:flex;justify-content:space-between;align-items:center;min-height:82px}
+.mobile-payment-options>a strong{display:block;color:#effff5;font-size:15px}
+.mobile-payment-options>a small{font-size:11px;margin-top:7px;color:#a6cdb8}
+.mobile-payment-options>a>span:last-child{font-size:25px;color:#77f0ae}
+.mobile-splash{position:relative;isolation:isolate;overflow:hidden;padding:max(42px,env(safe-area-inset-top)) 26px max(36px,env(safe-area-inset-bottom));display:flex;flex-direction:column;justify-content:space-between}
+.mobile-splash-glow{position:absolute;inset:5% -40% auto;height:70%;z-index:-1;background:radial-gradient(ellipse,#19a77880,transparent 65%)}
+.mobile-splash-brand{font-size:27px;color:#78ffc0;font-weight:800}
+.mobile-splash-cards{position:relative;height:280px;margin:auto 0;display:flex;align-items:center;justify-content:center}
+.mobile-splash-cards>div{width:185px;height:245px;border:1px solid #5cf5b4;border-radius:20px;background:linear-gradient(145deg,#18b87b,#084536 60%,#071e1a);box-shadow:0 20px 40px #0008;transform:rotate(-17deg);padding:24px;font-size:21px;font-weight:800}
+.mobile-splash-cards>div+div{position:absolute;transform:rotate(17deg) translate(50px,0);background:linear-gradient(145deg,#172d28,#071611)}
+.mobile-splash-cards small{color:#c3f9dd;font-size:13px;margin-top:110px}
+.mobile-splash-footer h1{font-size:clamp(29px,8vw,40px);line-height:1.12;letter-spacing:-1px;margin:0 0 15px;max-width:350px}
+.mobile-splash-footer p{color:#b2d5c2;font-size:13px;line-height:1.6;margin-bottom:28px}
+.mobile-splash-footer>a{display:flex;align-items:center;justify-content:space-between;padding:16px 18px;background:#36e993;border-radius:14px;color:#052a1a;font-weight:800;min-height:54px}
+.mobile-splash-footer>a.mobile-splash-secondary{background:transparent;color:#b8ebce;justify-content:center;margin-top:10px}
+.mobile-onboarding-art{display:flex;align-items:center;justify-content:center;gap:12px;min-height:280px}
+.mobile-onboarding-art span{display:grid;place-items:center;width:84px;height:108px;border-radius:22px;background:linear-gradient(145deg,#15724d,#092a22);color:#8dffc0;font-size:45px;transform:rotate(-15deg);box-shadow:0 14px 28px #0006}
+.mobile-onboarding-art span:nth-child(2){transform:translateY(-24px) rotate(8deg)}
+.mobile-onboarding-art span:nth-child(3){transform:rotate(18deg)}
+@media(min-width:768px){.mobile-splash{max-width:440px;margin:auto;min-height:100dvh}}

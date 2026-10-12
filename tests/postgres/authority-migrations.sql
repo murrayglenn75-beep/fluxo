@@ -113,4 +113,28 @@ do $$ declare t text; begin
  end loop;
 end $$;
 reset role;
+
+-- Effective permissions include inherited roles and grants to PUBLIC.
+-- Check privileges from the perspective of each API role, not only ACL entries.
+do $
+declare t text; role_name text; privilege_name text;
+begin
+ foreach t in array array['accounts','payment_consents','payment_intents',
+ 'provider_evidence','ledger_entries','financial_commands','financial_approvals'] loop
+  foreach role_name in array array['anon','authenticated'] loop
+   foreach privilege_name in array array['INSERT','UPDATE','DELETE','TRUNCATE','REFERENCES','TRIGGER'] loop
+    if has_table_privilege(role_name, format('public.%I',t), privilege_name) then
+     raise exception 'Effective privilege violation: role % has % on %',role_name,privilege_name,t;
+    end if;
+   end loop;
+  end loop;
+  if has_table_privilege('anon',format('public.%I',t),'SELECT') then
+   raise exception 'Effective privilege violation: anon SELECT on %',t;
+  end if;
+  if has_table_privilege('PUBLIC',format('public.%I',t),'SELECT') then
+   raise exception 'PUBLIC financial SELECT grant on %',t;
+  end if;
+ end loop;
+end $;
+
 select 'PASS actual migrations: preserved rows, owner RLS, denied client writes/anonymous reads, cross-owner references, idempotency' as result;

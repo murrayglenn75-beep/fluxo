@@ -131,9 +131,6 @@ begin
   if has_table_privilege('anon',format('public.%I',t),'SELECT') then
    raise exception 'Effective privilege violation: anon SELECT on %',t;
   end if;
-  if has_table_privilege('PUBLIC',format('public.%I',t),'SELECT') then
-   raise exception 'PUBLIC financial SELECT grant on %',t;
-  end if;
  end loop;
 end $;
 

@@ -86,3 +86,52 @@ body{background:#eaf0ef}.app{width:100%;max-width:430px;min-height:100dvh;margin
 @media(min-width:768px){.login-shell{background:#eaf0ef;padding:48px}.login-card{max-width:484px;padding:32px;background:#f7f9fb;border:1px solid #e8edeb;border-radius:24px;box-shadow:0 10px 40px #18382b06}}
 @media(max-width:360px){.login-shell{padding:32px 18px}.login-alternatives{gap:7px}.login-alternatives button{gap:5px;font-size:11px}.login-brand{margin-bottom:24px}}
 .account-submit{margin-top:24px}.login-card form>.login-error{margin-top:16px}.statement-review{max-height:440px;overflow:auto;margin:14px 0}.statement-review strong{overflow-wrap:anywhere}.field textarea{width:100%;padding:12px;border:1px solid #dbe4e8;border-radius:9px;background:#f8fafb;color:inherit;resize:vertical}.statement-review .saved-expense{gap:16px}.statement-review .saved-expense>b{flex-shrink:0}
+
+
+/* Fluxo mobile banking layout hardening — preserve approved emerald/forest design. */
+@media (max-width: 767px) {
+  html,body { width:100%; max-width:100%; overflow-x:clip; }
+  body { font-size:14px; -webkit-text-size-adjust:100%; }
+  .app { width:100%; max-width:100%; min-width:0; padding:0 16px; }
+  .sidebar,.topbar,.assistant-column { display:none; }
+  .main { margin:0; width:100%; min-width:0; }
+  .dashboard-layout,.overview,.charts,.summary { display:grid; grid-template-columns:minmax(0,1fr); width:100%; }
+  .workspace,.primary-overview,.secondary-overview,.panel,.page-panel { width:100%; min-width:0; max-width:100%; }
+  .summary { gap:12px; }
+  .summary > section { min-width:0; }
+  .summary h2 { white-space:normal; overflow-wrap:anywhere; }
+  .quick-actions { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px 8px; }
+  .quick-actions > a { min-width:0; min-height:88px; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:12px 5px; gap:6px; }
+  .quick-actions strong { white-space:normal; overflow-wrap:anywhere; font-size:11px; line-height:1.3; }
+  .quick-actions small { display:none; }
+  .quick-icon { width:44px; height:44px; }
+  .page-panel { padding:18px 14px; min-height:0; }
+  .page-panel h2 { font-size:22px; }
+  .activity-controls { flex-wrap:wrap; }
+  .activity-controls .search-field { flex:1 1 100%; min-width:0; }
+  .activity-controls .search-field input { width:100%; min-width:0; }
+  .tabs { max-width:100%; overflow-x:auto; scrollbar-width:thin; }
+  .tabs button { flex-shrink:0; min-height:44px; }
+  .field input,.field select,.field textarea,.primary,.secondary,.add-card-button,.virtual-card-button { min-height:48px; font-size:16px; }
+  .activity-row,.bill-row,.saved-expense,.bank-row { min-width:0; }
+  .activity-row strong,.bill-row strong,.saved-expense strong { overflow-wrap:anywhere; }
+  .activity-row > b,.saved-expense > b { flex-shrink:0; }
+  .credit-card { width:100%; max-width:100%; }
+  .card-selector { max-width:100%; overscroll-behavior-x:contain; }
+  .currency-box,.receive-box,.demo-card-details { min-width:0; overflow-wrap:anywhere; }
+  .qr-image img { width:auto; max-width:100%; }
+  .bottom-nav { padding-bottom:max(10px,env(safe-area-inset-bottom)); }
+  .bottom-nav a,.bottom-nav button { min-height:48px; }
+  .app main { padding-bottom:calc(100px + env(safe-area-inset-bottom)); }
+  .login-shell { min-height:100dvh; padding:24px 20px max(24px,env(safe-area-inset-bottom)); }
+  .login-card { max-width:100%; }
+  .login-input,.login-password input { font-size:16px; }
+}
+@media (max-width: 360px) {
+  .app { padding-inline:12px; }
+  .page-panel { padding-inline:12px; }
+  .quick-actions { gap:8px 5px; }
+  .quick-actions > a { padding:10px 3px; }
+  .quick-actions strong { font-size:10px; }
+  .login-shell { padding-inline:16px; }
+}

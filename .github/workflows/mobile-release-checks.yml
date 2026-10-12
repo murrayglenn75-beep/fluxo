@@ -1,0 +1,32 @@
+name: Fluxo mobile release checks
+on:
+  push:
+    branches: [v2/secure-auth-backend]
+  pull_request:
+  workflow_dispatch:
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci
+      - name: TypeScript
+        run: npm run typecheck
+      - name: Unit and regression tests
+        run: npm test
+      - name: Production build
+        run: npm run build
+      - name: Check 13 reference screen routes
+        run: |
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          const paths=['app/splash/page.tsx','app/welcome/page.tsx','app/login/page.tsx','app/signup/page.tsx','app/biometric/page.tsx','app/pin/page.tsx','app/home/page.tsx','app/cards/page.tsx','app/transfer/page.tsx','app/pix/page.tsx','app/payments/page.tsx','app/ai/page.tsx','app/settings/page.tsx'];
+          const missing=paths.filter(p=>!fs.existsSync(p));
+          if(missing.length){console.error('Missing screens:',missing.join(', '));process.exit(1);}
+          console.log('13 route files present; this is not a visual or device test.');
+          NODE

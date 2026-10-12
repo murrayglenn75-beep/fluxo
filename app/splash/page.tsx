@@ -1,0 +1,2 @@
+import Link from 'next/link';
+export default function Splash(){return <main className="mobile-splash"><div className="mobile-splash-glow"/><div className="mobile-splash-brand">✦ Fluxo</div><div className="mobile-splash-cards"><div>FLUXO<br/><small>•••• 3485</small></div><div>FLUXO<br/><small>•••• 9012</small></div></div><div className="mobile-splash-footer"><h1>Your smart financial future starts here</h1><p>Banking designed around your life.</p><Link href="/welcome">Get started <span aria-hidden="true">→</span></Link></div></main>}

@@ -1,0 +1,33 @@
+name: Fluxo runtime and security verification
+on:
+  pull_request:
+    paths:
+      - 'lib/security/**'
+      - 'tests/**'
+      - 'supabase/migrations/**'
+      - 'package.json'
+      - 'package-lock.json'
+      - '.github/workflows/runtime-security-verify.yml'
+  push:
+    branches: [security/runtime-portability-audit]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - name: Install locked dependencies
+        run: npm ci
+      - name: TypeScript validation
+        run: npm run typecheck
+      - name: Unit and adversarial tests
+        run: npm test
+      - name: Production build
+        run: npm run build

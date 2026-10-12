@@ -51,8 +51,8 @@ export default function LoginScreen(){
    <div role="status" className="login-feedback">{message}</div>
    <button className="login-expand" type="button" aria-expanded={expanded} aria-controls="other-sign-in" onClick={()=>setExpanded(!expanded)}>Other ways to sign in<span aria-hidden="true">{expanded?'−':'+'}</span></button>
    <section id="other-sign-in" hidden={!expanded} className="pattern-panel" aria-labelledby="gesture-heading"><h2 id="gesture-heading">Gesture unlock <span>Prototype</span></h2><p>Try a local convenience pattern. It does not sign you in, unlock an account, or authorize a financial transaction.</p><div className="pattern-grid" role="group" aria-label="Gesture pattern">{dots.map(n=><button type="button" key={n} aria-label={'Pattern point '+n} aria-pressed={pattern.includes(n)} className={pattern.includes(n)?'selected':''} onPointerEnter={e=>{if(e.buttons===1)addDot(n)}} onClick={()=>addDot(n)}>{n}</button>)}</div><p className="pattern-selection" role="status">{pattern.length?`Pattern: ${pattern.join(' → ')}`:'Choose a pattern'}</p><button type="button" className="login-clear" onClick={()=>setPattern([])}>Clear pattern</button></section>
-   <p className="login-signup">New to Fluxo? <Link href="/auth/signup">Create account</Link></p>
-   <Link className="login-demo" href="/">View demo <span aria-hidden="true">↗</span></Link>
+   <p className="login-signup">New to Fluxo? <Link href="/signup">Create account</Link></p>
+   <Link className="login-demo" href="/splash">Explore Fluxo <span aria-hidden="true">↗</span></Link>
    <p className="login-security"><Icon name="lock"/>Signing in verifies your identity. Payments always require separate financial approval.</p>
  </section></main>;
 }

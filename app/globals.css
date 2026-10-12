@@ -200,3 +200,57 @@ input::placeholder,textarea::placeholder{color:#92b5a5}
 .login-alternatives button{background:#123b2c;color:#effff7;border-color:#285b43}
 .login-options a,.login-signup a{color:#75efad}
 }
+
+/* Reference-inspired card-first home and full-screen mobile flows. */
+.mobile-welcome{display:none}
+@media(max-width:767px){
+.section-home .mobile-welcome{display:block;padding:8px 2px 16px}
+.mobile-welcome-row{display:flex;align-items:center;gap:12px;margin:2px 0 22px}
+.welcome-avatar{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,#4ae4a0,#105a43);color:#06251b;font-weight:800;font-size:18px;border:2px solid #70efb2}
+.mobile-welcome-row>div{display:flex;flex-direction:column;gap:3px;flex:1}
+.mobile-welcome-row small{font-size:11px;color:#b2d3c4}
+.mobile-welcome-row strong{font-size:16px;color:#f1fff9}
+.mobile-welcome-row>a{display:grid;place-items:center;width:44px;height:44px;border:1px solid #2b634c;border-radius:50%;color:#c3efda}
+.mobile-hero-card{position:relative;isolation:isolate;overflow:hidden;aspect-ratio:1.72/1;border-radius:23px;padding:22px;background:radial-gradient(ellipse at 75% 0%,#62ffb98a,transparent 47%),linear-gradient(125deg,#0b7959 0%,#084a3a 48%,#05251e 100%);border:1px solid #4dc38e;box-shadow:0 16px 40px #0008,inset 0 1px #b2ffda40;display:flex;flex-direction:column;justify-content:space-between}
+.mobile-hero-card:after{content:'';position:absolute;z-index:-1;width:250px;height:250px;right:-80px;top:-90px;border:1px solid #c1ffdb50;border-radius:50%;box-shadow:0 0 0 28px #b2ffd008,0 0 0 65px #b2ffd009}
+.mobile-card-top,.mobile-card-bottom{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.mobile-card-top .brand{color:white;font-size:24px}
+.mobile-card-top>span{font-size:9px;letter-spacing:1px;color:#c8ffdf}
+.mobile-card-chip{width:39px;height:29px;border:1px solid #a6e6b3;border-radius:6px;background:linear-gradient(130deg,#e2e7b8,#9fb69b);position:relative;display:flex;gap:3px;align-items:center;justify-content:center}
+.mobile-card-chip i{height:22px;width:1px;background:#6f927b}
+.mobile-card-bottom{font-size:14px;color:#effff5;letter-spacing:1.5px;font-weight:650}
+.mobile-card-bottom span:last-child{font-size:11px;letter-spacing:2px}
+.mobile-balance-heading{display:flex;align-items:center;justify-content:space-between;padding:22px 3px 18px}
+.mobile-balance-heading>div{display:flex;flex-direction:column;gap:5px}
+.mobile-balance-heading small{font-size:12px;color:#a6c9b7}
+.mobile-balance-heading strong{font-size:clamp(27px,8vw,36px);font-weight:750;letter-spacing:-1px;color:#f3fff8}
+.mobile-balance-heading button{width:44px;height:44px;display:grid;place-items:center;color:#c1efda;border:1px solid #2a624a;border-radius:13px}
+.mobile-money-actions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin:0 0 16px}
+.mobile-money-actions a{display:flex;flex-direction:column;gap:9px;align-items:center;justify-content:center;min-height:77px;border:1px solid #2b644c;background:#10372b;color:#e6fff0;border-radius:15px;font-size:12px;font-weight:600}
+.mobile-money-actions a:first-child{background:#25d67b;color:#06291b;border-color:#46e595}
+.mobile-money-actions .icon{width:21px;height:21px}
+.mobile-ai-insight{display:flex;align-items:center;gap:11px;padding:14px;border-radius:16px;background:linear-gradient(110deg,#0b4c59,#14754d 80%,#24b575);border:1px solid #349d83;color:#fff}
+.mobile-ai-insight>span:first-child{font-size:25px;color:#9affce}
+.mobile-ai-insight>span:nth-child(2){display:flex;flex-direction:column;gap:5px;flex:1;min-width:0}
+.mobile-ai-insight strong{font-size:13px}
+.mobile-ai-insight small{font-size:10px;color:#d4fce8}
+.section-home .overview{display:none}
+.section-home .quick-actions{margin:6px 0 23px}
+.section-home .mobile-activity{padding:8px 0}
+.section-home .mobile-activity .panel-heading h3{font-size:16px;color:#eafff4}
+.section-home .mobile-activity .activity-row{min-height:60px}
+.section-pix .page-panel,.section-transfer .page-panel,.section-cards .page-panel,.section-bills .page-panel,.section-settings .page-panel,.section-ai .assistant-page{background:transparent;border:0;box-shadow:none}
+.section-pix .payment-page h3,.section-transfer .payment-page h3{font-size:20px;margin:15px 0 22px}
+.section-pix .tabs,.section-transfer .tabs{background:#0b2d24;padding:5px;border:1px solid #24533e;border-radius:15px}
+.section-pix .tabs button,.section-transfer .tabs button{flex:1;border-radius:11px}
+.section-pix .tabs .selected{background:#22ce7a;color:#04271a}
+.section-cards .credit-card{min-height:215px;padding:24px}
+.section-cards .cards-toolbar{margin:10px 0 19px}
+.section-ai .assistant{background:linear-gradient(145deg,#0d4436,#071f1b);border-color:#276449;border-radius:21px}
+.section-ai .suggestions button{background:#164a38;color:#e9fff2;border:1px solid #337558;font-size:12px;min-height:48px}
+.section-ai .ask-form{background:#133d30;border-color:#357254}
+.section-ai .ask-form input{color:#fff}
+.section-ai .assistant-intro{color:#e5fff2}
+.section-ai .assistant-disclaimer{color:#9bc8af}
+}
+@media(min-width:768px){.mobile-welcome{display:none}}

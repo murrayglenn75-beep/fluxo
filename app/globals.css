@@ -83,13 +83,13 @@ body{background:#eaf0ef}.app{width:100%;max-width:430px;min-height:100dvh;margin
 .login-spinner{width:16px;height:16px;border:2px solid #ffffff70;border-top-color:#fff;border-radius:50%;animation:login-spin .8s linear infinite}
 @keyframes login-spin{to{transform:rotate(360deg)}}
 @media(prefers-reduced-motion:reduce){.login-spinner{animation:none}}
-@media(min-width:768px){.login-shell{background:#eaf0ef;padding:48px}.login-card{max-width:484px;padding:32px;background:#f7f9fb;border:1px solid #e8edeb;border-radius:24px;box-shadow:0 10px 40px #18382b06}}
+@media(min-width:1101px){.login-shell{background:#eaf0ef;padding:48px}.login-card{max-width:484px;padding:32px;background:#f7f9fb;border:1px solid #e8edeb;border-radius:24px;box-shadow:0 10px 40px #18382b06}}
 @media(max-width:360px){.login-shell{padding:32px 18px}.login-alternatives{gap:7px}.login-alternatives button{gap:5px;font-size:11px}.login-brand{margin-bottom:24px}}
 .account-submit{margin-top:24px}.login-card form>.login-error{margin-top:16px}.statement-review{max-height:440px;overflow:auto;margin:14px 0}.statement-review strong{overflow-wrap:anywhere}.field textarea{width:100%;padding:12px;border:1px solid #dbe4e8;border-radius:9px;background:#f8fafb;color:inherit;resize:vertical}.statement-review .saved-expense{gap:16px}.statement-review .saved-expense>b{flex-shrink:0}
 
 
 /* Fluxo mobile banking layout hardening — preserve approved emerald/forest design. */
-@media (max-width: 767px) {
+@media (max-width:1100px) {
   html,body { width:100%; max-width:100%; overflow-x:clip; }
   body { font-size:14px; -webkit-text-size-adjust:100%; }
   .app { width:100%; max-width:100%; min-width:0; padding:0 16px; }
@@ -137,7 +137,7 @@ body{background:#eaf0ef}.app{width:100%;max-width:430px;min-height:100dvh;margin
 }
 
 /* Mobile banking navigation polish */
-@media (max-width:767px) {
+@media (max-width:1100px) {
 .bottom-nav{align-items:stretch;gap:4px;padding:7px 10px max(9px,env(safe-area-inset-bottom))}
 .bottom-nav>a,.bottom-nav>button{flex:1 1 0;width:auto;min-width:0;min-height:54px;justify-content:center;border-radius:12px;font-size:10px}
 .bottom-nav .icon{width:21px;height:21px}
@@ -152,7 +152,7 @@ body{background:#eaf0ef}.app{width:100%;max-width:430px;min-height:100dvh;margin
 }
 
 /* Premium dark emerald mobile theme, aligned to approved Fluxo reference screens. */
-@media(max-width:767px){
+@media(max-width:1100px){
 :root{--ink:#effff8;--muted:#9cbdb1;--surface:#102a27;--line:#23443b}
 html{background:#061612;color-scheme:dark}
 body{background:radial-gradient(ellipse at 50% -15%,#145e49 0%,#09251e 38%,#061612 75%);color:#effff8}
@@ -203,7 +203,7 @@ input::placeholder,textarea::placeholder{color:#92b5a5}
 
 /* Reference-inspired card-first home and full-screen mobile flows. */
 .mobile-welcome{display:none}
-@media(max-width:767px){
+@media(max-width:1100px){
 .section-home .mobile-welcome{display:block;padding:8px 2px 16px}
 .mobile-welcome-row{display:flex;align-items:center;gap:12px;margin:2px 0 22px}
 .welcome-avatar{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,#4ae4a0,#105a43);color:#06251b;font-weight:800;font-size:18px;border:2px solid #70efb2}
@@ -253,7 +253,7 @@ input::placeholder,textarea::placeholder{color:#92b5a5}
 .section-ai .assistant-intro{color:#e5fff2}
 .section-ai .assistant-disclaimer{color:#9bc8af}
 }
-@media(min-width:768px){.mobile-welcome{display:none}}
+@media(min-width:1101px){.mobile-welcome{display:none}}
 
 /* Full-screen Fluxo onboarding and account access experiences */
 .mobile-auth-page,.mobile-splash{min-height:100dvh;background:radial-gradient(ellipse at 55% -15%,#13664b,#071e19 50%,#04120f);color:#f2fff8;font-family:Inter,Arial,sans-serif}
@@ -297,10 +297,10 @@ input::placeholder,textarea::placeholder{color:#92b5a5}
 .mobile-onboarding-art span{display:grid;place-items:center;width:84px;height:108px;border-radius:22px;background:linear-gradient(145deg,#15724d,#092a22);color:#8dffc0;font-size:45px;transform:rotate(-15deg);box-shadow:0 14px 28px #0006}
 .mobile-onboarding-art span:nth-child(2){transform:translateY(-24px) rotate(8deg)}
 .mobile-onboarding-art span:nth-child(3){transform:rotate(18deg)}
-@media(min-width:768px){.mobile-splash{max-width:440px;margin:auto;min-height:100dvh}}
+@media(min-width:1101px){.mobile-splash{max-width:440px;margin:auto;min-height:100dvh}}
 
 /* Fluxo mobile reference acceptance: ensure legacy light styles cannot override the new dashboard. */
-@media screen and (max-width:767px){
+@media screen and (max-width:1100px){
 html,body{background:#061914!important;color:#eafff4!important;color-scheme:dark}
 body{background-image:radial-gradient(ellipse at 50% -20%,#14664b 0%,#08271f 43%,#061914 80%)!important}
 .app,.section-home,.workspace,.dashboard-layout,.dashboard-layout main{background:transparent!important;color:#eafff4}

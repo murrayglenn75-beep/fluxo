@@ -324,3 +324,24 @@ body{background-image:radial-gradient(ellipse at 50% -20%,#14664b 0%,#08271f 43%
 .bottom-nav>a[href='/pix']:not(.active){color:#b4d4c4!important}
 .workspace-footer{padding-bottom:85px}
 }
+
+/* Shared desktop-preview/mobile-frame geometry; the dashboard and nav must use the same width. */
+:root{--fluxo-frame:472px}
+html{min-height:100%;background:#061914}
+body{min-height:100dvh;overflow-x:hidden}
+.app{width:100%;max-width:var(--fluxo-frame);min-height:100dvh;margin-inline:auto!important;position:relative;background:linear-gradient(165deg,#08251c,#041a14)!important;border-inline:1px solid #32614b55}
+.app .main{width:100%;margin:0!important;min-width:0}
+.app .main>main{width:100%;padding-inline:18px;padding-bottom:110px;min-width:0}
+.app .dashboard-layout,.app .workspace{width:100%;min-width:0}
+.app .mobile-header{padding-inline:18px}
+.app .bottom-nav{position:fixed!important;width:calc(100% - 24px)!important;max-width:calc(var(--fluxo-frame) - 24px)!important;left:50%!important;right:auto!important;transform:translateX(-50%)!important;bottom:max(10px,env(safe-area-inset-bottom))!important;display:flex!important;align-items:stretch;justify-content:space-around;border:1px solid #2b624c!important;border-radius:20px!important;background:#092820f5!important;box-shadow:0 12px 34px #0009!important;padding:7px 8px!important;z-index:100}
+.app .bottom-nav>a,.app .bottom-nav>button{flex:1 1 0!important;width:auto!important;min-width:0!important;min-height:54px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;color:#b5d9c6!important}
+.app .bottom-nav>a.active{color:#83f6b3!important;background:#1c6147!important;border-radius:12px}
+.app .setup-banner{background:linear-gradient(110deg,#103e30,#0b3026)!important;border:1px solid #2b7052!important;border-radius:16px!important;color:#dcffeb!important;box-shadow:none!important}
+.app .setup-banner small{color:#a0cfb4!important}
+.app .setup-banner .icon{color:#75ecaa!important}
+.app .mobile-activity{padding-bottom:18px}
+.app .workspace-footer{padding-bottom:24px}
+.app .mobile-hero-card{width:100%;max-width:100%;min-height:210px}
+@media(max-width:520px){:root{--fluxo-frame:100vw}.app{border:0}.app .main>main{padding-inline:16px}.app .bottom-nav{max-width:calc(100vw - 24px)!important}}
+@media(min-width:521px){body{background:radial-gradient(ellipse at 50% 10%,#104c38,#061914 70%)!important}.app{box-shadow:0 0 65px #0006}.app .mobile-header{padding-top:28px}}

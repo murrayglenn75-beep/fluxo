@@ -345,3 +345,27 @@ body{min-height:100dvh;overflow-x:hidden}
 .app .mobile-hero-card{width:100%;max-width:100%;min-height:210px}
 @media(max-width:520px){:root{--fluxo-frame:100vw}.app{border:0}.app .main>main{padding-inline:16px}.app .bottom-nav{max-width:calc(100vw - 24px)!important}}
 @media(min-width:521px){body{background:radial-gradient(ellipse at 50% 10%,#104c38,#061914 70%)!important}.app{box-shadow:0 0 65px #0006}.app .mobile-header{padding-top:28px}}
+
+/* Login contrast and responsive accessibility — scoped to authentication only. */
+.login-shell{background:radial-gradient(ellipse at 50% 0%,#15553f 0%,#08291f 48%,#041a15 100%)!important;color:#f4fff8!important;min-height:100dvh;display:flex;align-items:center;justify-content:center;padding:clamp(16px,4vw,44px) 16px max(20px,env(safe-area-inset-bottom))}
+.login-shell .login-card{width:100%;max-width:520px;min-width:0;margin:0 auto;padding:clamp(22px,5vw,40px)!important;background:linear-gradient(160deg,#103b2e 0%,#08251e 68%,#071f1a 100%)!important;color:#f4fff8!important;border:1px solid #367358!important;border-radius:26px!important;box-shadow:0 24px 65px #0008!important}
+.login-card .login-brand,.login-card .login-brand span,.login-card .login-heading h1{color:#f6fff9!important}
+.login-card .login-heading p,.login-card .login-field,.login-card .login-options,.login-card .login-options label,.login-card .login-help,.login-card .login-divider,.login-card .login-signup,.login-card .login-security{color:#c1e6d2!important}
+.login-card .login-field{font-weight:650;letter-spacing:.01em}
+.login-card .login-input,.login-card .login-password{background:#061d18!important;border:1px solid #3c755b!important;color:#f5fff9!important}
+.login-card .login-password input{background:transparent!important;color:#f5fff9!important}
+.login-card .login-input::placeholder,.login-card .login-password input::placeholder{color:#a9cdbb!important;opacity:1}
+.login-card .login-options{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between}
+.login-card .login-options label{display:inline-flex;align-items:center;gap:10px;min-height:44px}
+.login-card .login-options input[type=checkbox]{width:20px;height:20px;accent-color:#39e995;flex:none}
+.login-card .login-options a,.login-card .login-signup a{color:#67f5a6!important;font-weight:700}
+.login-card .login-submit{background:linear-gradient(100deg,#1bdb81,#4bf0a0)!important;color:#04271a!important;border:0!important;min-height:54px;font-weight:800;box-shadow:0 8px 26px #16e48b24}
+.login-card .login-submit:disabled{opacity:.65!important}
+.login-card .login-alternatives button{background:#10402f!important;color:#f4fff8!important;border:1px solid #37765a!important;min-width:0;min-height:48px}
+.login-card .login-divider:before,.login-card .login-divider:after{border-color:#3a6653!important}
+.login-card .login-expand{color:#d8f4e5!important}
+.login-card .login-card .pattern-panel,.login-card .pattern-panel{background:#092a21!important;color:#ecfff6!important;border-color:#326b50!important}
+.login-card .login-feedback{color:#a3ffd0!important}
+.login-card .login-security .icon{color:#74f1ad!important}
+.login-card :is(input,button,a):focus-visible{outline:3px solid #73ffb5!important;outline-offset:3px}
+@media(max-width:480px){.login-shell{padding:14px 12px max(18px,env(safe-area-inset-bottom));align-items:flex-start}.login-shell .login-card{border-radius:20px!important;padding:24px 18px!important}.login-card .login-alternatives{gap:7px}.login-card .login-alternatives button{font-size:11px;gap:5px}.login-card .login-heading h1{font-size:clamp(25px,7vw,33px)}}

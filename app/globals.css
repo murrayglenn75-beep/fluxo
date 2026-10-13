@@ -152,7 +152,7 @@ body{background:#eaf0ef}.app{width:100%;max-width:430px;min-height:100dvh;margin
 }
 
 /* Premium dark emerald mobile theme, aligned to approved Fluxo reference screens. */
-@media(max-width:1100px){
+@media(min-width:0px){
 :root{--ink:#effff8;--muted:#9cbdb1;--surface:#102a27;--line:#23443b}
 html{background:#061612;color-scheme:dark}
 body{background:radial-gradient(ellipse at 50% -15%,#145e49 0%,#09251e 38%,#061612 75%);color:#effff8}
@@ -203,7 +203,7 @@ input::placeholder,textarea::placeholder{color:#92b5a5}
 
 /* Reference-inspired card-first home and full-screen mobile flows. */
 .mobile-welcome{display:none}
-@media(max-width:1100px){
+@media(min-width:0px){
 .section-home .mobile-welcome{display:block;padding:8px 2px 16px}
 .mobile-welcome-row{display:flex;align-items:center;gap:12px;margin:2px 0 22px}
 .welcome-avatar{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,#4ae4a0,#105a43);color:#06251b;font-weight:800;font-size:18px;border:2px solid #70efb2}
@@ -253,7 +253,7 @@ input::placeholder,textarea::placeholder{color:#92b5a5}
 .section-ai .assistant-intro{color:#e5fff2}
 .section-ai .assistant-disclaimer{color:#9bc8af}
 }
-@media(min-width:1101px){.mobile-welcome{display:none}}
+@media(min-width:99999px){.mobile-welcome{display:none}}
 
 /* Full-screen Fluxo onboarding and account access experiences */
 .mobile-auth-page,.mobile-splash{min-height:100dvh;background:radial-gradient(ellipse at 55% -15%,#13664b,#071e19 50%,#04120f);color:#f2fff8;font-family:Inter,Arial,sans-serif}
@@ -300,7 +300,7 @@ input::placeholder,textarea::placeholder{color:#92b5a5}
 @media(min-width:1101px){.mobile-splash{max-width:440px;margin:auto;min-height:100dvh}}
 
 /* Fluxo mobile reference acceptance: ensure legacy light styles cannot override the new dashboard. */
-@media screen and (max-width:1100px){
+@media screen and (min-width:0px){
 html,body{background:#061914!important;color:#eafff4!important;color-scheme:dark}
 body{background-image:radial-gradient(ellipse at 50% -20%,#14664b 0%,#08271f 43%,#061914 80%)!important}
 .app,.section-home,.workspace,.dashboard-layout,.dashboard-layout main{background:transparent!important;color:#eafff4}

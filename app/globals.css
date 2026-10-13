@@ -298,3 +298,29 @@ input::placeholder,textarea::placeholder{color:#92b5a5}
 .mobile-onboarding-art span:nth-child(2){transform:translateY(-24px) rotate(8deg)}
 .mobile-onboarding-art span:nth-child(3){transform:rotate(18deg)}
 @media(min-width:768px){.mobile-splash{max-width:440px;margin:auto;min-height:100dvh}}
+
+/* Fluxo mobile reference acceptance: ensure legacy light styles cannot override the new dashboard. */
+@media screen and (max-width:767px){
+html,body{background:#061914!important;color:#eafff4!important;color-scheme:dark}
+body{background-image:radial-gradient(ellipse at 50% -20%,#14664b 0%,#08271f 43%,#061914 80%)!important}
+.app,.section-home,.workspace,.dashboard-layout,.dashboard-layout main{background:transparent!important;color:#eafff4}
+.section-home .mobile-welcome{display:block!important}
+.section-home .overview{display:none!important}
+.section-home .quick-actions{display:none!important}
+.section-home .mobile-welcome-row{display:flex!important}
+.section-home .mobile-hero-card{display:flex!important;flex-direction:column;justify-content:space-between;background:radial-gradient(ellipse at 85% 0%,#6affb86e,transparent 52%),linear-gradient(125deg,#159b69,#07503e 58%,#042a23)!important;border:1px solid #53dca0!important;box-shadow:0 18px 40px #0007!important}
+.section-home .mobile-balance-heading strong{color:#f3fff9!important}
+.section-home .mobile-money-actions a{background:#103b2e!important;color:#eafff4!important;border-color:#2c7254!important}
+.section-home .mobile-money-actions a:first-child{background:#3bea98!important;color:#03271b!important}
+.section-home .mobile-ai-insight{background:linear-gradient(105deg,#164a37,#0d2c24)!important;color:#eafff4!important;border:1px solid #2b6e4d!important}
+.section-home .mobile-activity,.section-home .mobile-activity .activity-list{background:transparent!important;color:#effff8!important}
+.section-home .mobile-activity .activity-row{background:#102e25!important;border:1px solid #204d3b!important;border-radius:15px!important;padding:13px!important;margin-bottom:9px!important}
+.section-home .mobile-activity .activity-row strong{color:#effff8!important}
+.section-home .mobile-activity .activity-row small{color:#a2c7b4!important}
+.section-home .mobile-activity .panel-heading h3{color:#eafff4!important}
+.bottom-nav{position:fixed!important;left:12px!important;right:12px!important;bottom:max(10px,env(safe-area-inset-bottom))!important;background:#08261fee!important;border:1px solid #2d634c!important;border-radius:22px!important;box-shadow:0 12px 32px #0009!important;backdrop-filter:blur(16px);z-index:30}
+.bottom-nav>a,.bottom-nav>button{background:transparent!important;color:#b4d4c4!important}
+.bottom-nav>a.active{background:#1b6446!important;color:#a1ffca!important}
+.bottom-nav>a[href='/pix']:not(.active){color:#b4d4c4!important}
+.workspace-footer{padding-bottom:85px}
+}

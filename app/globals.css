@@ -369,3 +369,38 @@ body{min-height:100dvh;overflow-x:hidden}
 .login-card .login-security .icon{color:#74f1ad!important}
 .login-card :is(input,button,a):focus-visible{outline:3px solid #73ffb5!important;outline-offset:3px}
 @media(max-width:480px){.login-shell{padding:14px 12px max(18px,env(safe-area-inset-bottom));align-items:flex-start}.login-shell .login-card{border-radius:20px!important;padding:24px 18px!important}.login-card .login-alternatives{gap:7px}.login-card .login-alternatives button{font-size:11px;gap:5px}.login-card .login-heading h1{font-size:clamp(25px,7vw,33px)}}
+
+/* Fluxo app-wide design system v3: shared dark surfaces for all banking routes. */
+.app{--ink:#f1fff7;--muted:#a8cbbb;--surface:#102d24;--line:#2c624a;--teal:#41ec97;color:#f1fff7}
+.app .mobile-header,.app .topbar,.app .page-panel,.app .panel,.app .payment-page,.app .bank-page,.app .recent,.app .summary,.app .card-manager,.app .assistant-page,.app .account-page{color:#f1fff7;background-color:transparent}
+.app .mobile-header{background:#08251e!important;border-bottom:1px solid #204b38}
+.app .topbar h1,.app .screen-heading h1,.app .page-panel h2,.app .page-panel h3,.app .panel h3,.app .page-title,.app .assistant-heading h2{color:#f1fff7!important}
+.app .topbar p,.app .page-subtitle,.app .bank-page>p,.app .panel p,.app .page-panel p,.app .assistant-intro{color:#b4d6c4}
+.app .page-panel{width:100%;max-width:none;min-height:0;padding:16px 0 24px}
+.app .panel,.app .recent,.app .card-manager,.app .account-page{border-color:#285741}
+.app .field,.app label{color:#d2eddf}
+.app :is(input:not([type=checkbox]):not([type=radio]),textarea,select){background:#0c2c22;color:#f3fff8;border:1px solid #386b52;border-radius:12px;max-width:100%;font-size:16px}
+.app :is(input,textarea)::placeholder{color:#a2c9b4;opacity:1}
+.app .field input{padding:14px;margin-top:8px}
+.app .primary{background:linear-gradient(110deg,#19d67c,#4bf0a0);border:0;border-radius:13px;color:#04281a;font-weight:800;min-height:48px}
+.app .secondary{background:#11392b;color:#d8f9e6;border:1px solid #37765a;border-radius:12px;min-height:44px}
+.app .tabs{background:#0c2b23;border:1px solid #285741;border-radius:14px;padding:4px;max-width:100%;overflow-x:auto}
+.app .tabs button{color:#c3e7d4;min-height:42px;border-radius:10px}
+.app .tabs button.active,.app .tabs button[aria-selected=true]{background:#1c7953;color:#f7fff9}
+.app .panel-heading a,.app .panel-heading button,.app a:not(.primary):not(.mobile-auth-cta){text-underline-offset:3px}
+.app .panel-heading a,.app .panel-heading button{color:#6cf2a8}
+.app .activity-row,.app .recent .activity-row{background:#102e25;border:1px solid #24533e;border-radius:14px;margin-bottom:9px;padding:12px}
+.app .activity-row strong,.app .activity-row b{color:#f1fff7}
+.app .activity-row small{color:#a9d2be}
+.app .setup-banner{background:#0d382a!important;color:#eafff2!important;border-color:#306f50!important}
+.app .setup-banner small{color:#b0d5bf!important}
+.app .assistant,.app .assistant-page{color:#f0fff7}
+.app .assistant :is(input,textarea){background:#0a2c22;color:#fff}
+.app .assistant-disclaimer{color:#a3c9b4}
+.app .workspace-footer{color:#a5cfb8}
+.app :is(a,button,input,select,textarea):focus-visible{outline:3px solid #7dffc0;outline-offset:3px}
+.app button:disabled{opacity:.55;cursor:not-allowed}
+.app :is(.page-panel,.panel,.payment-page,.assistant-page,.bank-page){min-width:0}
+.app .page-panel :is(img,svg){max-width:100%}
+@media(max-width:480px){.app .page-panel{padding:12px 0 20px}.app .main>main{padding-bottom:120px}.app .topbar{padding-inline:16px}.app .tabs{gap:3px}.app .tabs button{font-size:12px}}
+@media(prefers-reduced-motion:reduce){.app *{scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important}}

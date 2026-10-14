@@ -66,3 +66,48 @@ begin
  end;
 end $$;
 reset role;
+
+-- Verify anonymous users have no table privileges.
+reset role;
+do $$
+begin
+ if has_table_privilege('anon','public.fluxo_sandbox_accounts','SELECT') or
+    has_table_privilege('anon','public.fluxo_sandbox_intents','SELECT') or
+    has_table_privilege('anon','public.fluxo_sandbox_intents','INSERT') then
+   raise exception 'anonymous role has sandbox data privileges';
+ end if;
+ if has_table_privilege('authenticated','public.fluxo_sandbox_accounts','UPDATE') or
+    has_table_privilege('authenticated','public.fluxo_sandbox_accounts','DELETE') or
+    has_table_privilege('authenticated','public.fluxo_sandbox_intents','UPDATE') or
+    has_table_privilege('authenticated','public.fluxo_sandbox_intents','DELETE') then
+   raise exception 'authenticated role can mutate protected records';
+ end if;
+end $$;
+-- Verify users cannot manufacture a settled/reviewed intent or bind a different owner.
+set role authenticated;
+select set_config('request.jwt.claim.sub','11111111-1111-4111-8111-111111111111',false);
+do $$
+begin
+ begin
+  insert into public.fluxo_sandbox_intents(id,user_id,account_user_id,command_id,recipient,amount_minor,status)
+  values('88888888-8888-4888-8888-888888888888',
+   '11111111-1111-4111-8111-111111111111','11111111-1111-4111-8111-111111111111',
+   '99999999-9999-4999-8999-999999999999','Forged',500,'settled');
+  raise exception 'forged settlement status accepted';
+ exception when check_violation then null;
+ end;
+ begin
+  insert into public.fluxo_sandbox_intents(id,user_id,account_user_id,command_id,recipient,amount_minor)
+  values('aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa',
+   '11111111-1111-4111-8111-111111111111','22222222-2222-4222-8222-222222222222',
+   'bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb','Wrong account',500);
+  raise exception 'mismatched account owner accepted';
+ exception when check_violation then null;
+ end;
+ begin
+  delete from public.fluxo_sandbox_intents;
+  raise exception 'client deletion allowed';
+ exception when insufficient_privilege then null;
+ end;
+end $$;
+reset role;

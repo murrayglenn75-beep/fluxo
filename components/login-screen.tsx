@@ -1,14 +1,6 @@
 'use client';
 import {useState, type FormEvent} from 'react';
-import {createClient,type SupabaseClient} from '@supabase/supabase-js';
-
-let client:SupabaseClient|null=null;
-function authClient(){
- const url=process.env.NEXT_PUBLIC_SUPABASE_URL;
- const key=process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY||process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
- if(!url||!key)return null;
- return client||(client=createClient(url,key));
-}
+import {browserAuth} from '../lib/supabase/browser-auth';
 
 export default function LoginScreen(){
  const [email,setEmail]=useState('');
@@ -18,7 +10,7 @@ export default function LoginScreen(){
  async function signIn(event:FormEvent<HTMLFormElement>){
   event.preventDefault();
   if(busy)return;
-  const auth=authClient();
+  const auth=browserAuth();
   if(!auth){setMessage('Secure sign-in is not configured. Contact the administrator.');return;}
   setBusy(true);setMessage('');
   try{
@@ -29,14 +21,14 @@ export default function LoginScreen(){
   finally{setBusy(false);}
  }
  async function resetPassword(){
-  const auth=authClient();
+  const auth=browserAuth();
   if(!auth){setMessage('Secure sign-in is not configured.');return;}
   if(!email.trim()){setMessage('Enter your email address to request a password reset.');return;}
   if(busy)return;
   setBusy(true);setMessage('');
   try{
    const {error}=await auth.auth.resetPasswordForEmail(email.trim(),{
-    redirectTo:new URL('/login',window.location.origin).toString()
+    redirectTo:new URL('/auth/reset',window.location.origin).toString()
    });
    setMessage(error?'Unable to request a reset right now. Try again later.':'If this account exists, a password-reset email has been requested.');
   }catch{setMessage('Unable to connect. Try again later.');}

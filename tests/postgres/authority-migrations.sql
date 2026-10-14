@@ -116,7 +116,7 @@ reset role;
 
 -- Effective permissions include inherited roles and grants to PUBLIC.
 -- Check privileges from the perspective of each API role, not only ACL entries.
-do $
+do $$
 declare t text; role_name text; privilege_name text;
 begin
  foreach t in array array['accounts','payment_consents','payment_intents',
@@ -132,6 +132,6 @@ begin
    raise exception 'Effective privilege violation: anon SELECT on %',t;
   end if;
  end loop;
-end $;
+end $$;
 
 select 'PASS actual migrations: preserved rows, owner RLS, denied client writes/anonymous reads, cross-owner references, idempotency' as result;

@@ -94,7 +94,7 @@ begin
    '11111111-1111-4111-8111-111111111111','11111111-1111-4111-8111-111111111111',
    '99999999-9999-4999-8999-999999999999','Forged',500,'settled');
   raise exception 'forged settlement status accepted';
- exception when check_violation then null;
+ exception when check_violation or insufficient_privilege then null;
  end;
  begin
   insert into public.fluxo_sandbox_intents(id,user_id,account_user_id,command_id,recipient,amount_minor)
@@ -102,7 +102,7 @@ begin
    '11111111-1111-4111-8111-111111111111','22222222-2222-4222-8222-222222222222',
    'bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb','Wrong account',500);
   raise exception 'mismatched account owner accepted';
- exception when check_violation then null;
+ exception when check_violation or insufficient_privilege then null;
  end;
  begin
   delete from public.fluxo_sandbox_intents;

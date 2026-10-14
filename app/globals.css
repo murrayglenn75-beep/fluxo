@@ -37,3 +37,16 @@ body{background:#eaf0ef}.app{width:100%;max-width:430px;min-height:100dvh;margin
 .login-brand{font-size:28px;font-weight:800;letter-spacing:-1px;margin-bottom:20px}.login-card h1{font-size:34px;margin:6px 0}.login-divider{display:flex;align-items:center;gap:12px;margin:18px 0;color:#8e9b97}.login-divider:before,.login-divider:after{content:"";height:1px;background:rgba(255,255,255,.1);flex:1}
 .pattern-panel{margin-top:18px;padding:18px;border-radius:20px;background:rgba(255,255,255,.035)}.pattern-grid{display:grid;grid-template-columns:repeat(3,58px);justify-content:center;gap:18px;margin:20px 0}.pattern-grid button{width:58px;height:58px;border-radius:50%;border:1px solid rgba(255,255,255,.18);background:#101b18;color:#8da099;touch-action:none}.pattern-grid button.selected{border-color:#41e2b1;box-shadow:0 0 0 6px rgba(65,226,177,.1);color:#41e2b1}.pattern-actions{display:flex;gap:10px;margin-top:14px}.pattern-actions>*{flex:1;text-align:center}.biometric-button{width:100%}
 .currency-box select{width:100%;margin:10px 0;padding:13px 14px;border-radius:12px;border:1px solid rgba(255,255,255,.12);background:#0d1715;color:inherit}
+
+/* Scoped mobile-first dark forest-green authentication contrast */
+.login-shell .login-card{color:#f8fffc;max-width:430px}
+.login-shell .login-card .eyebrow{color:#78e6bd}
+.login-shell .login-card .page-subtitle{color:#c8dad4;line-height:1.5}
+.login-shell .login-card .field{color:#f0faf6;font-size:13px;font-weight:600;margin:18px 0}
+.login-shell .login-card .field input{background:#10241e;border:1px solid #548275;color:#fff;border-radius:12px;padding:14px;font-size:16px;min-height:48px}
+.login-shell .login-card .field input::placeholder{color:#a9c5b9}
+.login-shell .login-card .primary{background:#059969;color:#fff;font-size:15px;min-height:48px;border-radius:12px}
+.login-shell .login-card .login-reset{display:block;margin:14px auto;padding:10px;color:#9be8c8;font-size:13px;text-decoration:underline;text-underline-offset:3px}
+.login-shell .login-card .privacy-note{color:#c4d5cd;font-size:11px;line-height:1.6;margin:18px 0 0}
+.login-shell .login-card .notice{color:#fff;border:1px solid #587b70;background:#122d24;padding:12px;border-radius:10px}
+@media(max-width:480px){.login-shell{padding:14px;align-items:center}.login-shell .login-card{padding:22px 20px;border-radius:22px}.login-shell .login-card h1{font-size:29px}}

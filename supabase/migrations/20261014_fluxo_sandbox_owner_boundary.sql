@@ -21,11 +21,16 @@ alter table public.fluxo_sandbox_accounts enable row level security;
 alter table public.fluxo_sandbox_intents enable row level security;
 revoke all on public.fluxo_sandbox_accounts from anon, authenticated;
 revoke all on public.fluxo_sandbox_intents from anon, authenticated;
-grant select on public.fluxo_sandbox_accounts to authenticated;
+grant select, insert on public.fluxo_sandbox_accounts to authenticated;
 grant select, insert on public.fluxo_sandbox_intents to authenticated;
 drop policy if exists fluxo_sandbox_account_read on public.fluxo_sandbox_accounts;
 create policy fluxo_sandbox_account_read on public.fluxo_sandbox_accounts
  for select to authenticated using (user_id = (select auth.uid()));
+drop policy if exists fluxo_sandbox_account_insert on public.fluxo_sandbox_accounts;
+create policy fluxo_sandbox_account_insert on public.fluxo_sandbox_accounts
+ for insert to authenticated with check (
+ user_id = (select auth.uid()) and balance_minor = 0 and currency = 'BRL'
+);
 drop policy if exists fluxo_sandbox_intent_read on public.fluxo_sandbox_intents;
 create policy fluxo_sandbox_intent_read on public.fluxo_sandbox_intents
  for select to authenticated using (user_id = (select auth.uid()));
@@ -34,5 +39,5 @@ create policy fluxo_sandbox_intent_insert on public.fluxo_sandbox_intents
  for insert to authenticated with check (
  user_id = (select auth.uid()) and account_user_id = (select auth.uid()) and status = 'pending_review'
 );
--- No authenticated account-write, intent-update or intent-delete grants/policies.
+-- Account creation is strictly an owner-bound zero-balance sandbox; no authenticated update or delete privileges.
 -- Do not treat a pending intent as an approved or executed transfer.

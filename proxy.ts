@@ -1,7 +1,9 @@
 import {NextResponse, type NextRequest} from 'next/server';
 import {createServerClient} from '@supabase/ssr';
+import {isPublicAuthRoute} from './lib/security/route-access';
 
 export async function proxy(request:NextRequest){
+ if(isPublicAuthRoute(request.nextUrl.pathname))return NextResponse.next();
  const url=process.env.NEXT_PUBLIC_SUPABASE_URL;
  const key=process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY||process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
  if(!url||!key){
@@ -28,5 +30,5 @@ export async function proxy(request:NextRequest){
 }
 
 export const config={
- matcher:['/((?!login|auth/|_next/|favicon.ico|.*\\.(?:png|jpg|jpeg|gif|svg|ico|webp|woff2?)).*)']
+ matcher:['/((?!_next/|favicon.ico|.*\\.(?:png|jpg|jpeg|gif|svg|ico|webp|woff2?)).*)']
 };

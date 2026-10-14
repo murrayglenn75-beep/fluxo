@@ -16,7 +16,7 @@ export default function LoginScreen(){
   try{
    const {error}=await auth.auth.signInWithPassword({email:email.trim(),password});
    if(error){setMessage('Sign-in failed. Check your credentials and try again.');return;}
-   window.location.assign('/home');
+   window.location.assign('/sandbox/account');
   }catch{setMessage('Unable to connect. Check your connection and try again.');}
   finally{setBusy(false);}
  }

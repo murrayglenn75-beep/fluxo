@@ -33,6 +33,18 @@ export default function SandboxAccountPage(){
   finally{setLoading(false);}
  },[]);
  useEffect(()=>{void load();},[load]);
+ async function createAccount(){
+  if(busy||!userId||account)return;
+  const auth=browserAuth();if(!auth)return;
+  setBusy(true);setMessage('');
+  try{
+   const {error}=await auth.from('fluxo_sandbox_accounts').insert({user_id:userId,display_name:'My sandbox',balance_minor:0,currency:'BRL'});
+   if(error){setMessage('Unable to create sandbox account. Check database setup or try again.');return;}
+   setMessage('Zero-balance sandbox account created.');
+   await load();
+  }catch{setMessage('Unable to connect. Check whether the sandbox account exists before retrying.');}
+  finally{setBusy(false);}
+ }
  async function createIntent(event:FormEvent<HTMLFormElement>){
   event.preventDefault();if(busy||!account||!userId)return;
   let amountMinor:number;
@@ -62,7 +74,7 @@ export default function SandboxAccountPage(){
     <label className="field">Amount (BRL)<input required type="text" inputMode="decimal" value={amount} onChange={e=>setAmount(e.target.value)}/></label>
     <button className="primary" disabled={busy}>{busy?'Saving…':'Save pending sandbox intent'}</button>
    </form>
-  </>:<p className="page-subtitle">No sandbox account has been provisioned. No balance or payment is available.</p>}
+  </>:<div><p className="page-subtitle">No sandbox account exists. You can create an empty account with a zero balance.</p><button className="primary" type="button" disabled={busy||!userId} onClick={createAccount}>{busy?'Creating…':'Create empty sandbox account'}</button></div>}
   <h2>Recent sandbox intents</h2>
   {intents.length? <ul>{intents.map(i=><li key={i.id}>{i.recipient} — {i.amount_minor/100} BRL — {i.status}</li>)}</ul>:<p className="page-subtitle">No persisted intents.</p>}
   {message&&<p role="status" className="notice" aria-live="polite">{message}</p>}

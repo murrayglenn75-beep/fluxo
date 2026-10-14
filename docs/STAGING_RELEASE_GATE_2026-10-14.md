@@ -21,3 +21,21 @@
 
 ## Known limitations
 The hosted Next.js route guard is not an authorization boundary for Capacitor static exports. All sensitive reads/writes must be enforced by Supabase RLS and database grants; fake accounts shown elsewhere in Fluxo are local demo data. The sandbox account currently starts at zero and has no authorized funding action. There is no settlement or provider reconciliation implementation. Do not call this a complete financial transfer flow.
+
+## Seven-part production release evidence gate (2026-10-14)
+
+The following are **not yet verified** and require linked evidence for this exact release commit. No entry may be marked passed on the basis of source code or a READY preview alone.
+
+| Requirement | Required evidence | Current status |
+| --- | --- | --- |
+| Rollback | Rehearsed deployment revert and safe migration rollback/forward-repair, with integrity checks | Missing |
+| Observability | Redacted structured logs, request correlation, failed-auth/intent alert and an incident owner | Missing |
+| Regression | CI tests on SHA for auth, RLS, duplicate intent, spoofed settlement and native build | CI verified; live coverage incomplete |
+| Performance | Browser mobile timings and representative account/history volume plus p95/error rates | Missing |
+| Privacy | Data classification, retention/deletion, breach response and applicable-law assessment | Missing |
+| Safe support | Audited, least-privilege diagnostic procedure with no service-role tokens exposed to support UI | Missing |
+| Maintainability | Architecture notes, environment map, migration runbook and independent maintainer review | Partial documentation |
+
+All seven are release blockers until tested or explicitly reviewed as not applicable. GDPR, HIPAA and SOC 2 each need separate applicability assessment and any necessary compliance work.
+
+The latest local/security verification does not establish live two-user authentication. Do not create a billable Supabase branch or alter the active project as a shortcut; continue no-cost CI and isolated local verification until authorized.

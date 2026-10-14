@@ -1,27 +1,59 @@
 'use client';
-import {useMemo,useState} from 'react';
-import Link from 'next/link';
+import {useState, type FormEvent} from 'react';
 import {createClient,type SupabaseClient} from '@supabase/supabase-js';
 
 let client:SupabaseClient|null=null;
-function authClient(){const url=process.env.NEXT_PUBLIC_SUPABASE_URL,key=process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY||process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;if(!url||!key)return null;return client||(client=createClient(url,key));}
-const dots=[1,2,3,4,5,6,7,8,9];
+function authClient(){
+ const url=process.env.NEXT_PUBLIC_SUPABASE_URL;
+ const key=process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY||process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+ if(!url||!key)return null;
+ return client||(client=createClient(url,key));
+}
 
 export default function LoginScreen(){
- const [email,setEmail]=useState(''),[password,setPassword]=useState(''),[pattern,setPattern]=useState<number[]>([]),[message,setMessage]=useState(''),[busy,setBusy]=useState(false);
- const patternText=useMemo(()=>pattern.join(' → '),[pattern]);
- async function signIn(){const auth=authClient();if(!auth){setMessage('Supabase sign-in is not configured.');return;}setBusy(true);const {error}=await auth.auth.signInWithPassword({email,password});setBusy(false);if(error){setMessage(error.message);return;}window.location.assign('/home');}
- async function biometric(){
-   if(!window.PublicKeyCredential){setMessage('Passkeys are not supported on this device/browser.');return;}
-   setMessage('Biometric/passkey hardware is available. Server challenge registration is required before it can unlock Fluxo.');
+ const [email,setEmail]=useState('');
+ const [password,setPassword]=useState('');
+ const [message,setMessage]=useState('');
+ const [busy,setBusy]=useState(false);
+ async function signIn(event:FormEvent<HTMLFormElement>){
+  event.preventDefault();
+  if(busy)return;
+  const auth=authClient();
+  if(!auth){setMessage('Secure sign-in is not configured. Contact the administrator.');return;}
+  setBusy(true);setMessage('');
+  try{
+   const {error}=await auth.auth.signInWithPassword({email:email.trim(),password});
+   if(error){setMessage('Sign-in failed. Check your credentials and try again.');return;}
+   window.location.assign('/home');
+  }catch{setMessage('Unable to connect. Check your connection and try again.');}
+  finally{setBusy(false);}
  }
- function addDot(n:number){setPattern(p=>p.includes(n)?p:p.length<9?[...p,n]:p);}
- return <main className="login-shell"><section className="login-card"><div className="login-brand">Fluxo</div><p className="eyebrow">Secure sandbox access</p><h1>Welcome back</h1><p className="page-subtitle">Use your account, device biometrics/passkey, or a local gesture pattern.</p>
- <label className="field">Email<input type="email" autoComplete="username" value={email} onChange={e=>setEmail(e.target.value)}/></label>
- <label className="field">Password<input type="password" autoComplete="current-password" value={password} onChange={e=>setPassword(e.target.value)}/></label>
- <button className="primary" disabled={busy} onClick={signIn}>{busy?'Signing in…':'Sign in securely'}</button>
- <div className="login-divider"><span>or</span></div>
- <button className="secondary biometric-button" onClick={biometric}>◉ Use biometrics / passkey</button>
- <section className="pattern-panel"><h3>Gesture passcode</h3><small>Drag-style prototype. Tap the dots in your pattern; this convenience control does not authorize payments.</small><div className="pattern-grid" aria-label="Gesture passcode grid">{dots.map(n=><button key={n} aria-label={'Pattern point '+n} className={pattern.includes(n)?'selected':''} onPointerEnter={e=>{if(e.buttons===1)addDot(n)}} onPointerDown={()=>addDot(n)}>{n}</button>)}</div><small>{patternText||'Choose a pattern'}</small><div className="pattern-actions"><button className="secondary" onClick={()=>setPattern([])}>Clear</button><Link className="secondary" href="/home">Demo access</Link></div></section>
- {message&&<p className="notice" role="status">{message}</p>}<small className="privacy-note">Login convenience factors never bypass Fluxo's separate payment review and authorization boundary.</small></section></main>;
+ async function resetPassword(){
+  const auth=authClient();
+  if(!auth){setMessage('Secure sign-in is not configured.');return;}
+  if(!email.trim()){setMessage('Enter your email address to request a password reset.');return;}
+  if(busy)return;
+  setBusy(true);setMessage('');
+  try{
+   const {error}=await auth.auth.resetPasswordForEmail(email.trim(),{
+    redirectTo:new URL('/login',window.location.origin).toString()
+   });
+   setMessage(error?'Unable to request a reset right now. Try again later.':'If this account exists, a password-reset email has been requested.');
+  }catch{setMessage('Unable to connect. Try again later.');}
+  finally{setBusy(false);}
+ }
+ return <main className="login-shell"><section className="login-card" aria-label="Fluxo sign in">
+  <div className="login-brand">Fluxo</div>
+  <p className="eyebrow">Secure sandbox access</p>
+  <h1>Welcome back</h1>
+  <p className="page-subtitle">Sign in to your sandbox account. Real-money transfers are not supported.</p>
+  <form onSubmit={signIn}>
+   <label className="field">Email<input required type="email" autoComplete="username" inputMode="email" value={email} onChange={e=>setEmail(e.target.value)}/></label>
+   <label className="field">Password<input required type="password" autoComplete="current-password" value={password} onChange={e=>setPassword(e.target.value)}/></label>
+   <button className="primary" type="submit" disabled={busy} aria-busy={busy}>{busy?'Signing in…':'Log In'}</button>
+  </form>
+  <button className="login-reset" type="button" onClick={resetPassword} disabled={busy}>Forgot password?</button>
+  {message&&<p className="notice" role="status" aria-live="polite">{message}</p>}
+  <p className="privacy-note">This login uses Supabase authentication. This screen does not provide passkey login or a local gesture unlock. Demo data elsewhere in Fluxo is not a real bank balance.</p>
+ </section></main>;
 }

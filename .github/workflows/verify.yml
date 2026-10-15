@@ -1,5 +1,7 @@
 name: verify
 on: [push, pull_request]
+permissions:
+  contents: read
 jobs:
   verify:
     runs-on: ubuntu-24.04
@@ -7,8 +9,50 @@ jobs:
       - uses: actions/checkout@v5
       - uses: actions/setup-node@v5
         with: { node-version: 22, cache: npm }
-      - run: npm ci
-      - run: npm run typecheck
-      - run: npm test
-      - run: npm run build
-      - run: npm run build:native
+      - id: install
+        continue-on-error: true
+        run: npm ci
+      - id: typecheck
+        if: steps.install.outcome == 'success'
+        continue-on-error: true
+        run: npm run typecheck
+      - id: tests
+        if: steps.install.outcome == 'success'
+        continue-on-error: true
+        run: npm test
+      - id: build
+        if: steps.install.outcome == 'success'
+        continue-on-error: true
+        run: npm run build
+      - id: native
+        if: steps.install.outcome == 'success'
+        continue-on-error: true
+        run: npm run build:native
+      - name: Explain and preserve CI outcomes
+        if: always()
+        env:
+          STAGE_INSTALL: ${{ steps.install.outcome }}
+          STAGE_TYPECHECK: ${{ steps.typecheck.outcome }}
+          STAGE_TESTS: ${{ steps.tests.outcome }}
+          STAGE_BUILD: ${{ steps.build.outcome }}
+          STAGE_NATIVE: ${{ steps.native.outcome }}
+        run: python scripts/ci_explain.py >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: fluxo-ci-diagnostics
+          path: |
+            ci-diagnostic.md
+            ci-diagnostic.json
+          if-no-files-found: warn
+          retention-days: 14
+      - name: Enforce failures
+        if: always()
+        env:
+          STAGE_INSTALL: ${{ steps.install.outcome }}
+          STAGE_TYPECHECK: ${{ steps.typecheck.outcome }}
+          STAGE_TESTS: ${{ steps.tests.outcome }}
+          STAGE_BUILD: ${{ steps.build.outcome }}
+          STAGE_NATIVE: ${{ steps.native.outcome }}
+        run: |
+          python -c 'import os,sys; stages=["INSTALL","TYPECHECK","TESTS","BUILD","NATIVE"]; sys.exit(1 if any(os.environ.get("STAGE_"+x) == "failure" for x in stages) or os.environ.get("STAGE_INSTALL") != "success" or any(os.environ.get("STAGE_"+x) not in ("success",) for x in stages) else 0)'

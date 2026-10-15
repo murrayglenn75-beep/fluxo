@@ -1,6 +1,7 @@
 'use client';
 import {useMemo,useState} from 'react';
 import Link from 'next/link';
+import {safePostLoginPath} from '../lib/auth/return-path';
 import {createClient,type SupabaseClient} from '@supabase/supabase-js';
 
 let client:SupabaseClient|null=null;

@@ -28,5 +28,5 @@ jobs:
       PGUSER: postgres
       PGDATABASE: fluxo_test
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - run: psql -X -v ON_ERROR_STOP=1 -f tests/postgres/sandbox-owner-boundary.sql

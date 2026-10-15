@@ -16,7 +16,7 @@ jobs:
       FLUXO_QA_URL: http://localhost:3110
       FLUXO_QA_OUTPUT: /tmp/fluxo-release-qa
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
       - uses: actions/setup-node@v5
         with:
           node-version: '24'

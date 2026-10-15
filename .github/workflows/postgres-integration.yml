@@ -28,7 +28,7 @@ jobs:
       PGPASSWORD: test_only_password
       PGDATABASE: fluxo_test
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
       - name: Check PostgreSQL readiness
         run: psql -v ON_ERROR_STOP=1 -c 'select current_database(),version()'
       - name: Create isolated test schema and seed data

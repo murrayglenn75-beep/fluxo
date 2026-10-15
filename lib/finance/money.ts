@@ -1,4 +1,4 @@
-export const currencies=["BRL","USD","EUR","GBP"] as const;
+export const currencies=["BRL","USD","EUR","GBP","CAD","AUD","JPY","CHF","CNY"] as const;
 export type Currency=(typeof currencies)[number];
 export type Money=Readonly<{amountMinor:bigint;currency:Currency}>;
 export function money(amountMinor:bigint,currency:Currency):Money{return {amountMinor,currency}}

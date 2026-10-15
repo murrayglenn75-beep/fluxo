@@ -1,0 +1,2 @@
+import Link from 'next/link';
+export default function Pin(){return <main className="mobile-auth-page mobile-auth-center"><div className="mobile-auth-logo">✦ Fluxo</div><div className="mobile-auth-symbol" aria-hidden="true">●●●●</div><h1>PIN sign-in</h1><p>PIN authentication is not configured. To protect your account, Fluxo will not accept a demonstration PIN as real authentication.</p><Link className="mobile-auth-cta" href="/login">Sign in securely</Link></main>}

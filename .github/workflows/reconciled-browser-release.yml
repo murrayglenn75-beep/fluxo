@@ -1,0 +1,56 @@
+name: Fluxo reconciled browser release checks
+on:
+  pull_request:
+  push:
+    branches: [main, v2/secure-auth-backend]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  browser-release:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      NEXT_PUBLIC_SUPABASE_URL: ''
+      NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY: ''
+      FLUXO_QA_URL: http://localhost:3110
+      FLUXO_QA_OUTPUT: /tmp/fluxo-release-qa
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci
+      - name: Install isolated pinned browser tooling
+        run: |
+          npm install --prefix "$RUNNER_TEMP/fluxo-browser" --no-audit --no-fund --save-exact playwright@1.64.0 @axe-core/playwright@4.13.0
+          "$RUNNER_TEMP/fluxo-browser/node_modules/.bin/playwright" install --with-deps chromium
+      - name: Build hosted web application
+        run: npm run build
+      - name: Verify public auth, protected routes and web accessibility
+        shell: bash
+        run: |
+          set -euo pipefail
+          node node_modules/next/dist/bin/next start --port 3110 >"$RUNNER_TEMP/fluxo-web.log" 2>&1 &
+          server_pid=$!
+          trap 'kill "$server_pid" 2>/dev/null || true' EXIT
+          ready=0
+          for attempt in $(seq 1 30); do
+            if curl --fail --silent http://localhost:3110/api/health/ >/dev/null; then ready=1; break; fi
+            sleep 1
+          done
+          if [ "$ready" -ne 1 ]; then cat "$RUNNER_TEMP/fluxo-web.log"; exit 1; fi
+          NODE_PATH="$RUNNER_TEMP/fluxo-browser/node_modules" node tests/browser/auth-release.cjs
+      - name: Build sandbox native export
+        run: npm run build:native
+      - name: Verify native layout, accessibility, persistence and read-only AI
+        run: NODE_PATH="$RUNNER_TEMP/fluxo-browser/node_modules" node tests/browser/release-reconciliation.cjs
+      - name: Preserve synthetic-data visual evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: fluxo-reconciled-browser-evidence
+          path: /tmp/fluxo-release-qa
+          if-no-files-found: ignore
+          retention-days: 7

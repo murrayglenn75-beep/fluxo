@@ -1,0 +1,2 @@
+import Link from 'next/link';
+export default function Biometric(){return <main className="mobile-auth-page mobile-auth-center"><div className="mobile-auth-logo">✦ Fluxo</div><div className="mobile-auth-symbol" aria-hidden="true">◎</div><h1>Biometric sign-in</h1><p>Secure device authentication is not enabled yet. Your fingerprint or face will not unlock Fluxo until a verified passkey sign-in flow is connected.</p><Link className="mobile-auth-cta" href="/login">Continue with password</Link><Link href="/pin">About PIN access</Link></main>}

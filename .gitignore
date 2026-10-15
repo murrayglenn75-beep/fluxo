@@ -15,3 +15,6 @@ ios/App/App/public
 ios/App/DerivedData
 ios/App/build
 *.tsbuildinfo
+
+# Supabase CLI local state
+supabase/.temp/

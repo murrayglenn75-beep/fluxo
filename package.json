@@ -15,7 +15,7 @@
     "open:ios": "cap open ios"
   },
   "dependencies": {
-    "@capacitor/android": "8.5.2",
+    "@capacitor/android": "8.5.3",
     "@capacitor/app": "8.1.2",
     "@capacitor/core": "8.5.2",
     "@capacitor/filesystem": "8.1.4",

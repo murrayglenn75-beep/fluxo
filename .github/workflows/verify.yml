@@ -37,7 +37,7 @@ jobs:
           STAGE_BUILD: ${{ steps.build.outcome }}
           STAGE_NATIVE: ${{ steps.native.outcome }}
         run: python scripts/ci_explain.py >> "$GITHUB_STEP_SUMMARY"
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         if: always()
         with:
           name: fluxo-ci-diagnostics

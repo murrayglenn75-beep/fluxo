@@ -4519,3 +4519,23 @@ body{min-height:100dvh;overflow-x:hidden}
 .app .page-panel :is(img,svg){max-width:100%}
 @media(max-width:480px){.app .page-panel{padding:12px 0 20px}.app .main>main{padding-bottom:120px}.app .topbar{padding-inline:16px}.app .tabs{gap:3px}.app .tabs button{font-size:12px}}
 @media(prefers-reduced-motion:reduce){.app *{scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important}}
+
+/* Accessible forest-green login contrast from the reviewed authentication branch. */
+
+/* Scoped mobile-first dark forest-green authentication contrast */
+.login-shell .login-card{color:#f8fffc;max-width:430px}
+.login-shell .login-card .eyebrow{color:#78e6bd}
+.login-shell .login-card .page-subtitle{color:#c8dad4;line-height:1.5}
+.login-shell .login-card .field{color:#f0faf6;font-size:13px;font-weight:600;margin:18px 0}
+.login-shell .login-card .field input{background:#10241e;border:1px solid #548275;color:#fff;border-radius:12px;padding:14px;font-size:16px;min-height:48px}
+.login-shell .login-card .field input::placeholder{color:#a9c5b9}
+.login-shell .login-card .primary{background:#059969;color:#fff;font-size:15px;min-height:48px;border-radius:12px}
+.login-shell .login-card .login-reset{display:block;margin:14px auto;padding:10px;color:#9be8c8;font-size:13px;text-decoration:underline;text-underline-offset:3px}
+.login-shell .login-card .privacy-note{color:#c4d5cd;font-size:11px;line-height:1.6;margin:18px 0 0}
+.login-shell .login-card .notice{color:#fff;border:1px solid #587b70;background:#122d24;padding:12px;border-radius:10px}
+@media(max-width:480px){.login-shell{padding:14px;align-items:center}.login-shell .login-card{padding:22px 20px;border-radius:22px}.login-shell .login-card h1{font-size:29px}}
+.login-card .login-demo{color:#b8d7ca}
+/* Reconciled mobile accessibility states: dark surfaces and readable active controls. */
+.app.section-cards .virtual-card-button{background:#007d5c;border-color:#007d5c;color:#fff}
+.app.section-ai .assistant-intro{background:#123b2d;color:#e6f6ee;border:1px solid #315e4c}
+.app.section-settings .account-auth .tabs button.selected{background:#35e99b;color:#06251a}

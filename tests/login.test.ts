@@ -3,6 +3,8 @@ import {createElement} from 'react';
 import {renderToStaticMarkup} from 'react-dom/server';
 import {signIn,readRememberedEmail,rememberEmail} from '../lib/auth/login';
 import LoginScreen from '../components/login-screen';
+import SignupPage from '../app/signup/page';
+import {isPublicRoute} from '../lib/supabase/route-policy';
 
 const {createClient,passwordSignIn}=vi.hoisted(()=>({createClient:vi.fn(),passwordSignIn:vi.fn()}));
 vi.mock('../lib/supabase/client',()=>({createClient}));
@@ -68,10 +70,15 @@ describe('initial login composition',()=>{
  });
  it('links to real account forms and the public demo without authenticating',()=>{
    const html=renderToStaticMarkup(createElement(LoginScreen));
-   expect(html).toContain('href="/auth/signup"');
+   expect(html).toContain('href="/signup"');
    expect(html).toContain('href="/auth/forgot-password"');
    expect(html).toContain('href="/"');
    expect(html).toContain('View demo');
+   expect(isPublicRoute('/signup')).toBe(true);
+   const signup=renderToStaticMarkup(createElement(SignupPage));
+   expect(signup).toContain('Create account');
+   expect(signup).toContain('id="account-email"');
+   expect(signup).toContain('id="account-password"');
    expect(html).toContain('Passkey / biometric prototype');
    expect(html).toContain('Payments always require separate financial approval');
    expect(createClient).not.toHaveBeenCalled();

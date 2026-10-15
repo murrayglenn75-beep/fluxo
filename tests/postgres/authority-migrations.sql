@@ -17,6 +17,7 @@ grant usage on schema auth to authenticated;
 \ir authority-seed.sql
 \endif
 \ir ../../supabase/migrations/20261009000000_v2_authority_hardening.sql
+\ir ../../supabase/migrations/20261014_fluxo_sandbox_owner_boundary.sql
 \if :populated
 \else
 \ir authority-seed.sql
@@ -135,3 +136,29 @@ begin
 end $$;
 
 select 'PASS actual migrations: preserved rows, owner RLS, denied client writes/anonymous reads, cross-owner references, idempotency' as result;
+
+-- Verify that the account/intent sandbox boundary coexists with the full v2 migrations.
+set role authenticated;
+select set_config('request.jwt.claim.sub','00000000-0000-4000-8000-000000000001',false);
+insert into public.fluxo_sandbox_accounts(user_id) values ('00000000-0000-4000-8000-000000000001');
+insert into public.fluxo_sandbox_intents(id,user_id,account_user_id,command_id,recipient,amount_minor)
+values ('90000000-0000-4000-8000-000000000001','00000000-0000-4000-8000-000000000001','00000000-0000-4000-8000-000000000001','90000000-0000-4000-8000-000000000002','Sandbox only',100);
+do $$ begin
+ if (select balance_minor from public.fluxo_sandbox_accounts) <> 0 then raise exception 'Sandbox intent mutated balance'; end if;
+ begin
+  update public.fluxo_sandbox_intents set status='settled';
+  raise exception 'Authenticated settlement mutation was allowed';
+ exception when insufficient_privilege then null;
+ end;
+end $$;
+select set_config('request.jwt.claim.sub','00000000-0000-4000-8000-000000000002',false);
+do $$ begin
+ if exists(select 1 from public.fluxo_sandbox_accounts) or exists(select 1 from public.fluxo_sandbox_intents) then raise exception 'Cross-user sandbox read was allowed'; end if;
+ begin
+  insert into public.fluxo_sandbox_accounts(user_id) values ('00000000-0000-4000-8000-000000000001');
+  raise exception 'Cross-user sandbox insert was allowed';
+ exception when insufficient_privilege then null;
+ end;
+end $$;
+reset role;
+select 'PASS combined authority and sandbox migrations: zero balance, pending intents, owner isolation, settlement denied' as result;

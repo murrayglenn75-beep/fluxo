@@ -1,5 +1,7 @@
 # Fluxo v2 consolidation status
 
+The October 8 snapshot below is historical. For the reconciled October 14 candidate, current test evidence and unresolved live-environment gates, see [the release reconciliation](RELEASE_RECONCILIATION_2026-10-14.md).
+
 Verified locally on October 8, 2026. This document describes the consolidated sandbox release candidate on `v2/secure-auth-backend`. Passing builds do not establish production banking readiness.
 
 ## Included work

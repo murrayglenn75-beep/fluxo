@@ -6,7 +6,9 @@ describe('authenticated route policy',()=>{
     expect(isPublicRoute('/')).toBe(true);
     expect(isPublicRoute('/login')).toBe(true);
     expect(isPublicRoute('/api/health')).toBe(true);
-    expect(isPublicRoute('/auth/callback')).toBe(true);
+    expect(isPublicRoute('/signup')).toBe(true);
+    expect(isPublicRoute('/auth/reset')).toBe(true);
+    expect(isPublicRoute('/auth/callback')).toBe(false);
   });
 
   it('keeps trailing-slash login public without exposing protected routes',()=>{

@@ -10,7 +10,7 @@ const dots=[1,2,3,4,5,6,7,8,9];
 export default function LoginScreen(){
  const [email,setEmail]=useState(''),[password,setPassword]=useState(''),[pattern,setPattern]=useState<number[]>([]),[message,setMessage]=useState(''),[busy,setBusy]=useState(false);
  const patternText=useMemo(()=>pattern.join(' → '),[pattern]);
- async function signIn(){const auth=authClient();if(!auth){setMessage('Supabase sign-in is not configured.');return;}setBusy(true);const {error}=await auth.auth.signInWithPassword({email,password});setBusy(false);if(error){setMessage(error.message);return;}window.location.assign('/home');}
+ async function signIn(){const auth=authClient();if(!auth){setMessage('Supabase sign-in is not configured.');return;}setBusy(true);const {error}=await auth.auth.signInWithPassword({email,password});setBusy(false);if(error){setMessage(error.message);return;}window.location.assign(safePostLoginPath(window.location.search));}
  async function biometric(){
    if(!window.PublicKeyCredential){setMessage('Passkeys are not supported on this device/browser.');return;}
    setMessage('Biometric/passkey hardware is available. Server challenge registration is required before it can unlock Fluxo.');

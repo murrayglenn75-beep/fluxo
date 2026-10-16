@@ -4539,3 +4539,41 @@ body{min-height:100dvh;overflow-x:hidden}
 .app.section-cards .virtual-card-button{background:#007d5c;border-color:#007d5c;color:#fff}
 .app.section-ai .assistant-intro{background:#123b2d;color:#e6f6ee;border:1px solid #315e4c}
 .app.section-settings .account-auth .tabs button.selected{background:#35e99b;color:#06251a}
+
+
+/* More feature directory only: dark surface and Android safe-area clearance. */
+@layer presentation {
+  .modal.fluxo-navigation-dialog {
+    --ink: #f2fff9;
+    --muted: #a9c9c2;
+    --surface: #103b37;
+    --raised: #194840;
+    --line: #326756;
+    --teal: #73f5b6;
+    background: #092c2b;
+    color: #f2fff9;
+    border: 1px solid #326756;
+    max-height: min(80dvh, 760px);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding-bottom: max(28px, env(safe-area-inset-bottom, 0px));
+  }
+  .modal.fluxo-navigation-dialog h2,
+  .modal.fluxo-navigation-dialog .close { color: #f2fff9; }
+  .modal.fluxo-navigation-dialog .feature-menu a {
+    color: #f2fff9;
+    border-bottom: 1px solid #326756;
+    min-height: 56px;
+    font-size: 15px;
+  }
+  .modal.fluxo-navigation-dialog .feature-menu a:focus-visible {
+    outline: 3px solid #73f5b6;
+    outline-offset: -3px;
+  }
+  @media (max-width: 600px) {
+    .modal.fluxo-navigation-dialog {
+      max-height: calc(100dvh - 32px - env(safe-area-inset-bottom, 0px));
+      padding-bottom: calc(110px + env(safe-area-inset-bottom, 0px));
+    }
+  }
+}

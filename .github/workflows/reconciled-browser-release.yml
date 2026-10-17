@@ -21,6 +21,8 @@ jobs:
         with:
           node-version: '24'
           cache: npm
+      - name: Murray Method evidence preflight regression
+        run: python3 -m unittest discover -s engineering -p 'test_*.py' -q
       - run: npm ci
       - name: Install isolated pinned browser tooling
         run: |

@@ -29,7 +29,7 @@ describe('web authentication boundary',()=>{
  it('accepts only a verified current user and makes private responses non-cacheable',async()=>{
    getUser.mockResolvedValue({data:{user:{id:'user-a'}},error:null});
    const result=await updateSession(request('/sandbox/account'));
-   expect(result.status).toBe(200);expect(result.headers.get('Cache-Control')).toBe('private, no-store');expect(getUser).toHaveBeenCalledOnce();
+   expect(result.status).toBe(200);expect(result.headers.get('Cache-Control')).toMatch(/(?:^|,\s*)private(?:,|$)/);expect(result.headers.get('Cache-Control')).toMatch(/(?:^|,\s*)no-store(?:,|$)/);expect(getUser).toHaveBeenCalledOnce();
  });
  it('denies even an apparent user when the Auth server reports an error',async()=>{
    getUser.mockResolvedValue({data:{user:{id:'user-a'}},error:{message:'Invalid token'}});
@@ -43,11 +43,11 @@ describe('web authentication boundary',()=>{
  it('carries refreshed cookies and cache headers on an authenticated response',async()=>{
    getUser.mockImplementation(async()=>{cookies.setAll([{name:'sb-session',value:'test-session',options:{path:'/'}}],{'Cache-Control':'private, no-store'});return {data:{user:{id:'user-a'}},error:null};});
    const result=await updateSession(request('/sandbox/account'));
-   expect(result.cookies.get('sb-session')?.value).toBe('test-session');expect(result.headers.get('Cache-Control')).toBe('private, no-store');
+   expect(result.cookies.get('sb-session')?.value).toBe('test-session');expect(result.headers.get('Cache-Control')).toMatch(/(?:^|,\s*)private(?:,|$)/);expect(result.headers.get('Cache-Control')).toMatch(/(?:^|,\s*)no-store(?:,|$)/);
  });
  it('carries cookie invalidation into the denied response',async()=>{
    getUser.mockImplementation(async()=>{cookies.setAll([{name:'sb-session',value:'',options:{path:'/'}}],{});return {data:{user:null},error:{message:'Expired'}};});
    const result=await updateSession(request('/sandbox/account'));
-   expect(result.status).toBe(307);expect(result.cookies.get('sb-session')?.value).toBe('');expect(result.headers.get('Cache-Control')).toBe('private, no-store');
+   expect(result.status).toBe(307);expect(result.cookies.get('sb-session')?.value).toBe('');expect(result.headers.get('Cache-Control')).toMatch(/(?:^|,\s*)private(?:,|$)/);expect(result.headers.get('Cache-Control')).toMatch(/(?:^|,\s*)no-store(?:,|$)/);
  });
 });

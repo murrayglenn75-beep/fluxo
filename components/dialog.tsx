@@ -25,10 +25,12 @@ export function Dialog({
   title,
   close,
   children,
+  className,
 }: {
   title: string;
   close: () => void;
   children: ReactNode;
+  className?: string;
 }) {
   const ref = useRef<HTMLElement>(null),
     closeRef = useRef(close);
@@ -102,7 +104,7 @@ export function Dialog({
     <div className="overlay">
       <section
         ref={ref}
-        className="modal"
+        className={className ? `modal ${className}` : "modal"}
         role="dialog"
         aria-modal="true"
         aria-label={title}

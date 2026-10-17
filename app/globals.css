@@ -4599,3 +4599,28 @@ body{min-height:100dvh;overflow-x:hidden}
  :root[data-fluxo-theme]:not([data-fluxo-theme="forest"]) .modal.fluxo-navigation-dialog .feature-menu a { color:var(--ink); border-color:var(--line); }
  :root[data-fluxo-theme]:not([data-fluxo-theme="forest"]) .modal.fluxo-navigation-dialog h2 { color:var(--ink); }
 }
+
+
+/* Mobile More dialog is a sheet above the fixed tab bar, not behind it. */
+@layer presentation {
+ @media(max-width:600px) {
+  .modal.fluxo-navigation-dialog {
+    position:relative;
+    width:min(94vw,430px);
+    max-height:calc(100dvh - 44px - env(safe-area-inset-bottom,0px));
+    overflow-y:auto;
+    overscroll-behavior:contain;
+    scrollbar-gutter:stable;
+    padding-bottom:calc(126px + env(safe-area-inset-bottom,0px));
+  }
+  .overlay:has(>.fluxo-navigation-dialog) { z-index:1000; }
+  .overlay:has(>.fluxo-navigation-dialog) .fluxo-navigation-dialog { z-index:1001; }
+ }
+ /* Keep navigation legible under every appearance palette. */
+ :root[data-fluxo-theme] .modal.fluxo-navigation-dialog .feature-menu a:hover,
+ :root[data-fluxo-theme] .modal.fluxo-navigation-dialog .feature-menu a:focus-visible {
+   background:var(--raised);
+   color:var(--ink);
+ }
+ :root[data-fluxo-theme] .fluxo-appearance-settings .page-subtitle {color:var(--muted);}
+}

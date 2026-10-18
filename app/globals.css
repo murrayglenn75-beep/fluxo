@@ -4646,3 +4646,45 @@ body{min-height:100dvh;overflow-x:hidden}
 :root[data-fluxo-theme="system"] .app :is(.page-panel,.panel,.account-auth,.integration-status,.appearance-settings){background:#fff!important;color:#142d27!important}
 :root[data-fluxo-theme="system"] .app :is(.bottom-nav,.mobile-header,.topbar){background:#e2f2ea!important;color:#142d27!important}
 }
+
+
+/* Mobile appearance acceptance: override the exact legacy !important selectors.
+   Neutral dark backgrounds stay dark; branded emerald artwork follows the choice. */
+:root[data-fluxo-accent] .app.section-home .mobile-hero-card,
+:root[data-fluxo-accent] .section-home .mobile-hero-card{
+ background:radial-gradient(ellipse at 85% 0%,color-mix(in srgb,var(--action) 45%,transparent),transparent 54%),linear-gradient(125deg,var(--action),var(--fluxo-accent-dark) 58%,#061b1b)!important;
+ border-color:var(--action)!important;
+}
+:root[data-fluxo-accent] .app.section-home .mobile-money-actions a:first-child,
+:root[data-fluxo-accent] .section-home .mobile-money-actions a:first-child{background:var(--action)!important;color:var(--action-ink)!important;border-color:var(--action)!important}
+:root[data-fluxo-accent] .app .bottom-nav>a.active,
+:root[data-fluxo-accent] .app .bottom-nav>button.active,
+:root[data-fluxo-accent] .bottom-nav>a.active{
+ background:color-mix(in srgb,var(--action) 26%,#092820)!important;
+ color:var(--teal)!important;
+ border-color:var(--action)!important;
+}
+:root[data-fluxo-accent] .app .bottom-nav>a.active .icon,
+:root[data-fluxo-accent] .app .bottom-nav>button.active .icon{color:var(--teal)!important}
+:root[data-fluxo-accent] .app.section-pix .tabs .selected,
+:root[data-fluxo-accent] .app.section-transfer .tabs .selected,
+:root[data-fluxo-accent] .section-pix .tabs .selected,
+:root[data-fluxo-accent] .section-transfer .tabs .selected{background:var(--action)!important;color:var(--action-ink)!important}
+:root[data-fluxo-accent] .app .primary,
+:root[data-fluxo-accent] .app .tabs button.selected,
+:root[data-fluxo-accent] .app .mobile-money-actions a:first-child{background:var(--action)!important;color:var(--action-ink)!important;border-color:var(--action)!important}
+:root[data-fluxo-accent] .app .mobile-ai-insight{border-color:var(--line)!important}
+:root[data-fluxo-accent] .app .mobile-ai-insight>span:first-child{color:var(--teal)!important}
+:root[data-fluxo-accent] .app .setup-banner .icon,
+:root[data-fluxo-accent] .app .panel-heading a,
+:root[data-fluxo-accent] .app .panel-heading button{color:var(--teal)!important}
+:root[data-fluxo-theme="light"] body,
+:root[data-fluxo-theme="light"] html{background:#f4faf7!important;background-image:none!important;color:#142d27!important;color-scheme:light}
+:root[data-fluxo-theme="light"] .app{background:#f4faf7!important;color:#142d27!important}
+:root[data-fluxo-theme="light"] .app .mobile-header{background:#e2f2ea!important;color:#142d27!important}
+:root[data-fluxo-theme="light"] .app :is(.topbar h1,.screen-heading h1,.page-panel h2,.page-panel h3,.panel h3,.page-title){color:#142d27!important}
+:root[data-fluxo-theme="light"] .app :is(.page-panel,.panel,.account-auth,.integration-status,.appearance-settings){background:#fff!important;color:#142d27!important}
+:root[data-fluxo-theme="light"] .app :is(.field,.field label,.page-subtitle,.page-panel p,.panel p){color:#47665d!important}
+:root[data-fluxo-theme="light"] .app :is(input:not([type=checkbox]):not([type=radio]),textarea,select){background:#fff!important;color:#142d27!important}
+:root[data-fluxo-theme="light"] .app .bottom-nav{background:#e2f2ea!important}
+:root[data-fluxo-theme="light"] .app .bottom-nav>a:not(.active){color:#47665d!important}

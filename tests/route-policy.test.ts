@@ -14,18 +14,20 @@ describe('authenticated route policy',()=>{
   it('keeps trailing-slash login public without exposing protected routes',()=>{
     expect(isPublicRoute('/login/')).toBe(true);
     expect(isPublicRoute('/api/health/')).toBe(true);
-    expect(requiresAuthenticatedUser('/settings/')).toBe(true);
+    expect(requiresAuthenticatedUser('/settings/')).toBe(false);
     expect(requiresAuthenticatedUser('/login-admin/')).toBe(true);
   });
 
-  it('protects financial and user application routes',()=>{
+  it('allows local sandbox pages without sign-in',()=>{
     for(const path of ['/home','/cards','/pix','/transfer','/activity','/settings','/exchange','/import','/import/']){
-      expect(requiresAuthenticatedUser(path)).toBe(true);
+      expect(requiresAuthenticatedUser(path)).toBe(false);
     }
   });
 
   it('does not treat lookalike routes as public',()=>{
     expect(requiresAuthenticatedUser('/login-admin')).toBe(true);
     expect(requiresAuthenticatedUser('/api/health/private')).toBe(true);
+    expect(requiresAuthenticatedUser('/api/payments')).toBe(true);
+    expect(requiresAuthenticatedUser('/settings/private')).toBe(true);
   });
 });

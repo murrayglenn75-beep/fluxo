@@ -9,6 +9,7 @@ import CardManager from './card-manager';
 import PixRequest from './pix-request';
 import Recipients from './recipients';
 import AccountScreen from './account-screen';
+import AppearanceSettings,{AppearanceBootstrap} from './appearance-settings';
 import Budgets from './budgets';
 import Goals from './goals';
 import ExpenseImport from './expense-import';
@@ -128,10 +129,11 @@ export default function Dashboard({section='home'}:{section?:string}) {
  section==='import'?<StatementImport/>:
  section==='budgets'?<Budgets/>:
  section==='goals'?<Goals/>:
+ section==='settings'?<AppearanceSettings/>:
  <AccountScreen onboarding={section==='onboarding'}/>
  }
  <footer className="workspace-footer"><span><i/> Sandbox · demo data</span><span>Your money. Your control.</span></footer></div>{section!=='ai'&&<div className="assistant-column">{assistant}</div>}</div></main></div>
- <nav className="bottom-nav" aria-label="Mobile navigation">{[['home','home','Home'],['activity','activity','Activity'],['pix','pix','Pix'],['cards','cards','Cards']].map(([id,icon,label])=><Link href={id==='home'?'/':`/${id}`} className={section===id?'active':''} aria-current={section===id?'page':undefined} key={id}><Icon name={icon}/><span>{label}</span></Link>)}<button className={more||!['home','activity','pix','cards'].includes(section)?'active':''} aria-label="More Fluxo features" onClick={()=>setMore(!more)} aria-expanded={more} aria-controls="fluxo-more-menu"><Icon name="more"/><span>More</span></button></nav>{more&&<Dialog title="Explore Fluxo" close={()=>setMore(false)} variant="navigation"><nav className="feature-menu" id="fluxo-more-menu" aria-label="More Fluxo features">{navigation.filter(n=>!['home','activity','pix','cards'].includes(n[0])).map(([id,icon,label])=><Link href={`/${id}`} onClick={()=>setMore(false)} key={id}><Icon name={icon}/>{label}<Icon name="arrow"/></Link>)}</nav></Dialog>}
+ <AppearanceBootstrap/><nav className="bottom-nav" aria-label="Mobile navigation">{[['home','home','Home'],['activity','activity','Activity'],['pix','pix','Pix'],['cards','cards','Cards']].map(([id,icon,label])=><Link href={id==='home'?'/':`/${id}`} className={section===id?'active':''} aria-current={section===id?'page':undefined} key={id}><Icon name={icon}/><span>{label}</span></Link>)}<button className={more||!['home','activity','pix','cards'].includes(section)?'active':''} aria-label="More Fluxo features" onClick={()=>setMore(!more)} aria-expanded={more} aria-controls="fluxo-more-menu"><Icon name="more"/><span>More</span></button></nav>{more&&<Dialog title="Explore Fluxo" close={()=>setMore(false)} variant="navigation"><nav className="feature-menu" id="fluxo-more-menu" aria-label="More Fluxo features">{navigation.filter(n=>!['home','activity','pix','cards'].includes(n[0])).map(([id,icon,label])=><Link href={`/${id}`} onClick={()=>setMore(false)} key={id}><Icon name={icon}/>{label}<Icon name="arrow"/></Link>)}</nav></Dialog>}
 
  {receipt&&<Receipt transaction={receipt} close={()=>setReceipt(null)}/>}
  {statement&&<CardStatement index={selectedCard} close={()=>setStatement(false)}/>}

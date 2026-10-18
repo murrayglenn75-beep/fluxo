@@ -4539,3 +4539,88 @@ body{min-height:100dvh;overflow-x:hidden}
 .app.section-cards .virtual-card-button{background:#007d5c;border-color:#007d5c;color:#fff}
 .app.section-ai .assistant-intro{background:#123b2d;color:#e6f6ee;border:1px solid #315e4c}
 .app.section-settings .account-auth .tabs button.selected{background:#35e99b;color:#06251a}
+
+
+/* More feature directory only: dark surface and Android safe-area clearance. */
+@layer presentation {
+  .modal.fluxo-navigation-dialog {
+    --ink: #f2fff9;
+    --muted: #a9c9c2;
+    --surface: #103b37;
+    --raised: #194840;
+    --line: #326756;
+    --teal: #73f5b6;
+    background: #092c2b;
+    color: #f2fff9;
+    border: 1px solid #326756;
+    max-height: min(80dvh, 760px);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding-bottom: max(28px, env(safe-area-inset-bottom, 0px));
+  }
+  .modal.fluxo-navigation-dialog h2,
+  .modal.fluxo-navigation-dialog .close { color: #f2fff9; }
+  .modal.fluxo-navigation-dialog .feature-menu a {
+    color: #f2fff9;
+    border-bottom: 1px solid #326756;
+    min-height: 56px;
+    font-size: 15px;
+  }
+  .modal.fluxo-navigation-dialog .feature-menu a:focus-visible {
+    outline: 3px solid #73f5b6;
+    outline-offset: -3px;
+  }
+  @media (max-width: 600px) {
+    .modal.fluxo-navigation-dialog {
+      max-height: calc(100dvh - 32px - env(safe-area-inset-bottom, 0px));
+      padding-bottom: calc(110px + env(safe-area-inset-bottom, 0px));
+    }
+  }
+}
+
+
+/* Device-local colour themes: keep the dark layout, change accent and surface tones. */
+:root[data-fluxo-theme="ocean"] { --teal:#7ac7ff; --action:#4aafff; --action-ink:#061f37; --dark:#071b2c; --surface:#12394c; --raised:#1b4b65; --line:#356b84; --muted:#b1d2e6; }
+:root[data-fluxo-theme="violet"] { --teal:#c6b5ff; --action:#b19aff; --action-ink:#25123d; --dark:#1a112d; --surface:#322447; --raised:#48355f; --line:#6c5688; --muted:#d3c5e6; }
+:root[data-fluxo-theme="sunset"] { --teal:#ffd18a; --action:#ffc36b; --action-ink:#3c240a; --dark:#261c17; --surface:#49352b; --raised:#634637; --line:#86614b; --muted:#e3c8b2; }
+:root[data-fluxo-theme="ruby"] { --teal:#ff9daf; --action:#ff7b92; --action-ink:#3b0f1b; --dark:#28151e; --surface:#4c2836; --raised:#663444; --line:#895265; --muted:#e5bfcd; }
+@layer presentation {
+ .fluxo-appearance-settings { margin:24px 0; padding:18px; border:1px solid var(--line); border-radius:20px; background:var(--surface); color:var(--ink); }
+ .fluxo-appearance-settings h3 { color:var(--ink); margin:0 0 8px; }
+ .fluxo-theme-options { display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:10px; margin-top:16px; }
+ .fluxo-theme-option { display:flex; align-items:center; gap:9px; padding:12px; min-height:52px; border:1px solid var(--line); border-radius:12px; background:var(--raised); color:var(--ink); text-align:left; }
+ .fluxo-theme-option.selected { border:2px solid var(--action); }
+ .fluxo-theme-option:focus-visible { outline:3px solid var(--action); outline-offset:2px; }
+ .fluxo-theme-swatch { width:22px; height:22px; border-radius:50%; flex-shrink:0; border:1px solid #ffffff66; }
+ .fluxo-theme-selected { margin-left:auto; color:var(--teal); font-weight:800; }
+ :root[data-fluxo-theme]:not([data-fluxo-theme="forest"]) .bottom-nav { background:var(--dark); border-color:var(--line); }
+ :root[data-fluxo-theme]:not([data-fluxo-theme="forest"]) .bottom-nav .active { background:var(--surface); color:var(--teal); }
+ :root[data-fluxo-theme]:not([data-fluxo-theme="forest"]) .modal.fluxo-navigation-dialog { background:var(--dark); border-color:var(--line); color:var(--ink); }
+ :root[data-fluxo-theme]:not([data-fluxo-theme="forest"]) .modal.fluxo-navigation-dialog .feature-menu a { color:var(--ink); border-color:var(--line); }
+ :root[data-fluxo-theme]:not([data-fluxo-theme="forest"]) .modal.fluxo-navigation-dialog h2 { color:var(--ink); }
+}
+
+
+/* Mobile More dialog is a sheet above the fixed tab bar, not behind it. */
+@layer presentation {
+ @media(max-width:600px) {
+  .modal.fluxo-navigation-dialog {
+    position:relative;
+    width:min(94vw,430px);
+    max-height:calc(100dvh - 44px - env(safe-area-inset-bottom,0px));
+    overflow-y:auto;
+    overscroll-behavior:contain;
+    scrollbar-gutter:stable;
+    padding-bottom:calc(126px + env(safe-area-inset-bottom,0px));
+  }
+  .overlay:has(>.fluxo-navigation-dialog) { z-index:1000; }
+  .overlay:has(>.fluxo-navigation-dialog) .fluxo-navigation-dialog { z-index:1001; }
+ }
+ /* Keep navigation legible under every appearance palette. */
+ :root[data-fluxo-theme] .modal.fluxo-navigation-dialog .feature-menu a:hover,
+ :root[data-fluxo-theme] .modal.fluxo-navigation-dialog .feature-menu a:focus-visible {
+   background:var(--raised);
+   color:var(--ink);
+ }
+ :root[data-fluxo-theme] .fluxo-appearance-settings .page-subtitle {color:var(--muted);}
+}

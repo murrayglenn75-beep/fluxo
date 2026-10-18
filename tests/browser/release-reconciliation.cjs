@@ -6,17 +6,36 @@ const server=http.createServer((req,res)=>{try{let file=path.resolve(root,'.'+de
 (async()=>{
  await new Promise(r=>server.listen(3111,'127.0.0.1',r));const browser=await chromium.launch({channel:process.env.FLUXO_BROWSER_CHANNEL||undefined,headless:true});const context=await browser.newContext();const p=await context.newPage();const errors=[];p.on('pageerror',e=>errors.push(e.message));const output=path.resolve(process.env.FLUXO_QA_OUTPUT||path.join(require('node:os').tmpdir(),'fluxo-release-qa'))+path.sep;fs.mkdirSync(output,{recursive:true});
  try{
-  for(const width of [360,390,430]){
+  for(const width of [320,360,390,430]){
    await p.setViewportSize({width,height:844});
-   for(const route of ['home','login','signup','pix','transfer','cards','exchange','ai','settings','import','sandbox/account']){
+   for(const route of ['home','login','signup','pix','transfer','cards','activity','exchange','ai','settings','import','sandbox/account']){
     await p.goto('http://127.0.0.1:3111/'+route+'/');await p.locator('main').waitFor();
     const layout=await p.evaluate(()=>({viewport:innerWidth,content:document.documentElement.scrollWidth}));assert(layout.content<=layout.viewport,`${route} overflow at ${width}: ${JSON.stringify(layout)}`);
-    if(width===390&&['home','login','pix'].includes(route))await p.screenshot({path:output+`fluxo-integrated-${route}.png`,fullPage:true});
+    if(width===390&&['home','login','pix','activity'].includes(route))await p.screenshot({path:output+`fluxo-integrated-${route}.png`,fullPage:true});
     if(width===390){const a=await new AxeBuilder({page:p}).withTags(['wcag2a','wcag2aa','wcag21aa']).analyze();console.log(JSON.stringify({route,violations:a.violations.map(v=>({id:v.id,impact:v.impact,nodes:v.nodes.slice(0,4).map(n=>({target:n.target,summary:n.failureSummary}))}))}));assert.deepEqual(a.violations.map(v=>v.id),[],'Accessibility violations on '+route);}
    }
    console.log('PASS mobile layout '+width);
   }
 
+  await p.setViewportSize({width:390,height:844});
+  await p.goto('http://127.0.0.1:3111/home/');
+  // Regression: the feature directory must remain usable on a narrow mobile viewport.
+  await p.setViewportSize({width:320,height:640});
+  await p.goto('http://127.0.0.1:3111/home/');
+  await p.getByRole('button',{name:'More Fluxo features',exact:true}).click();
+  const menu= p.getByRole('dialog',{name:'Explore Fluxo'});
+  await menu.waitFor();
+  assert(await menu.getByRole('link',{name:'Statement Import',exact:true}).isVisible(),'Statement Import missing from demo feature directory');
+  await menu.getByRole('link',{name:'Statement Import',exact:true}).scrollIntoViewIfNeeded();
+  assert(await menu.getByRole('link',{name:'Statement Import',exact:true}).isVisible(),'Feature directory cannot reveal its later entries');
+  await p.keyboard.press('Escape');
+  await menu.waitFor({state:'hidden'});
+  await p.goto('http://127.0.0.1:3111/activity/');
+  await p.locator('main').waitFor();
+  const activityLayout=await p.evaluate(()=>({viewport:innerWidth,content:document.documentElement.scrollWidth}));
+  assert(activityLayout.content<=activityLayout.viewport,'Activity causes horizontal overflow on 320px viewport');
+  await p.screenshot({path:output+'fluxo-activity-320.png',fullPage:true});
+  console.log('PASS narrow-screen feature-directory visibility and Activity horizontal overflow');
   await p.setViewportSize({width:390,height:844});
   await p.goto('http://127.0.0.1:3111/home/');
   await p.getByRole('button',{name:'More Fluxo features',exact:true}).click();

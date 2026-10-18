@@ -4612,3 +4612,37 @@ body{min-height:100dvh;overflow-x:hidden}
 .appearance-swatch.emerald{background:#28db90}.appearance-swatch.blue{background:#438ef5}.appearance-swatch.purple{background:#9e72ed}.appearance-swatch.red{background:#f26b77}.appearance-swatch.yellow{background:#f4cc51}
 :root[data-fluxo-accent] .primary{background:var(--action);color:var(--action-ink)}
 :root[data-fluxo-accent] .bottom-nav .active{color:var(--teal)}
+
+
+/* Appearance repair: older mobile rules hard-code emerald, so apply the
+   selected accent to the actual navigation, buttons and decorative surfaces. */
+:root[data-fluxo-accent="blue"]{--fluxo-accent-rgb:67,142,245;--fluxo-accent-dark:#184a80}
+:root[data-fluxo-accent="purple"]{--fluxo-accent-rgb:158,114,237;--fluxo-accent-dark:#56368d}
+:root[data-fluxo-accent="red"]{--fluxo-accent-rgb:242,107,119;--fluxo-accent-dark:#893642}
+:root[data-fluxo-accent="yellow"]{--fluxo-accent-rgb:244,204,81;--fluxo-accent-dark:#796321}
+:root[data-fluxo-accent="emerald"]{--fluxo-accent-rgb:40,219,144;--fluxo-accent-dark:#006a50}
+:root[data-fluxo-accent] .app :is(.primary,.tabs button.selected,.bottom-nav .active,.bottom-nav .selected,.virtual-card-button,.appearance-options button.selected),
+:root[data-fluxo-accent] .app.section-cards .virtual-card-button,
+:root[data-fluxo-accent] .app.section-settings .account-auth .tabs button.selected{
+  background:var(--action)!important;
+  border-color:var(--action)!important;
+  color:var(--action-ink)!important;
+}
+:root[data-fluxo-accent] .app :is(.bottom-nav,.account-auth,.integration-status,.appearance-settings,.panel,.page-panel) {border-color:var(--line)}
+:root[data-fluxo-accent] .app :is(.bottom-nav a.active,.bottom-nav button.active,.bottom-nav a[aria-current="page"],.bottom-nav button[aria-current="page"]){color:var(--action-ink)!important}
+:root[data-fluxo-accent] .app :is(.fluxo-settings-eyebrow,.panel-heading a,.panel-heading button,.income-text,.quick-icon,.appearance-settings legend){color:var(--teal)}
+:root[data-fluxo-accent] .app :is(.fluxo-settings-avatar,.avatar,.activity-row:first-child .mint){background:linear-gradient(135deg,var(--action),var(--fluxo-accent-dark))!important}
+:root[data-fluxo-accent] .app .balance{background:linear-gradient(125deg,var(--fluxo-accent-dark),var(--action))!important;border-color:var(--line)}
+:root[data-fluxo-accent] .app .bottom-nav .active .icon{color:var(--action-ink)!important}
+:root[data-fluxo-accent] .app :is(button,a,input,select):focus-visible{outline-color:var(--action)}
+/* Light mode needs to override the fixed dark mobile shell, not only tokens. */
+:root[data-fluxo-theme="light"] .app{background:#f4faf7!important;color:#142d27!important}
+:root[data-fluxo-theme="light"] .app :is(.page-panel,.panel,.account-auth,.integration-status,.appearance-settings){background:#fff!important;color:#142d27!important}
+:root[data-fluxo-theme="light"] .app :is(.bottom-nav,.mobile-header,.topbar){background:#e2f2ea!important;color:#142d27!important}
+:root[data-fluxo-theme="light"] .app :is(.field input,.field select,.appearance-options button:not(.selected),.secondary,.tabs button:not(.selected)){background:#f1f8f4!important;color:#142d27!important}
+:root[data-fluxo-theme="light"] .app :is(.page-subtitle,small,.field){color:#47665d}
+@media(prefers-color-scheme:light){
+:root[data-fluxo-theme="system"] .app{background:#f4faf7!important;color:#142d27!important}
+:root[data-fluxo-theme="system"] .app :is(.page-panel,.panel,.account-auth,.integration-status,.appearance-settings){background:#fff!important;color:#142d27!important}
+:root[data-fluxo-theme="system"] .app :is(.bottom-nav,.mobile-header,.topbar){background:#e2f2ea!important;color:#142d27!important}
+}

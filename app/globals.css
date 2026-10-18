@@ -4585,3 +4585,9 @@ body{min-height:100dvh;overflow-x:hidden}
     .section-activity .activity-controls .tabs button { flex-shrink: 0; }
   }
 }
+
+/* Activity filter regression: ensure the selected label remains readable on emerald. */
+.app.section-activity .tabs button.selected {
+  background: #22c977;
+  color: #05241b;
+}

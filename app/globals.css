@@ -4539,3 +4539,49 @@ body{min-height:100dvh;overflow-x:hidden}
 .app.section-cards .virtual-card-button{background:#007d5c;border-color:#007d5c;color:#fff}
 .app.section-ai .assistant-intro{background:#123b2d;color:#e6f6ee;border:1px solid #315e4c}
 .app.section-settings .account-auth .tabs button.selected{background:#35e99b;color:#06251a}
+
+
+/* Fluxo mobile demo UX: all feature links remain accessible above the OS safe area. */
+@layer presentation {
+  .fluxo-navigation-overlay {
+    z-index: 1000;
+    align-items: center;
+    padding: max(16px, env(safe-area-inset-top, 0px)) 14px max(16px, env(safe-area-inset-bottom, 0px));
+  }
+  .fluxo-navigation-dialog {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 430px;
+    max-height: calc(100dvh - 32px - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    background: #103b37;
+    color: #f2fff9;
+    border: 1px solid #326756;
+    scrollbar-gutter: stable;
+    padding-bottom: max(28px, env(safe-area-inset-bottom, 0px));
+  }
+  .fluxo-navigation-dialog h2,
+  .fluxo-navigation-dialog .close { color: #f2fff9; }
+  .fluxo-navigation-dialog .feature-menu a {
+    display: flex;
+    align-items: center;
+    min-height: 54px;
+    color: #f2fff9;
+    border-color: #326756;
+  }
+  .fluxo-navigation-dialog .feature-menu a:focus-visible {
+    outline: 3px solid #73f5b6;
+    outline-offset: -3px;
+  }
+  @media (max-width: 600px) {
+    .section-activity main { padding-bottom: calc(104px + env(safe-area-inset-bottom, 0px)); }
+    .section-activity .page-panel,
+    .section-activity .activity-list,
+    .section-activity .activity-row { min-width: 0; max-width: 100%; }
+    .section-activity .activity-row > div { min-width: 0; flex: 1 1 auto; }
+    .section-activity .activity-row > b { flex: 0 0 auto; max-width: 42%; text-align: right; }
+    .section-activity .activity-controls .tabs { overflow-x: auto; flex-wrap: nowrap; }
+    .section-activity .activity-controls .tabs button { flex-shrink: 0; }
+  }
+}

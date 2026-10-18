@@ -25,10 +25,12 @@ export function Dialog({
   title,
   close,
   children,
+  variant,
 }: {
   title: string;
   close: () => void;
   children: ReactNode;
+  variant?: "navigation";
 }) {
   const ref = useRef<HTMLElement>(null),
     closeRef = useRef(close);
@@ -99,10 +101,10 @@ export function Dialog({
     };
   }, []);
   return (
-    <div className="overlay">
+    <div className={variant === "navigation" ? "overlay fluxo-navigation-overlay" : "overlay"}>
       <section
         ref={ref}
-        className="modal"
+        className={variant === "navigation" ? "modal fluxo-navigation-dialog" : "modal"}
         role="dialog"
         aria-modal="true"
         aria-label={title}

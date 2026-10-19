@@ -37,7 +37,7 @@ describe('web authentication boundary',()=>{
  });
  it('denies protected routes on network failure while leaving public auth usable',async()=>{
    getUser.mockRejectedValue(new Error('Auth unavailable'));
-   expect((await updateSession(request('/home'))).status).toBe(307);
+   expect((await updateSession(request('/sandbox/account'))).status).toBe(307);
    expect((await updateSession(request('/login'))).status).toBe(200);
  });
  it('carries refreshed cookies and cache headers on an authenticated response',async()=>{

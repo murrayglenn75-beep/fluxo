@@ -15,7 +15,7 @@
   background:linear-gradient(140deg,var(--fluxo-card-start),var(--fluxo-card-end))!important;
   border-color:var(--line)!important;
 }
-:root[data-fluxo-accent] .app :is(.primary,.mobile-money-actions a:first-child,.tabs button.selected,.appearance-option[aria-pressed="true"]) {
+:root[data-fluxo-accent] .app :is(.primary,.mobile-money-actions a:first-child,.tabs button.selected,.appearance-options button[aria-pressed="true"]) {
   background:var(--action)!important;
   color:var(--action-ink)!important;
   border-color:var(--action)!important;
@@ -53,3 +53,9 @@
   .app :is(.activity-controls,.page-title) {min-width:0;flex-wrap:wrap;}
   .app :is(.tabs,.activity-controls) {max-width:100%;overflow-x:auto;}
 }
+
+/* Match the actual appearance settings markup, including keyboard focus. */
+:root[data-fluxo-accent] .app .appearance-options button[aria-pressed="true"]{background:var(--action)!important;color:var(--action-ink)!important;border-color:var(--action)!important;box-shadow:0 0 0 2px color-mix(in srgb,var(--action) 25%,transparent)!important}
+:root[data-fluxo-accent] .app .appearance-options button:focus-visible{outline:3px solid var(--teal)!important;outline-offset:2px}
+/* Respect explicitly chosen dark mode even on light-system devices. */
+:root[data-fluxo-theme="dark"] .app .appearance-settings{color:var(--ink)!important}

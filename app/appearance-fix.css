@@ -1,0 +1,55 @@
+/* Fluxo appearance correction. Loaded AFTER legacy globals.css.
+   Semantic income/expense and brand logo colours remain independent. */
+:root {
+  --fluxo-nav-height: 108px;
+  --fluxo-accent-dark: #0b563c;
+  --fluxo-card-start: #08613f;
+  --fluxo-card-end: #041e1a;
+}
+:root[data-fluxo-accent="blue"] { --fluxo-accent-dark:#164d99; --fluxo-card-start:#073c8d; --fluxo-card-end:#031832; }
+:root[data-fluxo-accent="purple"] { --fluxo-accent-dark:#56318b; --fluxo-card-start:#522191; --fluxo-card-end:#1c0d36; }
+:root[data-fluxo-accent="red"] { --fluxo-accent-dark:#932e4a; --fluxo-card-start:#92283e; --fluxo-card-end:#310e1c; }
+:root[data-fluxo-accent="yellow"] { --fluxo-accent-dark:#7e5d12; --fluxo-card-start:#886310; --fluxo-card-end:#302407; }
+:root[data-fluxo-accent="emerald"] { --fluxo-accent-dark:#0b563c; --fluxo-card-start:#08613f; --fluxo-card-end:#041e1a; }
+:root[data-fluxo-accent] .app .mobile-hero-card {
+  background:linear-gradient(140deg,var(--fluxo-card-start),var(--fluxo-card-end))!important;
+  border-color:var(--line)!important;
+}
+:root[data-fluxo-accent] .app :is(.primary,.mobile-money-actions a:first-child,.tabs button.selected,.appearance-option[aria-pressed="true"]) {
+  background:var(--action)!important;
+  color:var(--action-ink)!important;
+  border-color:var(--action)!important;
+}
+:root[data-fluxo-accent] .app .bottom-nav :is(a.active,button.active) {
+  background:color-mix(in srgb,var(--action) 18%,#08261f)!important;
+  color:var(--teal)!important;
+}
+:root[data-fluxo-accent] .app .bottom-nav :is(a.active,button.active) .icon {color:var(--teal)!important;}
+:root[data-fluxo-accent] .app :is(.page-panel,.panel,.appearance-settings,.account-auth,.integration-status,.credit-card,.activity-row,.field input,.search-field,.tabs) {
+  border-color:var(--line)!important;
+}
+:root[data-fluxo-accent] .app :is(.panel-heading a,.panel-heading button,.setup-banner .icon,.mobile-ai-insight>span:first-child) {color:var(--teal)!important;}
+:root[data-fluxo-accent] .app :is(button,a,input,select,textarea):focus-visible {outline-color:var(--teal)!important;}
+/* The fixed bar must never cover the last form action, row or card. */
+.app .main>main {padding-bottom:calc(var(--fluxo-nav-height) + env(safe-area-inset-bottom,0px) + 30px)!important;}
+.app .workspace-footer {padding-bottom:calc(var(--fluxo-nav-height) + env(safe-area-inset-bottom,0px))!important;}
+.app .bottom-nav {bottom:max(10px,env(safe-area-inset-bottom,0px))!important;}
+/* Accessible input contrast in the dark appearance. */
+:root:not([data-fluxo-theme="light"]) .app :is(input,textarea,select)::placeholder {color:#a9bcb4!important;opacity:1;}
+:root:not([data-fluxo-theme="light"]) .app :is(.page-subtitle,.field,.activity-row small,.workspace-footer,.appearance-settings p) {color:#b4cfc1!important;}
+/* Explicit system theme resolution, not a third permanently dark palette. */
+@media(prefers-color-scheme:light){
+  :root[data-fluxo-theme="system"] {--ink:#142d27;--muted:#47665d;--dark:#f4faf7;--surface:#fff;--raised:#e2f2ea;--action-ink:#08271c;}
+  :root[data-fluxo-theme="system"] body,
+  :root[data-fluxo-theme="system"] .app {background:#f4faf7!important;color:#142d27!important;}
+  :root[data-fluxo-theme="system"] .app :is(.page-panel,.panel,.appearance-settings,.account-auth,.integration-status) {background:#fff!important;color:#142d27!important;}
+  :root[data-fluxo-theme="system"] .app .bottom-nav {background:#e2f2ea!important;}
+  :root[data-fluxo-theme="system"] .app .bottom-nav :is(a:not(.active),button:not(.active)) {color:#47665d!important;}
+}
+:root[data-fluxo-theme="light"] .app :is(.activity-row small,.page-subtitle,.field,.appearance-settings p) {color:#47665d!important;}
+@media(max-width:520px) {
+  .app .main>main {padding-bottom:calc(var(--fluxo-nav-height) + env(safe-area-inset-bottom,0px) + 40px)!important;}
+  .app .bottom-nav {width:calc(100vw - 24px)!important;}
+  .app :is(.activity-controls,.page-title) {min-width:0;flex-wrap:wrap;}
+  .app :is(.tabs,.activity-controls) {max-width:100%;overflow-x:auto;}
+}

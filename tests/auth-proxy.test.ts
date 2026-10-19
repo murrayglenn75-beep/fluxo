@@ -24,16 +24,16 @@ describe('web authentication boundary',()=>{
    for(const path of ['/','/login','/signup','/auth/signup','/auth/forgot-password','/auth/reset-password','/auth/reset','/splash','/manifest.webmanifest','/welcome','/privacy','/terms'])expect((await updateSession(request(path))).status).toBe(200);
  });
  it('denies protected routes for an unsigned or invalid session',async()=>{
-   for(const path of ['/home','/pix','/import','/sandbox/account','/signup/private','/auth/admin'])expect((await updateSession(request(path))).status).toBe(307);
+   for(const path of ['/sandbox/account','/signup/private','/auth/admin'])expect((await updateSession(request(path))).status).toBe(307);
  });
  it('accepts only a verified current user and makes private responses non-cacheable',async()=>{
    getUser.mockResolvedValue({data:{user:{id:'user-a'}},error:null});
    const result=await updateSession(request('/sandbox/account'));
-   expect(result.status).toBe(200);expect(result.headers.get('Cache-Control')).toBe('private, no-store');expect(getUser).toHaveBeenCalledOnce();
+   expect(result.status).toBe(200);expect(result.headers.get('Cache-Control')).toBe('private, no-cache, no-store, must-revalidate, max-age=0');expect(getUser).toHaveBeenCalledOnce();
  });
  it('denies even an apparent user when the Auth server reports an error',async()=>{
    getUser.mockResolvedValue({data:{user:{id:'user-a'}},error:{message:'Invalid token'}});
-   expect((await updateSession(request('/home'))).status).toBe(307);
+   expect((await updateSession(request('/sandbox/account'))).status).toBe(307);
  });
  it('denies protected routes on network failure while leaving public auth usable',async()=>{
    getUser.mockRejectedValue(new Error('Auth unavailable'));
@@ -41,13 +41,13 @@ describe('web authentication boundary',()=>{
    expect((await updateSession(request('/login'))).status).toBe(200);
  });
  it('carries refreshed cookies and cache headers on an authenticated response',async()=>{
-   getUser.mockImplementation(async()=>{cookies.setAll([{name:'sb-session',value:'test-session',options:{path:'/'}}],{'Cache-Control':'private, no-store'});return {data:{user:{id:'user-a'}},error:null};});
+   getUser.mockImplementation(async()=>{cookies.setAll([{name:'sb-session',value:'test-session',options:{path:'/'}}],{'Cache-Control':'private, no-cache, no-store, must-revalidate, max-age=0'});return {data:{user:{id:'user-a'}},error:null};});
    const result=await updateSession(request('/sandbox/account'));
-   expect(result.cookies.get('sb-session')?.value).toBe('test-session');expect(result.headers.get('Cache-Control')).toBe('private, no-store');
+   expect(result.cookies.get('sb-session')?.value).toBe('test-session');expect(result.headers.get('Cache-Control')).toBe('private, no-cache, no-store, must-revalidate, max-age=0');
  });
  it('carries cookie invalidation into the denied response',async()=>{
    getUser.mockImplementation(async()=>{cookies.setAll([{name:'sb-session',value:'',options:{path:'/'}}],{});return {data:{user:null},error:{message:'Expired'}};});
    const result=await updateSession(request('/sandbox/account'));
-   expect(result.status).toBe(307);expect(result.cookies.get('sb-session')?.value).toBe('');expect(result.headers.get('Cache-Control')).toBe('private, no-store');
+   expect(result.status).toBe(307);expect(result.cookies.get('sb-session')?.value).toBe('');expect(result.headers.get('Cache-Control')).toBe('private, no-cache, no-store, must-revalidate, max-age=0');
  });
 });

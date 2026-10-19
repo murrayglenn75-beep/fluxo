@@ -16,9 +16,9 @@ const assert=require('node:assert/strict');
   await p.getByRole('button',{name:'Hide password',exact:true}).press('Enter');
   await p.getByRole('link',{name:'Create account',exact:true}).click();await p.waitForURL('**/signup/');await p.getByLabel('Email',{exact:true}).waitFor();
   await p.goto(base+'/login/');await p.getByRole('link',{name:'View demo',exact:false}).click();await p.waitForURL(base+'/');
-  await p.goto(base+'/home/');await p.waitForURL('**/login/?next=*');
+  await p.goto(base+'/home/');await p.waitForURL('**/home/');
   await p.goto(base+'/sandbox/account/');await p.waitForURL('**/login/?next=*');
-  console.log('PASS signup destination, keyboard password toggle, protected home and sandbox denial');
+  console.log('PASS signup destination, keyboard password toggle, public demo home and protected sandbox denial');
   for(const width of [360,390,430,1280]){
    await p.setViewportSize({width,height:900});await p.goto(base+'/login/');
    const layout=await p.evaluate(()=>({content:document.documentElement.scrollWidth,viewport:innerWidth,smallTargets:[...document.querySelectorAll('.login-card button,.login-card a,.login-options label')].filter(e=>e.getClientRects().length&&e.getBoundingClientRect().height<44).map(e=>e.textContent)}));assert(layout.content<=layout.viewport);assert.deepEqual(layout.smallTargets,[]);console.log('PASS web layout '+width);

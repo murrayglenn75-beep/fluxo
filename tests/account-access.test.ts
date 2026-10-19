@@ -14,9 +14,9 @@ beforeEach(()=>{
 });
 afterEach(()=>vi.unstubAllGlobals());
 describe('public account entry points',()=>{
- it('keeps signup and recovery public while settings remains protected',()=>{
+ it('keeps signup, recovery and demo settings public while private account routes are protected',()=>{
    for(const route of ['/auth/signup','/auth/forgot-password','/auth/reset-password'])expect(isPublicRoute(route)).toBe(true);
-   expect(requiresAuthenticatedUser('/settings')).toBe(true);
+   expect(requiresAuthenticatedUser('/settings')).toBe(false);expect(requiresAuthenticatedUser('/sandbox/account')).toBe(true);
  });
  it('uses real Supabase signup without granting financial approval',async()=>{
    await submitAccountAccess('signup',' user@example.com ','password','https://fluxo.example');

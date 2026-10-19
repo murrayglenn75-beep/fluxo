@@ -4688,3 +4688,43 @@ body{min-height:100dvh;overflow-x:hidden}
 :root[data-fluxo-theme="light"] .app :is(input:not([type=checkbox]):not([type=radio]),textarea,select){background:#fff!important;color:#142d27!important}
 :root[data-fluxo-theme="light"] .app .bottom-nav{background:#e2f2ea!important}
 :root[data-fluxo-theme="light"] .app .bottom-nav>a:not(.active){color:#47665d!important}
+
+
+/* Accent consistency pass: leave semantic transaction colours and brand artwork
+   untouched; make interactive chrome, avatar and card trim follow the selection. */
+:root[data-fluxo-accent] .app .mobile-welcome-row .avatar,
+:root[data-fluxo-accent] .app .mobile-welcome-row [class*="avatar"],
+:root[data-fluxo-accent] .app .mobile-profile-avatar {
+  background:linear-gradient(145deg,var(--action),var(--fluxo-accent-dark))!important;
+  border-color:var(--teal)!important;
+  box-shadow:0 0 0 2px color-mix(in srgb,var(--action) 30%,transparent)!important;
+}
+:root[data-fluxo-accent] .app .mobile-welcome-row .avatar > span{
+  background:var(--action)!important;
+  border-color:var(--fluxo-accent-dark)!important;
+}
+:root[data-fluxo-accent] .app .mobile-welcome-row button,
+:root[data-fluxo-accent] .app .mobile-welcome-row a{
+  border-color:var(--line)!important;
+}
+:root[data-fluxo-accent] .app .mobile-hero-card{
+  border-color:var(--action)!important;
+}
+:root[data-fluxo-accent] .app .mobile-hero-card:after{
+  border-color:color-mix(in srgb,var(--teal) 35%,transparent)!important;
+  box-shadow:0 0 0 28px color-mix(in srgb,var(--action) 5%,transparent),0 0 0 65px color-mix(in srgb,var(--action) 3%,transparent)!important;
+}
+:root[data-fluxo-accent] .app .bottom-nav :is(a.active,button.active,a[aria-current="page"],button[aria-current="page"]){
+  color:var(--teal)!important;
+  border-color:var(--line)!important;
+}
+:root[data-fluxo-accent] .app .bottom-nav :is(a.active,button.active,a[aria-current="page"],button[aria-current="page"]) .icon{
+  color:var(--teal)!important;
+  stroke:currentColor!important;
+}
+:root[data-fluxo-accent] .app .mobile-money-actions a:first-child .icon{
+  color:var(--action-ink)!important;
+}
+:root[data-fluxo-accent] .app :is(.mobile-welcome-row,.mobile-hero-card,.mobile-money-actions) :is(button,a):focus-visible{
+  outline-color:var(--teal)!important;
+}

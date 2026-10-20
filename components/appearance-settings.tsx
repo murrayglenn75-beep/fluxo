@@ -7,6 +7,8 @@ const themes = [
  {id:'violet',label:'Royal purple',swatch:'#b19aff'},
  {id:'sunset',label:'Sunset amber',swatch:'#ffc36b'},
  {id:'ruby',label:'Ruby red',swatch:'#ff7b92'},
+ {id:'pink',label:'Pink',swatch:'#ff69c8'},
+ {id:'black',label:'Black',swatch:'#25252a'},
 ] as const;
 type ThemeId = (typeof themes)[number]['id'];
 const storageKey='fluxo-appearance-theme-v1';

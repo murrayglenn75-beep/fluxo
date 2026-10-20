@@ -15,7 +15,7 @@ describe('mobile navigation and appearance release guardrails',()=>{
  });
  it('offers five selectable palettes and persists the preference',()=>{
   const ui=read('components/appearance-settings.tsx');
-  for(const id of ['forest','ocean','violet','sunset','ruby'])expect(ui).toContain("id:'"+id+"'");
+  for(const id of ['forest','ocean','violet','sunset','ruby','pink','black'])expect(ui).toContain("id:'"+id+"'");
   expect(ui).toContain('localStorage.setItem(storageKey,value)');
   expect(ui).toContain('aria-pressed={selected===theme.id}');
   expect(read('app/layout.tsx')).toContain('<ThemeInitializer/>');

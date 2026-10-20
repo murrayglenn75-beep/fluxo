@@ -4728,3 +4728,11 @@ body{min-height:100dvh;overflow-x:hidden}
 :root[data-fluxo-accent] .app :is(.mobile-welcome-row,.mobile-hero-card,.mobile-money-actions) :is(button,a):focus-visible{
   outline-color:var(--teal)!important;
 }
+
+/* Pink and black accents: use existing shared theme tokens. */
+:root[data-fluxo-accent="pink"]{--teal:#ff9fca;--action:#ef65a5;--action-ink:#2d0920;--line:#a9517c;--raised:#573044;--fluxo-accent-rgb:239,101,165;--fluxo-accent-dark:#9b285f}
+:root[data-fluxo-accent="black"]{--teal:#f1f1f1;--action:#d7d7d7;--action-ink:#080808;--line:#686868;--raised:#252525;--fluxo-accent-rgb:215,215,215;--fluxo-accent-dark:#090909}
+.appearance-swatch.pink{background:#ef65a5}
+.appearance-swatch.black{background:#080808;border-color:#a0a0a0}
+:root[data-fluxo-accent="black"] .app .mobile-hero-card{background:linear-gradient(145deg,#080808,#252525)!important;color:#fff!important}
+:root[data-fluxo-accent="pink"] .app .mobile-hero-card{background:linear-gradient(145deg,#5d163d,#b42f70)!important;color:#fff!important}

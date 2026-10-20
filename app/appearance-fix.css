@@ -11,6 +11,8 @@
 :root[data-fluxo-accent="red"] { --fluxo-accent-dark:#932e4a; --fluxo-card-start:#92283e; --fluxo-card-end:#310e1c; }
 :root[data-fluxo-accent="yellow"] { --fluxo-accent-dark:#7e5d12; --fluxo-card-start:#886310; --fluxo-card-end:#302407; }
 :root[data-fluxo-accent="emerald"] { --fluxo-accent-dark:#0b563c; --fluxo-card-start:#08613f; --fluxo-card-end:#041e1a; }
+:root[data-fluxo-accent="pink"] { --fluxo-accent-dark:#9b285f; --fluxo-card-start:#b42f70; --fluxo-card-end:#411127; }
+:root[data-fluxo-accent="black"] { --fluxo-accent-dark:#090909; --fluxo-card-start:#252525; --fluxo-card-end:#050505; }
 :root[data-fluxo-accent] .app .mobile-hero-card {
   background:linear-gradient(140deg,var(--fluxo-card-start),var(--fluxo-card-end))!important;
   border-color:var(--line)!important;

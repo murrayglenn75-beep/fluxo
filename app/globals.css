@@ -4624,3 +4624,13 @@ body{min-height:100dvh;overflow-x:hidden}
  }
  :root[data-fluxo-theme] .fluxo-appearance-settings .page-subtitle {color:var(--muted);}
 }
+
+/* Requested pink and black appearance palettes. */
+:root[data-fluxo-theme="pink"] { --teal:#ff91d7; --action:#ff69c8; --action-ink:#310b28; --dark:#231222; --surface:#41213d; --raised:#593050; --line:#855273; --muted:#e6bed9; }
+:root[data-fluxo-theme="black"] { --teal:#f2f2f4; --action:#ededf0; --action-ink:#111115; --dark:#09090b; --surface:#1b1b20; --raised:#292930; --line:#51515b; --muted:#c6c6cd; }
+@layer presentation {
+ :root[data-fluxo-theme="pink"] .fluxo-theme-option.selected,
+ :root[data-fluxo-theme="black"] .fluxo-theme-option.selected { border-color:var(--action); }
+ :root[data-fluxo-theme="pink"] .bottom-nav .active,
+ :root[data-fluxo-theme="black"] .bottom-nav .active {color:var(--teal);}
+}

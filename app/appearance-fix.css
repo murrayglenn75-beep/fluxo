@@ -59,3 +59,11 @@
 :root[data-fluxo-accent] .app .appearance-options button:focus-visible{outline:3px solid var(--teal)!important;outline-offset:2px}
 /* Respect explicitly chosen dark mode even on light-system devices. */
 :root[data-fluxo-theme="dark"] .app .appearance-settings{color:var(--ink)!important}
+
+/* Pink and Black are accents in the existing Dark / Light / System architecture. */
+:root[data-fluxo-accent="pink"] { --teal:#ff88d2; --action:#ff70c6; --action-ink:#2e0923; --fluxo-accent-dark:#8d246c; --fluxo-card-start:#a62a7f; --fluxo-card-end:#311329; }
+:root[data-fluxo-accent="black"] { --teal:#e5e5ea; --action:#e5e5ea; --action-ink:#101013; --fluxo-accent-dark:#26262d; --fluxo-card-start:#29292f; --fluxo-card-end:#08080b; }
+:root[data-fluxo-accent="pink"] .appearance-swatch.pink {background:#ff70c6!important;}
+:root[data-fluxo-accent="black"] .appearance-swatch.black {background:#1c1c20!important;border:1px solid #a8a8af;}
+:root[data-fluxo-accent="pink"] .app .bottom-nav :is(a.active,button.active) {background:color-mix(in srgb,#ff70c6 20%,var(--dark))!important;}
+:root[data-fluxo-accent="black"] .app .bottom-nav :is(a.active,button.active) {background:color-mix(in srgb,#e5e5ea 20%,var(--dark))!important;}

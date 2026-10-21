@@ -3,6 +3,8 @@
 > **Independent review:** [Reproduce the checks and inspect the trust boundaries](docs/REVIEWER_QUICKSTART.md). This guide separates documented evidence from production guarantees.
 
 
+**Forward Deployed Engineering review:** [Customer-style case study](docs/FDE_CASE_STUDY.md) · [Mobile acceptance contract](docs/MOBILE_VERTICAL_SLICE_SCOPE.md) · [Evidence matrix](docs/FDE_VERIFICATION_MATRIX.md). The case study is a simulated engagement, not a real client delivery.
+
 ## 30-second overview
 
 **Fluxo is a mobile-first fintech product sandbox that demonstrates how banking-style workflows can be built with deterministic financial controls.** It includes Pix-style transfers, cards, budgets, goals, statements, request flows, and native Android/iOS builds.

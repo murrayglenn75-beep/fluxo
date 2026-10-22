@@ -83,3 +83,61 @@
 }
 .appearance-swatch.pink { background:#f06bac; }
 .appearance-swatch.black { background:#101115; border-color:#cbd5e1; }
+
+/* UI recovery: one final shell layer. Purposefully scoped to mobile screens and
+   the selected appearance; preserves the existing desktop layout and semantic
+   positive/negative finance colours. */
+:root[data-fluxo-theme="dark"],
+:root[data-fluxo-theme="light"],
+:root[data-fluxo-theme="system"] { color-scheme:dark; }
+:root[data-fluxo-theme="light"] { color-scheme:light; }
+@media (prefers-color-scheme: light) {
+  :root[data-fluxo-theme="system"] { color-scheme:light; }
+}
+:root[data-fluxo-accent="black"] {
+  --fluxo-shell-deep:#0b0c0e;
+  --fluxo-shell-surface:#181a1f;
+}
+:root[data-fluxo-accent="pink"] {
+  --fluxo-shell-deep:#170d17;
+  --fluxo-shell-surface:#2a1a28;
+}
+@media(max-width:520px) {
+  :root:not([data-fluxo-theme="light"]) body,
+  :root:not([data-fluxo-theme="light"]) .app {
+    background:var(--fluxo-shell-deep,#061b1b)!important;
+    color:var(--ink)!important;
+  }
+  :root:not([data-fluxo-theme="light"]) .app :is(.mobile-header,.bottom-nav) {
+    background:var(--fluxo-shell-surface,#103b37)!important;
+    color:var(--ink)!important;
+    border-color:var(--line)!important;
+  }
+  :root:not([data-fluxo-theme="light"]) .app :is(.page-panel,.panel,.appearance-settings,.account-auth,.integration-status) {
+    background:var(--fluxo-shell-surface,#103b37)!important;
+    color:var(--ink)!important;
+    border-color:var(--line)!important;
+  }
+  :root[data-fluxo-theme="light"] .app :is(.mobile-header,.bottom-nav) {
+    background:#e2f2ea!important;
+    color:#142d27!important;
+  }
+  :root[data-fluxo-theme="light"] .app .mobile-hero-card,
+  :root:not([data-fluxo-theme="light"]) .app .mobile-hero-card {
+    color:#fff!important;
+  }
+  .app :is(.mobile-money-actions a,.bottom-nav a,.bottom-nav button) {
+    min-height:44px;
+  }
+  .app :is(.page-panel,.appearance-settings,.account-auth) {
+    min-width:0;
+    overflow-wrap:anywhere;
+  }
+}
+/* Resolve system theme explicitly on devices requesting a light appearance. */
+@media (prefers-color-scheme:light) and (max-width:520px) {
+  :root[data-fluxo-theme="system"] body,
+  :root[data-fluxo-theme="system"] .app { background:#f4faf7!important;color:#142d27!important; }
+  :root[data-fluxo-theme="system"] .app :is(.mobile-header,.bottom-nav) { background:#e2f2ea!important;color:#142d27!important; }
+  :root[data-fluxo-theme="system"] .app :is(.page-panel,.panel,.appearance-settings,.account-auth,.integration-status) { background:#fff!important;color:#142d27!important; }
+}

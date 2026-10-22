@@ -1,0 +1,25 @@
+name: Fluxo UX source contract
+on:
+  pull_request:
+    paths:
+      - 'app/layout.tsx'
+      - 'app/globals.css'
+      - 'app/appearance-fix.css'
+      - 'components/account-screen.tsx'
+      - 'components/dashboard.tsx'
+      - 'DESIGN.md'
+      - 'scripts/check-ux-contract.mjs'
+      - '.github/workflows/ux-contract.yml'
+  workflow_dispatch:
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify static UX contracts
+        run: node scripts/check-ux-contract.mjs

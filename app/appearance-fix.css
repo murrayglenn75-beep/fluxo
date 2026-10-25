@@ -178,3 +178,37 @@
     color:#f4f3f5!important;
   }
 }
+
+/* Complete dark-mode hue propagation for every selectable accent, not only Pink/Black.
+   Fixed deep green shell previously survived Blue/Purple/Red/Yellow selection. */
+:root[data-fluxo-accent="blue"] {--fluxo-dark-canvas:#091b30;--fluxo-dark-panel:#112d49;--fluxo-dark-raised:#1c3d5c;--fluxo-dark-nav:#0b2239;--fluxo-dark-stroke:#416b93}
+:root[data-fluxo-accent="purple"] {--fluxo-dark-canvas:#1a112c;--fluxo-dark-panel:#2c1e45;--fluxo-dark-raised:#392b55;--fluxo-dark-nav:#201731;--fluxo-dark-stroke:#735b98}
+:root[data-fluxo-accent="red"] {--fluxo-dark-canvas:#291316;--fluxo-dark-panel:#3b2025;--fluxo-dark-raised:#512b32;--fluxo-dark-nav:#30191d;--fluxo-dark-stroke:#94535f}
+:root[data-fluxo-accent="yellow"] {--fluxo-dark-canvas:#27200f;--fluxo-dark-panel:#393019;--fluxo-dark-raised:#4a3d22;--fluxo-dark-nav:#2e2613;--fluxo-dark-stroke:#8d7640}
+:root[data-fluxo-accent="emerald"] {--fluxo-dark-canvas:#06231a;--fluxo-dark-panel:#10392c;--fluxo-dark-raised:#1b493a;--fluxo-dark-nav:#092b21;--fluxo-dark-stroke:#396c56}
+:root[data-fluxo-accent][data-fluxo-theme="dark"] {
+ --dark:var(--fluxo-dark-canvas);--surface:var(--fluxo-dark-panel);
+ --raised:var(--fluxo-dark-raised);--line:var(--fluxo-dark-stroke);
+}
+:root[data-fluxo-accent][data-fluxo-theme="dark"] body,
+:root[data-fluxo-accent][data-fluxo-theme="dark"] .app {background:var(--fluxo-dark-canvas)!important}
+:root[data-fluxo-accent][data-fluxo-theme="dark"] .app :is(.panel,.page-panel,.appearance-settings,.account-auth,.integration-status,.mobile-ai-insight) {
+ background:var(--fluxo-dark-panel)!important;border-color:var(--fluxo-dark-stroke)!important
+}
+:root[data-fluxo-accent][data-fluxo-theme="dark"] .app :is(.bottom-nav,.mobile-header,.topbar) {
+ background:var(--fluxo-dark-nav)!important;border-color:var(--fluxo-dark-stroke)!important
+}
+:root[data-fluxo-accent][data-fluxo-theme="dark"] .app :is(.mobile-money-actions a:not(:first-child),.appearance-settings .appearance-options button:not([aria-pressed="true"])) {
+ background:var(--fluxo-dark-raised)!important;border-color:var(--fluxo-dark-stroke)!important;color:#f4f6fa!important
+}
+@media(prefers-color-scheme:dark) {
+ :root[data-fluxo-accent][data-fluxo-theme="system"] {
+  --dark:var(--fluxo-dark-canvas);--surface:var(--fluxo-dark-panel);
+  --raised:var(--fluxo-dark-raised);--line:var(--fluxo-dark-stroke)
+ }
+ :root[data-fluxo-accent][data-fluxo-theme="system"] body,
+ :root[data-fluxo-accent][data-fluxo-theme="system"] .app {background:var(--fluxo-dark-canvas)!important}
+ :root[data-fluxo-accent][data-fluxo-theme="system"] .app :is(.panel,.page-panel,.appearance-settings,.account-auth,.integration-status,.mobile-ai-insight) {background:var(--fluxo-dark-panel)!important;border-color:var(--fluxo-dark-stroke)!important}
+ :root[data-fluxo-accent][data-fluxo-theme="system"] .app :is(.bottom-nav,.mobile-header,.topbar) {background:var(--fluxo-dark-nav)!important;border-color:var(--fluxo-dark-stroke)!important}
+ :root[data-fluxo-accent][data-fluxo-theme="system"] .app :is(.mobile-money-actions a:not(:first-child),.appearance-settings .appearance-options button:not([aria-pressed="true"])) {background:var(--fluxo-dark-raised)!important;color:#f4f6fa!important}
+}

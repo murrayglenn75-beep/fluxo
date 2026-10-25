@@ -64,3 +64,42 @@
 :root[data-fluxo-accent="pink"] {--teal:#ffb4d7;--action:#f06bac;--action-ink:#270d1d;--line:#a65c82;--raised:#542840;--fluxo-accent-dark:#803256;--fluxo-card-start:#9b355e;--fluxo-card-end:#260c20;}
 :root[data-fluxo-accent="black"] {--teal:#e7e9ee;--action:#e7e9ee;--action-ink:#101115;--line:#777c87;--raised:#292c32;--fluxo-accent-dark:#17191d;--fluxo-card-start:#25282e;--fluxo-card-end:#08090b;}
 .appearance-swatch.pink{background:#f06bac}.appearance-swatch.black{background:#101115;border-color:#cbd5e1}
+
+/* Appearance controls: the chosen accent belongs to the active control only.
+   Inactive options use a neutral surface rather than retaining the old maroon palette. */
+:root[data-fluxo-accent] .app .appearance-settings .appearance-options button:not([aria-pressed="true"]) {
+  background:#18372f !important;
+  color:#ecf5f0 !important;
+  border-color:color-mix(in srgb,var(--action) 30%,#56776b) !important;
+  box-shadow:none !important;
+}
+:root[data-fluxo-accent] .app .appearance-settings .appearance-options button[aria-pressed="true"] {
+  background:var(--action) !important;
+  color:var(--action-ink) !important;
+  border-color:var(--action) !important;
+  box-shadow:0 0 0 3px color-mix(in srgb,var(--action) 24%,transparent) !important;
+}
+:root[data-fluxo-theme="light"] .app .appearance-settings .appearance-options button:not([aria-pressed="true"]) {
+  background:#edf4f0 !important;
+  color:#17382c !important;
+}
+@media (prefers-color-scheme:light) {
+  :root[data-fluxo-theme="system"] .app .appearance-settings .appearance-options button:not([aria-pressed="true"]) {
+    background:#edf4f0 !important;
+    color:#17382c !important;
+  }
+}
+/* Fixed mobile navigation uses the selected accent for both active label and icon,
+   including the More button, without changing the inactive destinations. */
+:root[data-fluxo-accent] .app .bottom-nav :is(a.active,button.active,a[aria-current="page"],button[aria-current="page"]) {
+  background:color-mix(in srgb,var(--action) 18%,#08261f) !important;
+  color:var(--teal) !important;
+  border-color:color-mix(in srgb,var(--action) 55%,transparent) !important;
+}
+:root[data-fluxo-accent] .app .bottom-nav :is(a.active,button.active,a[aria-current="page"],button[aria-current="page"]) .icon {
+  color:var(--teal) !important;
+}
+:root[data-fluxo-theme="light"][data-fluxo-accent] .app .bottom-nav :is(a.active,button.active) {
+  background:color-mix(in srgb,var(--action) 16%,#e2f2ea) !important;
+  color:var(--fluxo-accent-dark) !important;
+}

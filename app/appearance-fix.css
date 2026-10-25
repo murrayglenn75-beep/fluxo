@@ -103,3 +103,153 @@
   background:color-mix(in srgb,var(--action) 16%,#e2f2ea) !important;
   color:var(--fluxo-accent-dark) !important;
 }
+
+/* Whole-screen accent harmony. Theme chooses brightness; accent chooses the
+   hue of chrome/surfaces. Preserve semantic transaction colours and accessibility. */
+:root[data-fluxo-accent="pink"] {
+  --fluxo-dark-canvas:#1c101b;
+  --fluxo-dark-panel:#301b2b;
+  --fluxo-dark-raised:#41283a;
+  --fluxo-dark-nav:#271621;
+  --fluxo-dark-stroke:#765064;
+}
+:root[data-fluxo-accent="black"] {
+  --fluxo-dark-canvas:#0c0e12;
+  --fluxo-dark-panel:#191c22;
+  --fluxo-dark-raised:#262a32;
+  --fluxo-dark-nav:#14171c;
+  --fluxo-dark-stroke:#58616c;
+}
+:root[data-fluxo-accent="pink"][data-fluxo-theme="dark"],
+:root[data-fluxo-accent="black"][data-fluxo-theme="dark"] {
+  --dark:var(--fluxo-dark-canvas);
+  --surface:var(--fluxo-dark-panel);
+  --raised:var(--fluxo-dark-raised);
+  --line:var(--fluxo-dark-stroke);
+}
+:root[data-fluxo-accent="pink"][data-fluxo-theme="dark"] body,
+:root[data-fluxo-accent="black"][data-fluxo-theme="dark"] body,
+:root[data-fluxo-accent="pink"][data-fluxo-theme="dark"] .app,
+:root[data-fluxo-accent="black"][data-fluxo-theme="dark"] .app {
+  background:var(--fluxo-dark-canvas)!important;
+}
+:root[data-fluxo-accent="pink"][data-fluxo-theme="dark"] .app :is(.panel,.page-panel,.appearance-settings,.account-auth,.integration-status),
+:root[data-fluxo-accent="black"][data-fluxo-theme="dark"] .app :is(.panel,.page-panel,.appearance-settings,.account-auth,.integration-status) {
+  background:var(--fluxo-dark-panel)!important;
+  border-color:var(--fluxo-dark-stroke)!important;
+}
+:root[data-fluxo-accent="pink"][data-fluxo-theme="dark"] .app :is(.bottom-nav,.mobile-header,.topbar),
+:root[data-fluxo-accent="black"][data-fluxo-theme="dark"] .app :is(.bottom-nav,.mobile-header,.topbar) {
+  background:var(--fluxo-dark-nav)!important;
+  border-color:var(--fluxo-dark-stroke)!important;
+}
+:root[data-fluxo-accent="pink"][data-fluxo-theme="dark"] .app .appearance-settings .appearance-options button:not([aria-pressed="true"]),
+:root[data-fluxo-accent="black"][data-fluxo-theme="dark"] .app .appearance-settings .appearance-options button:not([aria-pressed="true"]) {
+  background:var(--fluxo-dark-raised)!important;
+  color:#f4f3f5!important;
+  border-color:var(--fluxo-dark-stroke)!important;
+}
+@media(prefers-color-scheme:dark) {
+  :root[data-fluxo-accent="pink"][data-fluxo-theme="system"],
+  :root[data-fluxo-accent="black"][data-fluxo-theme="system"] {
+    --dark:var(--fluxo-dark-canvas);
+    --surface:var(--fluxo-dark-panel);
+    --raised:var(--fluxo-dark-raised);
+    --line:var(--fluxo-dark-stroke);
+  }
+  :root[data-fluxo-accent="pink"][data-fluxo-theme="system"] body,
+  :root[data-fluxo-accent="black"][data-fluxo-theme="system"] body,
+  :root[data-fluxo-accent="pink"][data-fluxo-theme="system"] .app,
+  :root[data-fluxo-accent="black"][data-fluxo-theme="system"] .app {
+    background:var(--fluxo-dark-canvas)!important;
+  }
+  :root[data-fluxo-accent="pink"][data-fluxo-theme="system"] .app :is(.panel,.page-panel,.appearance-settings,.account-auth,.integration-status),
+  :root[data-fluxo-accent="black"][data-fluxo-theme="system"] .app :is(.panel,.page-panel,.appearance-settings,.account-auth,.integration-status) {
+    background:var(--fluxo-dark-panel)!important;
+    border-color:var(--fluxo-dark-stroke)!important;
+  }
+  :root[data-fluxo-accent="pink"][data-fluxo-theme="system"] .app :is(.bottom-nav,.mobile-header,.topbar),
+  :root[data-fluxo-accent="black"][data-fluxo-theme="system"] .app :is(.bottom-nav,.mobile-header,.topbar) {
+    background:var(--fluxo-dark-nav)!important;
+  }
+  :root[data-fluxo-accent="pink"][data-fluxo-theme="system"] .app .appearance-settings .appearance-options button:not([aria-pressed="true"]),
+  :root[data-fluxo-accent="black"][data-fluxo-theme="system"] .app .appearance-settings .appearance-options button:not([aria-pressed="true"]) {
+    background:var(--fluxo-dark-raised)!important;
+    color:#f4f3f5!important;
+  }
+}
+
+/* Complete dark-mode hue propagation for every selectable accent, not only Pink/Black.
+   Fixed deep green shell previously survived Blue/Purple/Red/Yellow selection. */
+:root[data-fluxo-accent="blue"] {--fluxo-dark-canvas:#091b30;--fluxo-dark-panel:#112d49;--fluxo-dark-raised:#1c3d5c;--fluxo-dark-nav:#0b2239;--fluxo-dark-stroke:#416b93}
+:root[data-fluxo-accent="purple"] {--fluxo-dark-canvas:#1a112c;--fluxo-dark-panel:#2c1e45;--fluxo-dark-raised:#392b55;--fluxo-dark-nav:#201731;--fluxo-dark-stroke:#735b98}
+:root[data-fluxo-accent="red"] {--fluxo-dark-canvas:#291316;--fluxo-dark-panel:#3b2025;--fluxo-dark-raised:#512b32;--fluxo-dark-nav:#30191d;--fluxo-dark-stroke:#94535f}
+:root[data-fluxo-accent="yellow"] {--fluxo-dark-canvas:#27200f;--fluxo-dark-panel:#393019;--fluxo-dark-raised:#4a3d22;--fluxo-dark-nav:#2e2613;--fluxo-dark-stroke:#8d7640}
+:root[data-fluxo-accent="emerald"] {--fluxo-dark-canvas:#06231a;--fluxo-dark-panel:#10392c;--fluxo-dark-raised:#1b493a;--fluxo-dark-nav:#092b21;--fluxo-dark-stroke:#396c56}
+:root[data-fluxo-accent][data-fluxo-theme="dark"] {
+ --dark:var(--fluxo-dark-canvas);--surface:var(--fluxo-dark-panel);
+ --raised:var(--fluxo-dark-raised);--line:var(--fluxo-dark-stroke);
+}
+:root[data-fluxo-accent][data-fluxo-theme="dark"] body,
+:root[data-fluxo-accent][data-fluxo-theme="dark"] .app {background:var(--fluxo-dark-canvas)!important}
+:root[data-fluxo-accent][data-fluxo-theme="dark"] .app :is(.panel,.page-panel,.appearance-settings,.account-auth,.integration-status,.mobile-ai-insight) {
+ background:var(--fluxo-dark-panel)!important;border-color:var(--fluxo-dark-stroke)!important
+}
+:root[data-fluxo-accent][data-fluxo-theme="dark"] .app :is(.bottom-nav,.mobile-header,.topbar) {
+ background:var(--fluxo-dark-nav)!important;border-color:var(--fluxo-dark-stroke)!important
+}
+:root[data-fluxo-accent][data-fluxo-theme="dark"] .app :is(.mobile-money-actions a:not(:first-child),.appearance-settings .appearance-options button:not([aria-pressed="true"])) {
+ background:var(--fluxo-dark-raised)!important;border-color:var(--fluxo-dark-stroke)!important;color:#f4f6fa!important
+}
+@media(prefers-color-scheme:dark) {
+ :root[data-fluxo-accent][data-fluxo-theme="system"] {
+  --dark:var(--fluxo-dark-canvas);--surface:var(--fluxo-dark-panel);
+  --raised:var(--fluxo-dark-raised);--line:var(--fluxo-dark-stroke)
+ }
+ :root[data-fluxo-accent][data-fluxo-theme="system"] body,
+ :root[data-fluxo-accent][data-fluxo-theme="system"] .app {background:var(--fluxo-dark-canvas)!important}
+ :root[data-fluxo-accent][data-fluxo-theme="system"] .app :is(.panel,.page-panel,.appearance-settings,.account-auth,.integration-status,.mobile-ai-insight) {background:var(--fluxo-dark-panel)!important;border-color:var(--fluxo-dark-stroke)!important}
+ :root[data-fluxo-accent][data-fluxo-theme="system"] .app :is(.bottom-nav,.mobile-header,.topbar) {background:var(--fluxo-dark-nav)!important;border-color:var(--fluxo-dark-stroke)!important}
+ :root[data-fluxo-accent][data-fluxo-theme="system"] .app :is(.mobile-money-actions a:not(:first-child),.appearance-settings .appearance-options button:not([aria-pressed="true"])) {background:var(--fluxo-dark-raised)!important;color:#f4f6fa!important}
+}
+
+/* Light appearance: preserve light surfaces but tint interactive chrome with the
+   selected hue. Neutral content remains readable; brand/semantic colours stay distinct. */
+:root[data-fluxo-theme="light"][data-fluxo-accent] .app :is(.mobile-header,.bottom-nav,.topbar) {
+ background:color-mix(in srgb,var(--action) 8%,#f4faf7)!important;
+ border-color:color-mix(in srgb,var(--action) 46%,#d4e0db)!important;
+}
+:root[data-fluxo-theme="light"][data-fluxo-accent] .app :is(.appearance-settings,.account-auth,.integration-status,.panel,.page-panel) {
+ border-color:color-mix(in srgb,var(--action) 40%,#d6e0db)!important;
+}
+:root[data-fluxo-theme="light"][data-fluxo-accent] .app .appearance-options legend,
+:root[data-fluxo-theme="light"][data-fluxo-accent] .app .fluxo-settings-eyebrow {
+ color:color-mix(in srgb,var(--action) 70%,#162d27)!important;
+}
+:root[data-fluxo-theme="light"][data-fluxo-accent] .app .bottom-nav :is(a.active,button.active) {
+ background:color-mix(in srgb,var(--action) 20%,#fff)!important;
+ color:#163047!important;
+ border-color:color-mix(in srgb,var(--action) 50%,#ceddd6)!important;
+}
+:root[data-fluxo-theme="light"][data-fluxo-accent] .app .bottom-nav :is(a.active,button.active) :is(.icon,span) {color:#163047!important}
+:root[data-fluxo-theme="light"][data-fluxo-accent] .app .appearance-settings .appearance-options button:not([aria-pressed="true"]) {
+ background:color-mix(in srgb,var(--action) 6%,#fff)!important;
+ color:#193229!important;
+ border-color:color-mix(in srgb,var(--action) 37%,#b8c9c2)!important;
+}
+/* Reset remains clearly visible on every hue; never indicate destructive intent
+   with low-contrast red on a themed dark surface. */
+:root[data-fluxo-accent] .app .danger-button {
+ color:#ffb0b9!important;
+}
+:root[data-fluxo-theme="light"][data-fluxo-accent] .app .danger-button {
+ color:#a2223d!important;
+}
+@media(prefers-color-scheme:light) {
+ :root[data-fluxo-theme="system"][data-fluxo-accent] .app .danger-button {color:#a2223d!important}
+}
+
+/* Browser release gate: Emerald primary control must meet WCAG AA contrast. */
+:root[data-fluxo-accent="emerald"] .app .panel > .primary {
+ color:#000!important;
+}

@@ -212,3 +212,39 @@
  :root[data-fluxo-accent][data-fluxo-theme="system"] .app :is(.bottom-nav,.mobile-header,.topbar) {background:var(--fluxo-dark-nav)!important;border-color:var(--fluxo-dark-stroke)!important}
  :root[data-fluxo-accent][data-fluxo-theme="system"] .app :is(.mobile-money-actions a:not(:first-child),.appearance-settings .appearance-options button:not([aria-pressed="true"])) {background:var(--fluxo-dark-raised)!important;color:#f4f6fa!important}
 }
+
+/* Light appearance: preserve light surfaces but tint interactive chrome with the
+   selected hue. Neutral content remains readable; brand/semantic colours stay distinct. */
+:root[data-fluxo-theme="light"][data-fluxo-accent] .app :is(.mobile-header,.bottom-nav,.topbar) {
+ background:color-mix(in srgb,var(--action) 8%,#f4faf7)!important;
+ border-color:color-mix(in srgb,var(--action) 46%,#d4e0db)!important;
+}
+:root[data-fluxo-theme="light"][data-fluxo-accent] .app :is(.appearance-settings,.account-auth,.integration-status,.panel,.page-panel) {
+ border-color:color-mix(in srgb,var(--action) 40%,#d6e0db)!important;
+}
+:root[data-fluxo-theme="light"][data-fluxo-accent] .app .appearance-options legend,
+:root[data-fluxo-theme="light"][data-fluxo-accent] .app .fluxo-settings-eyebrow {
+ color:color-mix(in srgb,var(--action) 70%,#162d27)!important;
+}
+:root[data-fluxo-theme="light"][data-fluxo-accent] .app .bottom-nav :is(a.active,button.active) {
+ background:color-mix(in srgb,var(--action) 20%,#fff)!important;
+ color:#163047!important;
+ border-color:color-mix(in srgb,var(--action) 50%,#ceddd6)!important;
+}
+:root[data-fluxo-theme="light"][data-fluxo-accent] .app .bottom-nav :is(a.active,button.active) :is(.icon,span) {color:#163047!important}
+:root[data-fluxo-theme="light"][data-fluxo-accent] .app .appearance-settings .appearance-options button:not([aria-pressed="true"]) {
+ background:color-mix(in srgb,var(--action) 6%,#fff)!important;
+ color:#193229!important;
+ border-color:color-mix(in srgb,var(--action) 37%,#b8c9c2)!important;
+}
+/* Reset remains clearly visible on every hue; never indicate destructive intent
+   with low-contrast red on a themed dark surface. */
+:root[data-fluxo-accent] .app .danger-button {
+ color:#ffb0b9!important;
+}
+:root[data-fluxo-theme="light"][data-fluxo-accent] .app .danger-button {
+ color:#a2223d!important;
+}
+@media(prefers-color-scheme:light) {
+ :root[data-fluxo-theme="system"][data-fluxo-accent] .app .danger-button {color:#a2223d!important}
+}

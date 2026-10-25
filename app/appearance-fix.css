@@ -248,3 +248,8 @@
 @media(prefers-color-scheme:light) {
  :root[data-fluxo-theme="system"][data-fluxo-accent] .app .danger-button {color:#a2223d!important}
 }
+
+/* Browser release gate: Emerald primary control must meet WCAG AA contrast. */
+:root[data-fluxo-accent="emerald"] .app .panel > .primary {
+ color:#000!important;
+}

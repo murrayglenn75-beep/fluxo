@@ -4728,3 +4728,9 @@ body{min-height:100dvh;overflow-x:hidden}
 :root[data-fluxo-accent] .app :is(.mobile-welcome-row,.mobile-hero-card,.mobile-money-actions) :is(button,a):focus-visible{
   outline-color:var(--teal)!important;
 }
+
+/* Pink and Black appearance palettes. Keep all shared semantic colour tokens in sync. */
+:root[data-fluxo-accent="pink"]{--teal:#ffaddb;--action:#f25aab;--action-ink:#210a19;--line:#a45b81;--raised:#4d2840;--fluxo-accent-rgb:242,90,171;--fluxo-accent-dark:#7d225c}
+:root[data-fluxo-accent="black"]{--teal:#dadfe5;--action:#c7ced8;--action-ink:#101318;--line:#646d7a;--raised:#272d35;--fluxo-accent-rgb:199,206,216;--fluxo-accent-dark:#0b0e12}
+.appearance-swatch.pink{background:#f25aab}
+.appearance-swatch.black{background:#101318;border-color:#b7bec8}

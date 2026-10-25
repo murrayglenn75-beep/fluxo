@@ -59,3 +59,8 @@
 :root[data-fluxo-accent] .app .appearance-options button:focus-visible{outline:3px solid var(--teal)!important;outline-offset:2px}
 /* Respect explicitly chosen dark mode even on light-system devices. */
 :root[data-fluxo-theme="dark"] .app .appearance-settings{color:var(--ink)!important}
+
+/* Additional selectable appearance accents. */
+:root[data-fluxo-accent="pink"] {--teal:#ffb4d7;--action:#f06bac;--action-ink:#270d1d;--line:#a65c82;--raised:#542840;--fluxo-accent-dark:#803256;--fluxo-card-start:#9b355e;--fluxo-card-end:#260c20;}
+:root[data-fluxo-accent="black"] {--teal:#e7e9ee;--action:#e7e9ee;--action-ink:#101115;--line:#777c87;--raised:#292c32;--fluxo-accent-dark:#17191d;--fluxo-card-start:#25282e;--fluxo-card-end:#08090b;}
+.appearance-swatch.pink{background:#f06bac}.appearance-swatch.black{background:#101115;border-color:#cbd5e1}

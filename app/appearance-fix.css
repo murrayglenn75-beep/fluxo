@@ -253,3 +253,44 @@
 :root[data-fluxo-accent="emerald"] .app .panel > .primary {
  color:#000!important;
 }
+
+/* Final surface coverage: legacy component rules still hard-code forest green.
+   Apply only when an explicit dark appearance is selected. */
+:root[data-fluxo-accent][data-fluxo-theme="dark"] .app :is(.activity-row,.recent .activity-row,.mobile-activity .activity-row,.setup-banner,.tabs,.search-field,.field input,.field textarea,.field select,.mobile-money-actions a:not(:first-child),.virtual-details,.demo-card-details),
+:root[data-fluxo-accent][data-fluxo-theme="dark"] .app.section-home .mobile-activity .activity-row {
+ background:var(--fluxo-dark-raised)!important;
+ border-color:var(--fluxo-dark-stroke)!important;
+}
+:root[data-fluxo-accent][data-fluxo-theme="dark"] .app :is(.credit-card,.section-cards .credit-card) {
+ background:linear-gradient(140deg,var(--fluxo-card-start),var(--fluxo-card-end))!important;
+ border-color:var(--fluxo-dark-stroke)!important;
+ color:#f5f8ff!important;
+}
+:root[data-fluxo-accent][data-fluxo-theme="dark"] .app .credit-card :is(strong,small,h3,p,.card-status) {color:#f5f8ff!important}
+:root[data-fluxo-accent][data-fluxo-theme="dark"] .app .tabs button:not(.selected) {
+ background:var(--fluxo-dark-panel)!important;color:#edf5ff!important;
+}
+:root[data-fluxo-accent][data-fluxo-theme="dark"] .app .setup-banner :is(.icon,small) {color:#ecf4ff!important}
+/* The More dialog is mounted outside .app, so app-scoped theme rules could
+   never recolour it. Scope to its own navigation class instead. */
+:root[data-fluxo-accent][data-fluxo-theme="dark"] .fluxo-navigation-dialog {
+ background:var(--fluxo-dark-panel)!important;
+ border-color:var(--fluxo-dark-stroke)!important;
+ color:#f5f8ff!important;
+}
+:root[data-fluxo-accent][data-fluxo-theme="dark"] .fluxo-navigation-dialog .feature-menu a {
+ border-color:var(--fluxo-dark-stroke)!important;color:#f5f8ff!important;
+}
+@media(prefers-color-scheme:dark) {
+ :root[data-fluxo-accent][data-fluxo-theme="system"] .app :is(.activity-row,.recent .activity-row,.mobile-activity .activity-row,.setup-banner,.tabs,.search-field,.field input,.field textarea,.field select,.mobile-money-actions a:not(:first-child)) ,
+ :root[data-fluxo-accent][data-fluxo-theme="system"] .app.section-home .mobile-activity .activity-row {
+  background:var(--fluxo-dark-raised)!important;border-color:var(--fluxo-dark-stroke)!important
+ }
+ :root[data-fluxo-accent][data-fluxo-theme="system"] .app .credit-card {
+  background:linear-gradient(140deg,var(--fluxo-card-start),var(--fluxo-card-end))!important;border-color:var(--fluxo-dark-stroke)!important
+ }
+ :root[data-fluxo-accent][data-fluxo-theme="system"] .fluxo-navigation-dialog {
+  background:var(--fluxo-dark-panel)!important;border-color:var(--fluxo-dark-stroke)!important
+ }
+ :root[data-fluxo-accent][data-fluxo-theme="system"] .fluxo-navigation-dialog .feature-menu a {border-color:var(--fluxo-dark-stroke)!important}
+}

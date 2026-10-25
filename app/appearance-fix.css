@@ -103,3 +103,78 @@
   background:color-mix(in srgb,var(--action) 16%,#e2f2ea) !important;
   color:var(--fluxo-accent-dark) !important;
 }
+
+/* Whole-screen accent harmony. Theme chooses brightness; accent chooses the
+   hue of chrome/surfaces. Preserve semantic transaction colours and accessibility. */
+:root[data-fluxo-accent="pink"] {
+  --fluxo-dark-canvas:#1c101b;
+  --fluxo-dark-panel:#301b2b;
+  --fluxo-dark-raised:#41283a;
+  --fluxo-dark-nav:#271621;
+  --fluxo-dark-stroke:#765064;
+}
+:root[data-fluxo-accent="black"] {
+  --fluxo-dark-canvas:#0c0e12;
+  --fluxo-dark-panel:#191c22;
+  --fluxo-dark-raised:#262a32;
+  --fluxo-dark-nav:#14171c;
+  --fluxo-dark-stroke:#58616c;
+}
+:root[data-fluxo-accent="pink"][data-fluxo-theme="dark"],
+:root[data-fluxo-accent="black"][data-fluxo-theme="dark"] {
+  --dark:var(--fluxo-dark-canvas);
+  --surface:var(--fluxo-dark-panel);
+  --raised:var(--fluxo-dark-raised);
+  --line:var(--fluxo-dark-stroke);
+}
+:root[data-fluxo-accent="pink"][data-fluxo-theme="dark"] body,
+:root[data-fluxo-accent="black"][data-fluxo-theme="dark"] body,
+:root[data-fluxo-accent="pink"][data-fluxo-theme="dark"] .app,
+:root[data-fluxo-accent="black"][data-fluxo-theme="dark"] .app {
+  background:var(--fluxo-dark-canvas)!important;
+}
+:root[data-fluxo-accent="pink"][data-fluxo-theme="dark"] .app :is(.panel,.page-panel,.appearance-settings,.account-auth,.integration-status),
+:root[data-fluxo-accent="black"][data-fluxo-theme="dark"] .app :is(.panel,.page-panel,.appearance-settings,.account-auth,.integration-status) {
+  background:var(--fluxo-dark-panel)!important;
+  border-color:var(--fluxo-dark-stroke)!important;
+}
+:root[data-fluxo-accent="pink"][data-fluxo-theme="dark"] .app :is(.bottom-nav,.mobile-header,.topbar),
+:root[data-fluxo-accent="black"][data-fluxo-theme="dark"] .app :is(.bottom-nav,.mobile-header,.topbar) {
+  background:var(--fluxo-dark-nav)!important;
+  border-color:var(--fluxo-dark-stroke)!important;
+}
+:root[data-fluxo-accent="pink"][data-fluxo-theme="dark"] .app .appearance-settings .appearance-options button:not([aria-pressed="true"]),
+:root[data-fluxo-accent="black"][data-fluxo-theme="dark"] .app .appearance-settings .appearance-options button:not([aria-pressed="true"]) {
+  background:var(--fluxo-dark-raised)!important;
+  color:#f4f3f5!important;
+  border-color:var(--fluxo-dark-stroke)!important;
+}
+@media(prefers-color-scheme:dark) {
+  :root[data-fluxo-accent="pink"][data-fluxo-theme="system"],
+  :root[data-fluxo-accent="black"][data-fluxo-theme="system"] {
+    --dark:var(--fluxo-dark-canvas);
+    --surface:var(--fluxo-dark-panel);
+    --raised:var(--fluxo-dark-raised);
+    --line:var(--fluxo-dark-stroke);
+  }
+  :root[data-fluxo-accent="pink"][data-fluxo-theme="system"] body,
+  :root[data-fluxo-accent="black"][data-fluxo-theme="system"] body,
+  :root[data-fluxo-accent="pink"][data-fluxo-theme="system"] .app,
+  :root[data-fluxo-accent="black"][data-fluxo-theme="system"] .app {
+    background:var(--fluxo-dark-canvas)!important;
+  }
+  :root[data-fluxo-accent="pink"][data-fluxo-theme="system"] .app :is(.panel,.page-panel,.appearance-settings,.account-auth,.integration-status),
+  :root[data-fluxo-accent="black"][data-fluxo-theme="system"] .app :is(.panel,.page-panel,.appearance-settings,.account-auth,.integration-status) {
+    background:var(--fluxo-dark-panel)!important;
+    border-color:var(--fluxo-dark-stroke)!important;
+  }
+  :root[data-fluxo-accent="pink"][data-fluxo-theme="system"] .app :is(.bottom-nav,.mobile-header,.topbar),
+  :root[data-fluxo-accent="black"][data-fluxo-theme="system"] .app :is(.bottom-nav,.mobile-header,.topbar) {
+    background:var(--fluxo-dark-nav)!important;
+  }
+  :root[data-fluxo-accent="pink"][data-fluxo-theme="system"] .app .appearance-settings .appearance-options button:not([aria-pressed="true"]),
+  :root[data-fluxo-accent="black"][data-fluxo-theme="system"] .app .appearance-settings .appearance-options button:not([aria-pressed="true"]) {
+    background:var(--fluxo-dark-raised)!important;
+    color:#f4f3f5!important;
+  }
+}

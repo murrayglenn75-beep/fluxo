@@ -303,3 +303,7 @@
 
 /* Cards toolbar headings must be legible above tinted dark panel surfaces. */
 :root[data-fluxo-theme="dark"] .app .section-cards .cards-toolbar > span {color:#d7e6f0!important}
+
+/* Section class resides on .app itself, not a descendant. */
+:root[data-fluxo-theme="dark"] .app.section-cards .cards-toolbar > span,
+:root[data-fluxo-theme="dark"] .app .cards-toolbar > span {color:#e5eef8!important}

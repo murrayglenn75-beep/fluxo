@@ -294,3 +294,6 @@
  }
  :root[data-fluxo-accent][data-fluxo-theme="system"] .fluxo-navigation-dialog .feature-menu a {border-color:var(--fluxo-dark-stroke)!important}
 }
+
+/* Native browser accessibility: higher-contrast primary label on Emerald. */
+:root[data-fluxo-accent="emerald"] .app .panel > .primary {color:#000!important}

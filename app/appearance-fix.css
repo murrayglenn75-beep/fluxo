@@ -300,3 +300,6 @@
 
 /* Keep semantic expense pink/red legible against accented dark activity rows. */
 :root[data-fluxo-theme="dark"] .app :is(.expense-text,.activity-row .expense-text){color:#ffadba!important}
+
+/* Cards toolbar headings must be legible above tinted dark panel surfaces. */
+:root[data-fluxo-theme="dark"] .app .section-cards .cards-toolbar > span {color:#d7e6f0!important}

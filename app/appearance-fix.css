@@ -297,3 +297,6 @@
 
 /* Native browser accessibility: higher-contrast primary label on Emerald. */
 :root[data-fluxo-accent="emerald"] .app .panel > .primary {color:#000!important}
+
+/* Keep semantic expense pink/red legible against accented dark activity rows. */
+:root[data-fluxo-theme="dark"] .app :is(.expense-text,.activity-row .expense-text){color:#ffadba!important}

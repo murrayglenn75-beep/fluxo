@@ -294,3 +294,55 @@
  }
  :root[data-fluxo-accent][data-fluxo-theme="system"] .fluxo-navigation-dialog .feature-menu a {border-color:var(--fluxo-dark-stroke)!important}
 }
+
+/* Mobile screen-wide theme reconciliation: blue/pink/etc must also reach features
+   outside primary navigation. Do not tint bank logos or semantic money values. */
+:root[data-fluxo-accent][data-fluxo-theme="dark"] .app :is(
+ .section-budgets .page-panel,.section-budgets .panel,.section-budgets article,
+ .section-goals .page-panel,.section-goals .panel,
+ .section-exchange .page-panel,.section-exchange .panel,
+ .section-ai .assistant,.section-ai .assistant-page,.section-ai .suggestions button,
+ .section-open-finance .page-panel,
+ .section-import .page-panel,.section-import .panel,
+ .section-scan .page-panel,.section-scan .panel
+) {border-color:var(--fluxo-dark-stroke)!important;}
+:root[data-fluxo-accent][data-fluxo-theme="dark"] .app :is(
+ .section-budgets article,.section-budgets .budget-item,.section-budgets .budget-row,
+ .section-goals .goal-card,.section-goals .goal-hero,
+ .section-exchange .exchange-card,.section-exchange .currency-card,
+ .section-ai .assistant,.section-ai .assistant-page .suggestions button,
+ .section-import .panel,.section-scan .panel
+) {background:var(--fluxo-dark-panel)!important;color:#f0f6ff!important;}
+:root[data-fluxo-accent][data-fluxo-theme="dark"] .app :is(
+ .section-budgets button:not(.primary),.section-goals button:not(.primary),
+ .section-exchange input,.section-exchange select,
+ .section-ai .ask-form,.section-ai .ask-form input,.section-ai .suggestions button,
+ .section-import input,.section-import select,.section-scan input,.section-scan select,
+ .section-cards .secondary,.section-cards .virtual-details button
+) {background:var(--fluxo-dark-raised)!important;color:#f0f6ff!important;border-color:var(--fluxo-dark-stroke)!important;}
+:root[data-fluxo-accent][data-fluxo-theme="dark"] .app .section-ai :is(.assistant-hero,.ai-hero,.assistant-banner),
+:root[data-fluxo-accent][data-fluxo-theme="dark"] .app .section-goals :is(.goals-hero,.goal-banner) {
+ background:linear-gradient(140deg,var(--fluxo-card-start),var(--fluxo-card-end))!important;
+ border-color:var(--fluxo-dark-stroke)!important;
+}
+:root[data-fluxo-accent][data-fluxo-theme="dark"] .app :is(
+ .section-budgets progress,.section-budgets .progress,.section-goals progress
+) {accent-color:var(--action)!important;}
+/* Keep brand-specific financial institution tiles white; force readable text only
+   on those white list buttons, not on each institution logo. */
+:root[data-fluxo-accent][data-fluxo-theme="dark"] .app .section-open-finance :is(
+ .bank-list button,.bank-list a,.bank-item,.bank-option,.institution-option
+) {color:#183229!important;}
+:root[data-fluxo-accent][data-fluxo-theme="dark"] .app .section-open-finance :is(
+ .bank-list button,.bank-list a,.bank-item,.bank-option,.institution-option
+) :is(small,p,span:not(.bank-logo)) {color:#38554c!important;}
+/* Explicitly repair unreadable dark-on-dark card secondary limit text. */
+:root[data-fluxo-accent][data-fluxo-theme="dark"] .app .section-cards .credit-card :is(
+ small,p,span:not(.card-network),.available-limit,.card-limit
+) {color:#e7f0ff!important;}
+@media(prefers-color-scheme:dark){
+ :root[data-fluxo-accent][data-fluxo-theme="system"] .app :is(
+ .section-budgets .budget-item,.section-goals .goal-card,.section-exchange .exchange-card,
+ .section-ai .assistant,.section-ai .suggestions button
+ ) {background:var(--fluxo-dark-panel)!important;border-color:var(--fluxo-dark-stroke)!important;color:#f0f6ff!important;}
+}

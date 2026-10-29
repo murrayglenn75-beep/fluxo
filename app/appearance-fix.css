@@ -91,3 +91,22 @@
  :root[data-fluxo-theme="system"][data-fluxo-accent="pink"] {--teal:#9a2058;--action:#bd3377;--action-ink:#fff;--line:#d9a0b9;--raised:#f8e4ee}
  :root[data-fluxo-theme="system"][data-fluxo-accent="black"] {--teal:#333;--action:#171717;--action-ink:#fff;--line:#a6a6a6;--raised:#ececec}
 }
+
+/* Complete accent token mapping: shared UI controls follow selected accent. */
+:root[data-fluxo-accent="emerald"] {--teal:#73f5b6;--action:#28db90;--action-ink:#062d22;--line:#326756}
+:root[data-fluxo-accent="blue"] {--teal:#8fc4ff;--action:#4a9cf0;--action-ink:#061d3d;--line:#42749d}
+:root[data-fluxo-accent="purple"] {--teal:#d3a9ff;--action:#ae79ed;--action-ink:#250c40;--line:#765595}
+:root[data-fluxo-accent="red"] {--teal:#ffb1c0;--action:#f16a87;--action-ink:#3d0715;--line:#a45669}
+:root[data-fluxo-accent="yellow"] {--teal:#ffdf8a;--action:#eec04e;--action-ink:#302100;--line:#9a8142}
+:root[data-fluxo-theme="light"][data-fluxo-accent="blue"] {--teal:#175aa2;--action:#175fae;--action-ink:#fff;--line:#9ebbd5}
+:root[data-fluxo-theme="light"][data-fluxo-accent="purple"] {--teal:#7134a2;--action:#7134a2;--action-ink:#fff;--line:#c6addb}
+:root[data-fluxo-theme="light"][data-fluxo-accent="red"] {--teal:#a51e45;--action:#a51e45;--action-ink:#fff;--line:#d9a9b5}
+:root[data-fluxo-theme="light"][data-fluxo-accent="yellow"] {--teal:#775500;--action:#755200;--action-ink:#fff;--line:#cbb986}
+:root[data-fluxo-theme="light"][data-fluxo-accent="emerald"] {--teal:#086b4a;--action:#087a55;--action-ink:#fff;--line:#9ec8b8}
+@media(prefers-color-scheme:light) {
+ :root[data-fluxo-theme="system"][data-fluxo-accent="blue"] {--teal:#175aa2;--action:#175fae;--action-ink:#fff;--line:#9ebbd5}
+ :root[data-fluxo-theme="system"][data-fluxo-accent="purple"] {--teal:#7134a2;--action:#7134a2;--action-ink:#fff;--line:#c6addb}
+ :root[data-fluxo-theme="system"][data-fluxo-accent="red"] {--teal:#a51e45;--action:#a51e45;--action-ink:#fff;--line:#d9a9b5}
+ :root[data-fluxo-theme="system"][data-fluxo-accent="yellow"] {--teal:#775500;--action:#755200;--action-ink:#fff;--line:#cbb986}
+ :root[data-fluxo-theme="system"][data-fluxo-accent="emerald"] {--teal:#086b4a;--action:#087a55;--action-ink:#fff;--line:#9ec8b8}
+}

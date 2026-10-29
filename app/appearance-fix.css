@@ -74,3 +74,20 @@
  .app :is(.activity-controls,.page-title) {min-width:0;flex-wrap:wrap}
  .app :is(.tabs,.activity-controls) {max-width:100%;overflow-x:auto}
 }
+
+/* Resolve system mode through the same effective palette as explicit themes. */
+:root[data-fluxo-theme="system"] {color-scheme:dark;--ink:#f2fff9;--muted:#b4cfc1;--dark:#061b1b;--surface:#103b37}
+:root[data-fluxo-theme="system"] .app .appearance-options button:not([aria-pressed="true"]) {background:#16352f!important;color:#f2fff9!important}
+@media(prefers-color-scheme:light) {
+ :root[data-fluxo-theme="system"] {color-scheme:light}
+ :root[data-fluxo-theme="system"] .app :is(.mobile-header,.topbar) {background:#e2f2ea!important;color:#142d27!important}
+ :root[data-fluxo-theme="system"] .app :is(.field input,.field select,textarea,.search-field) {background:#fff!important;color:#142d27!important}
+ :root[data-fluxo-theme="system"] .app :is(.page-subtitle,.field,.activity-row small,.workspace-footer,.appearance-settings p) {color:#47665d!important}
+ :root[data-fluxo-theme="system"] .app .appearance-options button:not([aria-pressed="true"]) {background:#f1f5f3!important;color:#142d27!important}
+}
+:root[data-fluxo-theme="light"][data-fluxo-accent="pink"],
+:root[data-fluxo-theme="system"][data-fluxo-accent="pink"] {--fluxo-card-start:#b42f70;--fluxo-card-end:#411127}
+@media(prefers-color-scheme:light) {
+ :root[data-fluxo-theme="system"][data-fluxo-accent="pink"] {--teal:#9a2058;--action:#bd3377;--action-ink:#fff;--line:#d9a0b9;--raised:#f8e4ee}
+ :root[data-fluxo-theme="system"][data-fluxo-accent="black"] {--teal:#333;--action:#171717;--action-ink:#fff;--line:#a6a6a6;--raised:#ececec}
+}

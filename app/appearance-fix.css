@@ -641,3 +641,70 @@
  .primary,.virtual-card-button,.tabs button.selected,
  .appearance-options button[aria-pressed="true"]
 ) {background:var(--action)!important;color:var(--action-ink)!important;}
+
+/* Fluxo visual refresh — reference-inspired, original brand and components.
+   Theme tokens, accessible foregrounds, compact geometry, and calm depth. */
+:root[data-fluxo-theme="dark"][data-fluxo-accent] {
+ --fluxo-radius-panel:22px;
+ --fluxo-radius-control:14px;
+ --fluxo-text-primary:#f6faff;
+ --fluxo-text-secondary:#cbdbea;
+ --fluxo-shadow:0 16px 40px #00000038;
+}
+:root[data-fluxo-theme="dark"][data-fluxo-accent] .app :is(.page-panel,.panel,.appearance-settings,.account-auth,.integration-status,.assistant-page) {
+ border-radius:var(--fluxo-radius-panel)!important;
+ box-shadow:var(--fluxo-shadow);
+}
+:root[data-fluxo-theme="dark"][data-fluxo-accent] .app :is(.activity-row,.currency-box,.budget-row,.goal-row,.bank-row,.search-field,.card-selector) {
+ border-radius:var(--fluxo-radius-control)!important;
+}
+:root[data-fluxo-theme="dark"][data-fluxo-accent] .app :is(.screen-heading h1,.page-panel h2,.page-panel h3,.panel h3,.fluxo-ai-hero h2) {
+ color:var(--fluxo-text-primary)!important;
+ letter-spacing:-.025em;
+}
+:root[data-fluxo-theme="dark"][data-fluxo-accent] .app :is(.page-subtitle,.fluxo-ai-hero p,.assistant-intro p,.activity-row small,.bank-page>p) {
+ color:var(--fluxo-text-secondary)!important;
+ opacity:1!important;
+}
+:root[data-fluxo-theme="dark"][data-fluxo-accent] .app :is(.primary,.virtual-card-button,.add-card-button,.secondary,.appearance-options button,.tabs button) {
+ border-radius:var(--fluxo-radius-control)!important;
+ min-height:44px;
+ font-weight:650;
+}
+:root[data-fluxo-theme="dark"][data-fluxo-accent] .app .mobile-hero-card,
+:root[data-fluxo-theme="dark"][data-fluxo-accent] .app .credit-card {
+ background:radial-gradient(ellipse at 90% 0%,color-mix(in srgb,var(--action) 37%,transparent),transparent 56%),linear-gradient(140deg,var(--fluxo-card-start),var(--fluxo-card-end))!important;
+ border:1px solid var(--fluxo-dark-stroke)!important;
+ border-radius:24px!important;
+ box-shadow:0 14px 34px #0005!important;
+}
+:root[data-fluxo-theme="dark"][data-fluxo-accent] .app .fluxo-ai-hero {
+ background:radial-gradient(circle at 9% 12%,color-mix(in srgb,var(--action) 30%,transparent),transparent 40%),linear-gradient(145deg,var(--fluxo-card-start),var(--fluxo-dark-panel))!important;
+ border:1px solid var(--fluxo-dark-stroke)!important;
+ border-radius:24px!important;
+}
+:root[data-fluxo-theme="dark"][data-fluxo-accent] .app .bottom-nav {
+ box-shadow:0 12px 38px #0007!important;
+ backdrop-filter:blur(18px);
+}
+@media(max-width:600px) {
+ :root[data-fluxo-theme="dark"][data-fluxo-accent] .app .main>main {
+   padding-inline:12px!important;
+   padding-bottom:calc(126px + env(safe-area-inset-bottom,0px))!important;
+ }
+ :root[data-fluxo-theme="dark"][data-fluxo-accent] .app .activity-row {
+   min-height:64px!important;
+   padding:11px 13px!important;
+ }
+ :root[data-fluxo-theme="dark"][data-fluxo-accent] .app .page-panel {
+   padding:16px!important;
+ }
+ :root[data-fluxo-theme="dark"][data-fluxo-accent] .app .bottom-nav {
+   border-radius:22px!important;
+   max-width:440px!important;
+ }
+ :root[data-fluxo-theme="dark"][data-fluxo-accent] .app .credit-card {
+   min-height:188px!important;
+   padding:20px!important;
+ }
+}

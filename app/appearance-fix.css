@@ -362,3 +362,59 @@
 :root[data-fluxo-theme="light"] .app :is(.activity-row small,.page-subtitle,.appearance-settings p) {
   color:#486759!important;
 }
+
+/* 2026-10-30: cross-route theme leak and bank-list contrast repair.
+   Applied after globals.css to defeat hard-coded legacy green and blue. */
+:root[data-fluxo-accent][data-fluxo-theme="dark"] .app :is(
+  .budget-row,.currency-box,.exchange-page .currency-box,
+  .fluxo-ai-hero,.assistant-page,.assistant-page .assistant-intro,
+  .assistant-page .suggestions button,.assistant-page .ask-form,
+  .goal-row,.receive-box,.approval
+) {
+  background:var(--fluxo-dark-panel)!important;
+  border-color:var(--fluxo-dark-stroke)!important;
+  color:var(--ink)!important;
+}
+:root[data-fluxo-accent][data-fluxo-theme="dark"] .app :is(
+  .fluxo-ai-hero,.assistant-page .suggestions button,.budget-row,.currency-box
+) {border-radius:16px;}
+:root[data-fluxo-accent][data-fluxo-theme="dark"] .app .fluxo-ai-hero {
+  background:linear-gradient(145deg,var(--fluxo-card-start),var(--fluxo-dark-panel) 72%)!important;
+}
+:root[data-fluxo-accent][data-fluxo-theme="dark"] .app :is(
+  .budget-row .progress,.progress,.card-progress
+) {background:var(--fluxo-dark-stroke)!important;}
+:root[data-fluxo-accent][data-fluxo-theme="dark"] .app :is(
+  .budget-row .progress i,.progress i,.card-progress i
+) {background:var(--action)!important;}
+:root[data-fluxo-accent][data-fluxo-theme="dark"] .app .assistant-page .ask-form input {
+  background:transparent!important;color:var(--ink)!important;
+}
+/* Bank choices are light cards: the inherited white text was unreadable.
+   Explicitly set foreground on labels and descriptions in ALL themes. */
+.app .bank-page .bank-row {
+  background:#f8fafc!important;
+  border:1px solid #cad7e0!important;
+  color:#152c3b!important;
+  text-align:left;
+  min-width:0;
+}
+.app .bank-page .bank-row strong,
+.app .bank-page .bank-row small,
+.app .bank-page .bank-row > .icon {
+  color:#152c3b!important;opacity:1!important;
+}
+.app .bank-page .bank-row small {color:#42596b!important;font-size:12px!important;}
+.app .bank-page .bank-row strong {font-size:15px!important;}
+.app .bank-page .bank-row:focus-visible {outline:3px solid var(--action)!important;}
+/* Prevent fixed navigation from masking primary actions on auxiliary pages. */
+@media(max-width:600px) {
+ .app .bank-page .bank-row {min-height:64px;padding:12px!important;margin:10px 0!important;}
+ .app .assistant-page .suggestions {gap:8px!important;margin-bottom:14px!important;}
+ .app .assistant-page .suggestions button {min-height:48px!important;padding:12px 14px!important;font-size:14px!important;}
+ .app .assistant-page .ask-form {min-height:50px!important;padding:8px!important;}
+ .app .assistant-page .ask-form input {min-width:0!important;width:100%!important;font-size:16px!important;}
+ .app .budget-row {margin:12px 0!important;padding:14px!important;}
+ .app .budget-row .secondary {margin-top:10px!important;}
+ .app .bank-page,.app .assistant-page,.app .exchange-page {padding-bottom:140px!important;}
+}

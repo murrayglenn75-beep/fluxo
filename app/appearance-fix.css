@@ -484,3 +484,33 @@
 :root[data-fluxo-theme="dark"][data-fluxo-accent] .app .bottom-nav :is(a.active,button.active) .icon {
  color:var(--teal)!important;
 }
+
+/* Dark-only mobile finish: actionable controls, scannable tabs, legible cards. */
+:root[data-fluxo-accent] .app .add-card-button {
+ background:var(--raised)!important;color:var(--ink)!important;
+ border:1px solid var(--line)!important;
+}
+:root[data-fluxo-accent] .app :is(.virtual-card-button,.card-selector button.selected,.card-selector button.active) {
+ background:var(--action)!important;color:var(--action-ink)!important;border-color:var(--action)!important;
+}
+:root[data-fluxo-accent] .app .credit-card :is(p,small,h3,strong,span) {
+ color:#f7fbff!important;text-shadow:none!important;
+}
+:root[data-fluxo-accent] .app .credit-card .card-progress {background:#ffffff42!important;}
+:root[data-fluxo-accent] .app .credit-card .card-progress i {background:var(--action)!important;}
+:root[data-fluxo-accent] .app .activity-controls .tabs {
+ scrollbar-width:none;overscroll-behavior-x:contain;
+}
+:root[data-fluxo-accent] .app .activity-controls .tabs::-webkit-scrollbar {display:none;}
+@media(max-width:600px) {
+ .app .cards-toolbar {display:flex!important;flex-wrap:wrap;align-items:center;gap:8px!important;}
+ .app .cards-toolbar>span {width:100%;margin:0!important;}
+ .app .cards-toolbar button {flex:1 1 auto;min-width:0;white-space:normal;}
+ .app .card-selector {max-width:100%;overflow-x:auto;}
+ .app .credit-card {overflow:hidden;min-width:0;}
+ .app .credit-card :is(p,h3,strong,small) {overflow-wrap:anywhere;}
+ .app .activity-controls .tabs {gap:5px!important;overflow-x:auto!important;flex-wrap:nowrap!important;}
+ .app .activity-controls .tabs button {padding:10px 13px!important;white-space:nowrap;flex:none;}
+ .app .mobile-money-actions {padding-bottom:12px!important;}
+ .app .bottom-nav {background:var(--fluxo-dark-nav)!important;border-color:var(--fluxo-dark-stroke)!important;}
+}

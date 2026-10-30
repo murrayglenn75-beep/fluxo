@@ -708,3 +708,54 @@
    padding:20px!important;
  }
 }
+
+/* Screen-class correction: these are the actual Budgets/Goals component names.
+   Earlier generic hero selectors did not match these elements. */
+:root[data-fluxo-accent][data-fluxo-theme="dark"] .app .fluxo-feature-banner{
+ background:radial-gradient(ellipse at 90% 0%,color-mix(in srgb,var(--action) 28%,transparent),transparent 62%),linear-gradient(145deg,var(--fluxo-card-start),var(--fluxo-card-end))!important;
+ border:1px solid var(--fluxo-dark-stroke)!important;
+ color:#f6faff!important;
+ border-radius:20px!important;
+}
+:root[data-fluxo-accent][data-fluxo-theme="dark"] .app .fluxo-feature-banner :is(span,strong,small){
+ color:#f6faff!important;opacity:1!important;
+}
+:root[data-fluxo-accent][data-fluxo-theme="dark"] .app .fluxo-screen-kicker{
+ color:var(--teal)!important;
+}
+:root[data-fluxo-accent][data-fluxo-theme="dark"] .app .fluxo-settings-eyebrow,
+:root[data-fluxo-accent][data-fluxo-theme="dark"] .app .fluxo-ai-hero > span,
+:root[data-fluxo-accent][data-fluxo-theme="dark"] .app .fluxo-ai-hero .fluxo-ai-hero-tabs span{
+ color:var(--teal)!important;
+}
+:root[data-fluxo-accent][data-fluxo-theme="dark"] .app .fluxo-settings-avatar{
+ color:var(--action-ink)!important;
+ border:2px solid var(--line)!important;
+}
+:root[data-fluxo-accent][data-fluxo-theme="dark"] .app .budget-row .secondary{
+ background:var(--fluxo-dark-raised)!important;
+ border:1px solid var(--fluxo-dark-stroke)!important;
+ color:#f6faff!important;
+}
+:root[data-fluxo-accent][data-fluxo-theme="dark"] .app .budget-row .progress{
+ background:var(--fluxo-dark-stroke)!important;
+}
+:root[data-fluxo-accent][data-fluxo-theme="dark"] .app .budget-row .progress i{
+ background:var(--action)!important;
+}
+@media(max-width:600px){
+ :root[data-fluxo-accent][data-fluxo-theme="dark"] .app .fluxo-budgets-page .budget-row{
+  padding:14px!important;margin:12px 0!important;
+ }
+ :root[data-fluxo-accent][data-fluxo-theme="dark"] .app .fluxo-budgets-page .budget-row .secondary{
+  min-height:44px!important;padding:10px 12px!important;font-size:15px!important;
+ }
+ :root[data-fluxo-accent][data-fluxo-theme="dark"] .app .fluxo-feature-banner{
+  padding:20px!important;margin-bottom:22px!important;
+ }
+ :root[data-fluxo-accent][data-fluxo-theme="dark"] .app .fluxo-goals-page,
+ :root[data-fluxo-accent][data-fluxo-theme="dark"] .app .fluxo-budgets-page,
+ :root[data-fluxo-accent][data-fluxo-theme="dark"] .app .account-page{
+  padding-bottom:calc(130px + env(safe-area-inset-bottom,0px))!important;
+ }
+}

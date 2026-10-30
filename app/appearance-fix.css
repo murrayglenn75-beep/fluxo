@@ -418,3 +418,69 @@
  .app .budget-row .secondary {margin-top:10px!important;}
  .app .bank-page,.app .assistant-page,.app .exchange-page {padding-bottom:140px!important;}
 }
+
+/* Unified seven-accent theme contract — all routes, Dark/Light/System.
+   System is resolved to effective dark/light by the appearance controller. */
+:root[data-fluxo-accent="emerald"] {--fluxo-accent-contrast:#06432c}
+:root[data-fluxo-accent="blue"] {--fluxo-accent-contrast:#123d76}
+:root[data-fluxo-accent="purple"] {--fluxo-accent-contrast:#502a80}
+:root[data-fluxo-accent="red"] {--fluxo-accent-contrast:#842337}
+:root[data-fluxo-accent="yellow"] {--fluxo-accent-contrast:#675111}
+:root[data-fluxo-accent="pink"] {--fluxo-accent-contrast:#80254f}
+:root[data-fluxo-accent="black"] {--fluxo-accent-contrast:#22252b}
+/* Selected hue should never leave default-green artwork or controls behind. */
+:root[data-fluxo-accent] .app :is(
+ .fluxo-settings-header,.fluxo-ai-hero,.mobile-hero-card,
+ .goal-hero,.budget-hero,.feature-hero,.hero-panel
+) {border-color:var(--line)!important;}
+:root[data-fluxo-accent] .app :is(
+ .fluxo-settings-header,.goal-hero,.budget-hero,.feature-hero,.hero-panel
+) {background:linear-gradient(145deg,var(--fluxo-card-start),var(--fluxo-card-end))!important;}
+:root[data-fluxo-accent] .app :is(
+ .fluxo-settings-eyebrow,.fluxo-ai-hero>span,.fluxo-ai-hero-tabs span,
+ .goal-row b,.panel-heading a,.panel-heading button
+) {color:var(--teal)!important;}
+:root[data-fluxo-accent] .app :is(
+ .primary,.virtual-card-button,.mobile-money-actions a:first-child,
+ .tabs button.selected,.appearance-options button[aria-pressed="true"],
+ .ask-form button
+) {background:var(--action)!important;border-color:var(--action)!important;color:var(--action-ink)!important;}
+:root[data-fluxo-accent] .app :is(.progress i,.budget-row .progress i,.card-progress i){
+ background:var(--action)!important;
+}
+:root[data-fluxo-accent] .app .bank-page .bank-row {
+ background:#f8fafc!important;color:#152c3b!important;border-color:#cad7e0!important;
+}
+:root[data-fluxo-accent] .app .bank-page .bank-row :is(strong,small) {
+ color:#152c3b!important;text-shadow:none!important;opacity:1!important;
+}
+/* Light theme is light regardless of accent, with accent-tinted actions. */
+:root[data-fluxo-theme="light"][data-fluxo-accent] {
+ --ink:#142d27;--muted:#47665d;--dark:#f4faf7;--surface:#ffffff;
+ --raised:#edf4f0;--line:color-mix(in srgb,var(--action) 38%,#bfd1c8);
+}
+:root[data-fluxo-theme="light"][data-fluxo-accent] .app :is(
+ .budget-row,.currency-box,.goal-row,.assistant-page,.assistant-page .assistant-intro,
+ .assistant-page .suggestions button,.assistant-page .ask-form,.search-field
+) {background:#fff!important;border-color:#cbdad3!important;color:#142d27!important;}
+:root[data-fluxo-theme="light"][data-fluxo-accent] .app :is(
+ .assistant-page .suggestions button,.currency-box,.budget-row
+) :is(span,p,small,strong,label){color:#28483b!important;}
+:root[data-fluxo-theme="light"][data-fluxo-accent] .app :is(
+ .secondary,.tabs button:not(.selected),.appearance-options button:not([aria-pressed="true"])
+) {background:#edf4f0!important;color:#142d27!important;border-color:#b6cfc3!important;}
+:root[data-fluxo-theme="light"][data-fluxo-accent] .app .bottom-nav :is(a.active,button.active) {
+ background:color-mix(in srgb,var(--action) 18%,white)!important;
+ color:var(--fluxo-accent-contrast)!important;
+}
+:root[data-fluxo-theme="light"][data-fluxo-accent] .app .bottom-nav :is(a.active,button.active) .icon {
+ color:var(--fluxo-accent-contrast)!important;
+}
+/* Avoid the dark-green active label in Blue, Purple, Red, Yellow, Pink, Black. */
+:root[data-fluxo-theme="dark"][data-fluxo-accent] .app .bottom-nav :is(a.active,button.active) {
+ background:color-mix(in srgb,var(--action) 20%,var(--fluxo-dark-nav))!important;
+ color:var(--teal)!important;
+}
+:root[data-fluxo-theme="dark"][data-fluxo-accent] .app .bottom-nav :is(a.active,button.active) .icon {
+ color:var(--teal)!important;
+}

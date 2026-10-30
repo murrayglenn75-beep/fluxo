@@ -16,10 +16,10 @@ describe('Fluxo seven-accent appearance contract', () => {
     expect(layout).toContain(`'${accent}'`);
   });
 
-  it('includes light and dark modes and effective system appearance selection', () => {
-    for (const theme of ['light', 'dark', 'system']) expect(layout).toContain(`'${theme}'`);
-    expect(layout).toContain("prefers-color-scheme: light");
-    expect(css).toContain('data-fluxo-theme="light"');
+  it('offers Dark and System and always renders dark surfaces', () => {
+    for (const theme of ['dark', 'system']) expect(layout).toContain(`'${theme}'`);
+    expect(layout).not.toContain("'light','system'");
+    expect(layout).toContain("dataset.fluxoTheme='dark'");
     expect(css).toContain('data-fluxo-theme="dark"');
   });
 

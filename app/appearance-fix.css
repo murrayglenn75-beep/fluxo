@@ -514,3 +514,63 @@
  .app .mobile-money-actions {padding-bottom:12px!important;}
  .app .bottom-nav {background:var(--fluxo-dark-nav)!important;border-color:var(--fluxo-dark-stroke)!important;}
 }
+
+/* Theme integrity — colour tokens drive branded visual elements consistently.
+   Financial gain/loss colours remain semantic, not theme accents. */
+:root[data-fluxo-accent="blue"] {
+ --teal:#91c9ff;--action:#438ef5;--action-ink:#071d37;
+ --line:#4778a4;--raised:#1c3d5c;--muted:#c5dcf1;
+ --fluxo-dark-canvas:#091b30;--fluxo-dark-panel:#112d49;
+ --fluxo-dark-raised:#1c3d5c;--fluxo-dark-nav:#0b2239;
+ --fluxo-dark-stroke:#416b93;--fluxo-card-start:#246bc8;--fluxo-card-end:#071b38;
+}
+:root[data-fluxo-accent][data-fluxo-theme="dark"] .app :is(
+ .goal-hero,.budget-hero,.feature-hero,.fluxo-ai-hero,
+ .fluxo-settings-header,.mobile-hero-card
+) {
+ background:linear-gradient(145deg,var(--fluxo-card-start),var(--fluxo-card-end))!important;
+ border-color:var(--fluxo-dark-stroke)!important;
+}
+:root[data-fluxo-accent][data-fluxo-theme="dark"] .app :is(
+ .fluxo-ai-hero-icon,.mobile-profile-avatar,.fluxo-settings-avatar,
+ .mobile-welcome-row .avatar
+) {
+ background:linear-gradient(135deg,var(--action),var(--fluxo-accent-dark))!important;
+ border-color:var(--line)!important;
+}
+:root[data-fluxo-accent][data-fluxo-theme="dark"] .app :is(
+ .fluxo-ai-hero>span,.fluxo-ai-hero-tabs span,
+ .fluxo-settings-eyebrow,.panel-heading a,.panel-heading button,
+ .appearance-options legend,.budget-page .eyebrow,.goals-page .eyebrow
+) {color:var(--teal)!important;}
+:root[data-fluxo-accent][data-fluxo-theme="dark"] .app :is(
+ .fluxo-ai-hero-tabs span,.assistant-page .suggestions button,
+ .budget-row,.goal-row,.currency-box,.setting-row
+) {border-color:var(--line)!important;}
+:root[data-fluxo-accent][data-fluxo-theme="dark"] .app :is(
+ .fluxo-ai-hero-tabs span,.assistant-page .suggestions button
+) {background:var(--raised)!important;color:#f5faff!important;}
+:root[data-fluxo-accent][data-fluxo-theme="dark"] .app :is(
+ .page-subtitle,.bank-page>p,.field,.field label,
+ .currency-box small,.budget-row span,.goal-row small,
+ .assistant-disclaimer,.workspace-footer,.mobile-hero-card small,
+ .fluxo-ai-hero p,.fluxo-settings-header p,.activity-row small
+) {color:#c7d9e9!important;opacity:1!important;}
+:root[data-fluxo-accent][data-fluxo-theme="dark"] .app :is(
+ input::placeholder,textarea::placeholder
+) {color:#b9cde1!important;opacity:1!important;}
+:root[data-fluxo-accent][data-fluxo-theme="dark"] .app :is(
+ .primary,.virtual-card-button,.tabs button.selected,
+ .appearance-options button[aria-pressed="true"],.ask-form button
+) {background:var(--action)!important;color:var(--action-ink)!important;}
+/* Preserve distinct income/expense semantics, with accessible dark contrast. */
+:root[data-fluxo-accent][data-fluxo-theme="dark"] .app .income-text {color:#78ecc1!important;}
+:root[data-fluxo-accent][data-fluxo-theme="dark"] .app .expense-text {color:#ffabba!important;}
+/* Active navigation must follow the actual selected accent, including More. */
+:root[data-fluxo-accent][data-fluxo-theme="dark"] .app .bottom-nav :is(a.active,button.active) {
+ background:color-mix(in srgb,var(--action) 19%,var(--fluxo-dark-nav))!important;
+ color:var(--teal)!important;
+}
+:root[data-fluxo-accent][data-fluxo-theme="dark"] .app .bottom-nav :is(a.active,button.active) .icon {
+ color:var(--teal)!important;
+}

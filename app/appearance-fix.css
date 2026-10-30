@@ -574,3 +574,70 @@
 :root[data-fluxo-accent][data-fluxo-theme="dark"] .app .bottom-nav :is(a.active,button.active) .icon {
  color:var(--teal)!important;
 }
+
+/* Single dark canvas contract for all seven accents: harmonize chrome, content,
+   cards and underlying body. Applies regardless of stored System/Dark selection. */
+:root[data-fluxo-accent][data-fluxo-theme="dark"] {
+ --dark:var(--fluxo-dark-canvas);
+ --surface:var(--fluxo-dark-panel);
+ --raised:var(--fluxo-dark-raised);
+ --line:var(--fluxo-dark-stroke);
+ color-scheme:dark;
+}
+:root[data-fluxo-accent][data-fluxo-theme="dark"] :is(html,body),
+:root[data-fluxo-accent][data-fluxo-theme="dark"] body,
+:root[data-fluxo-accent][data-fluxo-theme="dark"] .app,
+:root[data-fluxo-accent][data-fluxo-theme="dark"] .app .main,
+:root[data-fluxo-accent][data-fluxo-theme="dark"] .app .main>main {
+ background:var(--fluxo-dark-canvas)!important;
+ background-image:none!important;
+ color:#f3f8ff!important;
+}
+:root[data-fluxo-accent][data-fluxo-theme="dark"] .app :is(
+ .mobile-header,.topbar,.bottom-nav
+) {
+ background:var(--fluxo-dark-nav)!important;
+ border-color:var(--fluxo-dark-stroke)!important;
+}
+:root[data-fluxo-accent][data-fluxo-theme="dark"] .app :is(
+ .page-panel,.panel,.account-page,.appearance-settings,.account-auth,
+ .integration-status,.cards-page,.bank-page,.payment-page,
+ .assistant-page,.recent,.card-manager
+) {
+ background:var(--fluxo-dark-panel)!important;
+ border-color:var(--fluxo-dark-stroke)!important;
+ color:#f3f8ff!important;
+}
+:root[data-fluxo-accent][data-fluxo-theme="dark"] .app :is(
+ .activity-row,.currency-box,.budget-row,.goal-row,.search-field,
+ .field input,.field textarea,.field select,.card-selector,
+ .virtual-details,.demo-card-details,.suggestions button,.setting-row
+) {
+ background:var(--fluxo-dark-raised)!important;
+ border-color:var(--fluxo-dark-stroke)!important;
+ color:#f3f8ff!important;
+}
+:root[data-fluxo-accent][data-fluxo-theme="dark"] .app :is(
+ .page-panel h2,.page-panel h3,.panel h3,.screen-heading h1,
+ .activity-row strong,.activity-row b,.budget-row strong,.goal-row strong
+) {color:#f3f8ff!important;}
+/* Semantic transaction colours override generic text selectors. */
+:root[data-fluxo-accent][data-fluxo-theme="dark"] .app .activity-row b.income-text {color:#78ecc1!important;}
+:root[data-fluxo-accent][data-fluxo-theme="dark"] .app .activity-row b.expense-text {color:#ffabba!important;}
+/* Neutral text in status elements should be clearly visible. */
+:root[data-fluxo-accent][data-fluxo-theme="dark"] .app :is(
+ small,.page-subtitle,.field,.workspace-footer,.activity-row small,
+ .budget-row span,.currency-box small,.goal-row small,.assistant-disclaimer
+) {color:#c8daec!important;}
+/* Bank provider cards intentionally stay light and use dark foreground. */
+:root[data-fluxo-accent][data-fluxo-theme="dark"] .app .bank-page .bank-row {
+ background:#f8fafc!important;color:#152c3b!important;border-color:#cad7e0!important;
+}
+:root[data-fluxo-accent][data-fluxo-theme="dark"] .app .bank-page .bank-row :is(strong,small) {
+ color:#152c3b!important;
+}
+/* Preserve clear, selected accent in dark financial UI. */
+:root[data-fluxo-accent][data-fluxo-theme="dark"] .app :is(
+ .primary,.virtual-card-button,.tabs button.selected,
+ .appearance-options button[aria-pressed="true"]
+) {background:var(--action)!important;color:var(--action-ink)!important;}

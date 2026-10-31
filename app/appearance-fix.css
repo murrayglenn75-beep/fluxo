@@ -853,3 +853,19 @@
  .app .assistant-page .ask-form input {flex:1;min-width:0!important;}
  .app .assistant-page .ask-form button {flex-shrink:0;}
 }
+
+/* In-app notification drawer, always within mobile safe content area. */
+:root[data-fluxo-theme="dark"][data-fluxo-accent] .app .fluxo-notifications{
+ position:relative;z-index:7;margin:12px 16px 20px;padding:18px;
+ border:1px solid var(--fluxo-dark-stroke);
+ border-radius:18px;background:var(--fluxo-dark-panel);
+ color:#f6faff;box-shadow:0 15px 40px #0005;
+}
+.app .fluxo-notifications-heading{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.app .fluxo-notifications-heading h2{display:block!important;font-size:20px;margin:0 0 4px}
+.app .fluxo-notifications-heading .secondary{min-width:44px;width:44px;min-height:44px;padding:8px!important}
+.app .fluxo-notifications h3{font-size:15px;margin:16px 0 10px}
+.app .fluxo-notification-row{display:grid;grid-template-columns:1fr auto;gap:4px 12px;padding:12px 0;border-bottom:1px solid var(--fluxo-dark-stroke)}
+.app .fluxo-notification-row strong,.app .fluxo-notification-row span{font-size:14px}
+.app .fluxo-notification-row small{grid-column:1/-1;color:#cbdbea!important;font-size:12px}
+@media(max-width:600px){.app .fluxo-notifications{margin:10px 12px 16px;padding:14px}}

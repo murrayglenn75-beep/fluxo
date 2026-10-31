@@ -816,3 +816,40 @@
  background-image:linear-gradient(165deg,var(--fluxo-tone-top) 0%,var(--fluxo-dark-canvas) 48%,var(--fluxo-tone-bottom) 100%)!important;
  background-attachment:fixed!important;
 }
+
+/* Mobile QA refinements: accent-neutral semantics, avatar legibility and controls. */
+:root[data-fluxo-accent][data-fluxo-theme="dark"] .app :is(
+ .bottom-nav .active,.bottom-nav a.active,.bottom-nav button.active,
+ .mobile-header .brand,.more-menu .icon,.fluxo-ai-hero-tabs span,
+ .fluxo-screen-kicker,.appearance-options legend,.panel-heading a,
+ .panel-heading button,.recipients h3 button,.recipients .add
+){color:var(--teal)!important;}
+:root[data-fluxo-accent][data-fluxo-theme="dark"] .app .recipients .avatar{
+ background:linear-gradient(135deg,var(--action),var(--fluxo-accent-dark))!important;
+ color:var(--action-ink)!important;
+ font-weight:750!important;
+ text-shadow:none!important;
+}
+:root[data-fluxo-accent][data-fluxo-theme="dark"] .app :is(.currency-box input,.currency-box select,.exchange-page input,.exchange-page select,.assistant-page .ask-form input){
+ background:var(--fluxo-dark-raised)!important;
+ color:#f7faff!important;
+ border:1px solid var(--fluxo-dark-stroke)!important;
+}
+:root[data-fluxo-accent][data-fluxo-theme="dark"] .app .assistant-page .ask-form input{
+ background:transparent!important;border:0!important;outline-offset:2px;
+}
+:root[data-fluxo-accent][data-fluxo-theme="dark"] .app :is(.secondary,.currency-swap,.exchange-page .swap){
+ border-color:var(--fluxo-dark-stroke)!important;
+}
+:root[data-fluxo-accent][data-fluxo-theme="dark"] .app .secondary{
+ color:#f7faff!important;
+}
+@media(max-width:600px){
+ .app .main>main {padding-bottom:calc(155px + env(safe-area-inset-bottom,0px))!important;}
+ .app .workspace-footer {padding-bottom:calc(130px + env(safe-area-inset-bottom,0px))!important;}
+ .app .bottom-nav {bottom:max(10px,env(safe-area-inset-bottom,0px))!important;}
+ .app .recipients .avatar {min-width:34px!important;display:grid!important;place-items:center!important;}
+ .app .assistant-page .ask-form {display:flex!important;align-items:center;gap:10px;}
+ .app .assistant-page .ask-form input {flex:1;min-width:0!important;}
+ .app .assistant-page .ask-form button {flex-shrink:0;}
+}

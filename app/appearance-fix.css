@@ -759,3 +759,18 @@
   padding-bottom:calc(130px + env(safe-area-inset-bottom,0px))!important;
  }
 }
+
+/* Fluxo palette v4 — cohesive hue-matched surfaces and accessible controls.
+   Single palette map for future edits: accent, canvas, panel, raised, stroke, card. */
+:root[data-fluxo-accent="emerald"] {--action:#36e6a3;--teal:#83f4c5;--action-ink:#06291c;--fluxo-accent-dark:#086647;--fluxo-dark-canvas:#061c19;--fluxo-dark-panel:#0d302a;--fluxo-dark-raised:#174339;--fluxo-dark-nav:#09251f;--fluxo-dark-stroke:#366e5c;--fluxo-card-start:#126c50;--fluxo-card-end:#082b27;--line:#366e5c;--raised:#174339}
+:root[data-fluxo-accent="blue"] {--action:#5da6ff;--teal:#a7d5ff;--action-ink:#071c38;--fluxo-accent-dark:#2259ae;--fluxo-dark-canvas:#071629;--fluxo-dark-panel:#102944;--fluxo-dark-raised:#1a3959;--fluxo-dark-nav:#0b2038;--fluxo-dark-stroke:#426b96;--fluxo-card-start:#256ac2;--fluxo-card-end:#0a2242;--line:#426b96;--raised:#1a3959}
+:root[data-fluxo-accent="purple"] {--action:#be92ff;--teal:#d8bcff;--action-ink:#24103f;--fluxo-accent-dark:#7240aa;--fluxo-dark-canvas:#160e27;--fluxo-dark-panel:#281c40;--fluxo-dark-raised:#3b2a56;--fluxo-dark-nav:#201632;--fluxo-dark-stroke:#76609d;--fluxo-card-start:#7348b5;--fluxo-card-end:#24143c;--line:#76609d;--raised:#3b2a56}
+:root[data-fluxo-accent="red"] {--action:#ff858d;--teal:#ffc0c4;--action-ink:#3c1018;--fluxo-accent-dark:#a83d54;--fluxo-dark-canvas:#260f16;--fluxo-dark-panel:#3a1b27;--fluxo-dark-raised:#4d2938;--fluxo-dark-nav:#30131e;--fluxo-dark-stroke:#925365;--fluxo-card-start:#ab3f57;--fluxo-card-end:#351321;--line:#925365;--raised:#4d2938}
+:root[data-fluxo-accent="yellow"] {--action:#ffd969;--teal:#ffe8a4;--action-ink:#3b2c05;--fluxo-accent-dark:#94711e;--fluxo-dark-canvas:#211b10;--fluxo-dark-panel:#352b18;--fluxo-dark-raised:#473a23;--fluxo-dark-nav:#2a2213;--fluxo-dark-stroke:#867145;--fluxo-card-start:#927326;--fluxo-card-end:#30250f;--line:#867145;--raised:#473a23}
+:root[data-fluxo-accent="pink"] {--action:#ff86c3;--teal:#ffc3e2;--action-ink:#410e2a;--fluxo-accent-dark:#a53b70;--fluxo-dark-canvas:#24101f;--fluxo-dark-panel:#391b32;--fluxo-dark-raised:#502a44;--fluxo-dark-nav:#2d1627;--fluxo-dark-stroke:#965d81;--fluxo-card-start:#b74782;--fluxo-card-end:#39152f;--line:#965d81;--raised:#502a44}
+:root[data-fluxo-accent="black"] {--action:#e0e6f0;--teal:#f1f4f8;--action-ink:#11151b;--fluxo-accent-dark:#555c68;--fluxo-dark-canvas:#090b0f;--fluxo-dark-panel:#171b22;--fluxo-dark-raised:#292f39;--fluxo-dark-nav:#10141b;--fluxo-dark-stroke:#666f7d;--fluxo-card-start:#363d49;--fluxo-card-end:#10141b;--line:#666f7d;--raised:#292f39}
+:root[data-fluxo-accent][data-fluxo-theme="dark"] .app .fluxo-feature-banner :is(span,small),
+:root[data-fluxo-accent][data-fluxo-theme="dark"] .app .fluxo-ai-hero p {color:#f1f5ff!important}
+:root[data-fluxo-accent][data-fluxo-theme="dark"] .app :is(.fluxo-screen-kicker,.fluxo-settings-eyebrow,.fluxo-ai-hero>span) {color:var(--teal)!important}
+:root[data-fluxo-accent][data-fluxo-theme="dark"] .app :is(.bottom-nav a.active,.bottom-nav button.active) {color:var(--teal)!important}
+:root[data-fluxo-accent][data-fluxo-theme="dark"] .app :is(.primary,.virtual-card-button,.tabs button.selected,.appearance-options button[aria-pressed="true"]) {background:var(--action)!important;color:var(--action-ink)!important}

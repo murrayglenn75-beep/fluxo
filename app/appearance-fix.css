@@ -110,3 +110,28 @@
  :root[data-fluxo-theme="system"][data-fluxo-accent="yellow"] {--teal:#775500;--action:#755200;--action-ink:#fff;--line:#cbb986}
  :root[data-fluxo-theme="system"][data-fluxo-accent="emerald"] {--teal:#086b4a;--action:#087a55;--action-ink:#fff;--line:#9ec8b8}
 }
+
+/* Mobile-first usability: keep primary content above fixed navigation. */
+@media(max-width:520px) {
+ .app .main>main {
+  padding-bottom:calc(var(--fluxo-nav-height) + env(safe-area-inset-bottom,0px) + 56px)!important;
+ }
+ .app :is(button,a,input,select,textarea):focus-visible {
+  outline-offset:3px;
+ }
+ .app :is(.primary,.mobile-money-actions a,.bottom-nav a,.bottom-nav button) {
+  min-height:44px;
+ }
+ .app :is(.page-panel,.panel,.activity-row) {
+  min-width:0;
+  overflow-wrap:anywhere;
+ }
+}
+@media(prefers-reduced-motion:reduce) {
+ .app *, .app *::before, .app *::after {
+  scroll-behavior:auto!important;
+  animation-duration:0.01ms!important;
+  animation-iteration-count:1!important;
+  transition-duration:0.01ms!important;
+ }
+}

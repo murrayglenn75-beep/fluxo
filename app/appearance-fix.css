@@ -135,3 +135,21 @@
   transition-duration:0.01ms!important;
  }
 }
+
+/* Accent-aware surfaces: colour selection changes the whole workspace, not just buttons. */
+:root[data-fluxo-accent="blue"] {--fluxo-bg:#071a34;--fluxo-panel:#102c4c;--fluxo-nav:#102840}
+:root[data-fluxo-accent="purple"] {--fluxo-bg:#1b102e;--fluxo-panel:#302047;--fluxo-nav:#28183e}
+:root[data-fluxo-accent="red"] {--fluxo-bg:#290e1b;--fluxo-panel:#421b2b;--fluxo-nav:#341522}
+:root[data-fluxo-accent="yellow"] {--fluxo-bg:#29200c;--fluxo-panel:#433516;--fluxo-nav:#352a12}
+:root[data-fluxo-accent="pink"] {--fluxo-bg:#2a1020;--fluxo-panel:#49243b;--fluxo-nav:#38182c}
+:root[data-fluxo-accent="black"] {--fluxo-bg:#090909;--fluxo-panel:#202020;--fluxo-nav:#151515}
+:root[data-fluxo-accent="emerald"] {--fluxo-bg:#061b1b;--fluxo-panel:#103b37;--fluxo-nav:#10302b}
+:root[data-fluxo-accent] {--dark:var(--fluxo-bg);--surface:var(--fluxo-panel)}
+:root[data-fluxo-accent] body,
+:root[data-fluxo-accent] .app {background:var(--fluxo-bg)}
+:root[data-fluxo-accent] .app :is(.page-panel,.panel,.appearance-settings,.account-auth,.integration-status) {background:var(--fluxo-panel)}
+:root[data-fluxo-accent] .app :is(.bottom-nav,.mobile-header,.topbar) {background:var(--fluxo-nav)}
+:root[data-fluxo-theme="light"][data-fluxo-accent] {--fluxo-bg:#f4faf7;--fluxo-panel:#fff;--fluxo-nav:#e2f2ea}
+@media(prefers-color-scheme:light) {
+ :root[data-fluxo-theme="system"][data-fluxo-accent] {--fluxo-bg:#f4faf7;--fluxo-panel:#fff;--fluxo-nav:#e2f2ea}
+}

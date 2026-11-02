@@ -136,20 +136,34 @@
  }
 }
 
-/* Accent-aware surfaces: colour selection changes the whole workspace, not just buttons. */
-:root[data-fluxo-accent="blue"] {--fluxo-bg:#071a34;--fluxo-panel:#102c4c;--fluxo-nav:#102840}
-:root[data-fluxo-accent="purple"] {--fluxo-bg:#1b102e;--fluxo-panel:#302047;--fluxo-nav:#28183e}
-:root[data-fluxo-accent="red"] {--fluxo-bg:#290e1b;--fluxo-panel:#421b2b;--fluxo-nav:#341522}
-:root[data-fluxo-accent="yellow"] {--fluxo-bg:#29200c;--fluxo-panel:#433516;--fluxo-nav:#352a12}
-:root[data-fluxo-accent="pink"] {--fluxo-bg:#2a1020;--fluxo-panel:#49243b;--fluxo-nav:#38182c}
-:root[data-fluxo-accent="black"] {--fluxo-bg:#090909;--fluxo-panel:#202020;--fluxo-nav:#151515}
-:root[data-fluxo-accent="emerald"] {--fluxo-bg:#061b1b;--fluxo-panel:#103b37;--fluxo-nav:#10302b}
+/* Cohesive vibrant accent palettes: two-tone page, distinct panels and navigation. */
+:root[data-fluxo-accent="emerald"] {--fluxo-bg:#052c28;--fluxo-bg-alt:#0c5140;--fluxo-panel:#12483e;--fluxo-nav:#103b33;--teal:#85ffd0;--action:#35f2aa;--action-ink:#05291d;--fluxo-card-start:#0a9b6b;--fluxo-card-end:#04372f}
+:root[data-fluxo-accent="blue"] {--fluxo-bg:#061c42;--fluxo-bg-alt:#104d91;--fluxo-panel:#153d70;--fluxo-nav:#102d55;--teal:#b3dcff;--action:#5eb5ff;--action-ink:#061b3a;--fluxo-card-start:#1680e9;--fluxo-card-end:#092a60}
+:root[data-fluxo-accent="purple"] {--fluxo-bg:#210c46;--fluxo-bg-alt:#5c2598;--fluxo-panel:#43236d;--fluxo-nav:#341956;--teal:#e2c0ff;--action:#c18aff;--action-ink:#23083c;--fluxo-card-start:#a44ef1;--fluxo-card-end:#34105f}
+:root[data-fluxo-accent="red"] {--fluxo-bg:#3d0c22;--fluxo-bg-alt:#8e2149;--fluxo-panel:#63233d;--fluxo-nav:#4c1a32;--teal:#ffd0dd;--action:#ff7b9e;--action-ink:#3d0718;--fluxo-card-start:#ec4779;--fluxo-card-end:#5c1230}
+:root[data-fluxo-accent="yellow"] {--fluxo-bg:#33240b;--fluxo-bg-alt:#84601a;--fluxo-panel:#59431d;--fluxo-nav:#433316;--teal:#ffedab;--action:#ffdb65;--action-ink:#352300;--fluxo-card-start:#d99e25;--fluxo-card-end:#574014}
+:root[data-fluxo-accent="pink"] {--fluxo-bg:#3a0c2b;--fluxo-bg-alt:#8b2d6d;--fluxo-panel:#64254f;--fluxo-nav:#501c40;--teal:#ffc6e8;--action:#ff8acb;--action-ink:#3b0928;--fluxo-card-start:#ed4ba8;--fluxo-card-end:#631342}
+:root[data-fluxo-accent="black"] {--fluxo-bg:#090909;--fluxo-bg-alt:#303030;--fluxo-panel:#242424;--fluxo-nav:#171717;--teal:#fff;--action:#f0f0f0;--action-ink:#080808;--fluxo-card-start:#494949;--fluxo-card-end:#080808;--line:#777}
 :root[data-fluxo-accent] {--dark:var(--fluxo-bg);--surface:var(--fluxo-panel)}
-:root[data-fluxo-accent] body,
-:root[data-fluxo-accent] .app {background:var(--fluxo-bg)}
+:root[data-fluxo-theme="dark"][data-fluxo-accent] body,
+:root[data-fluxo-theme="dark"][data-fluxo-accent] .app,
+:root[data-fluxo-theme="system"][data-fluxo-accent] body,
+:root[data-fluxo-theme="system"][data-fluxo-accent] .app {
+ background:linear-gradient(150deg,var(--fluxo-bg),var(--fluxo-bg-alt)) fixed;
+}
 :root[data-fluxo-accent] .app :is(.page-panel,.panel,.appearance-settings,.account-auth,.integration-status) {background:var(--fluxo-panel)}
 :root[data-fluxo-accent] .app :is(.bottom-nav,.mobile-header,.topbar) {background:var(--fluxo-nav)}
-:root[data-fluxo-theme="light"][data-fluxo-accent] {--fluxo-bg:#f4faf7;--fluxo-panel:#fff;--fluxo-nav:#e2f2ea}
+/* System-light retains readable dark text but uses a subtle accent-tinted second tone. */
 @media(prefers-color-scheme:light) {
- :root[data-fluxo-theme="system"][data-fluxo-accent] {--fluxo-bg:#f4faf7;--fluxo-panel:#fff;--fluxo-nav:#e2f2ea}
+ :root[data-fluxo-theme="system"][data-fluxo-accent] {
+  --fluxo-panel:#fff;--fluxo-nav:color-mix(in srgb,var(--fluxo-bg-alt) 14%,white);
+  --dark:#f7f9fc;--surface:#fff;
+ }
+ :root[data-fluxo-theme="system"][data-fluxo-accent] body,
+ :root[data-fluxo-theme="system"][data-fluxo-accent] .app {
+  background:linear-gradient(150deg,#f7f9fc,color-mix(in srgb,var(--fluxo-bg-alt) 13%,white)) fixed!important;
+ }
+ :root[data-fluxo-theme="system"][data-fluxo-accent] .app :is(.bottom-nav,.mobile-header,.topbar) {
+  background:var(--fluxo-nav)!important;
+ }
 }

@@ -48,6 +48,8 @@ jobs:
         run: npm run build:native
       - name: Verify native layout, accessibility, persistence and read-only AI
         run: NODE_PATH="$RUNNER_TEMP/fluxo-browser/node_modules" node tests/browser/release-reconciliation.cjs
+      - name: Verify Dark/System theme and seven accent persistence in Chromium
+        run: NODE_PATH="$RUNNER_TEMP/fluxo-browser/node_modules" node tests/browser/appearance-release.cjs
       - name: Preserve synthetic-data visual evidence
         if: always()
         uses: actions/upload-artifact@v4
